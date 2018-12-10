@@ -1,32 +1,68 @@
 <template>
   <div class="login-component">
-
     <form class="form-signin" @submit.prevent="submit" action="https://" method="post">
-<!--      <p>-->
         <input id="name" v-model="email" type="text" name="email" placeholder="Email">
-<!--      </p>-->
-<!--      <p>-->
         <input id="password" v-model="password" type="password" name="password" placeholder="Mot de passe">
-<!--      </p>-->
-<!--      <p>-->
         <input type="submit" value="Submit">
-<!--      </p>-->
-      <p class="mt-5 mb-3 text-muted">Vous nouveau sur Flexiflex?
-        <router-link class="menu-item" to='/register'>
-          Inscrivez-vous
-        </router-link>
-      </p>
     </form>
+    <p class="mt-5 mb-3 text-muted">Vous nouveau sur Flexiflex?
+      <router-link class="menu-item" to='/register'>
+        Inscrivez-vous
+      </router-link>
+    </p>
   </div>
 </template>
 
-<!--
 <script>
+  import { mapActions, mapGetters } from 'vuex'
+
   export default {
     name: 'login page',
-    data() {
+    data () {
       return {
+        msg: 'Login',
+        email: '',
+        password: '',
+        error: this.hasError
+      }
+    },
+    computed: {
+      ...mapGetters('auth', [
+        'hasError',
+        'username',
+        'isAuthenticated',
+        'token'
+      ])
+    },
+    created () {
+      if (this.token !== null) {
+        this.$router.push({
+          name: 'Home'
+        })
+      }
+    },
+    watch: {
+      token (newValue) {
+        if (newValue !== null) {
+          this.$router.push({
+            name: 'home'
+          })
+        }
+      }
+    },
+    methods: {
+      ...mapActions('auth', [
+        'login', 'request'
+      ]),
+      submit () {
+        this.login({
+          username: this.email,
+          password: this.password
+        })
+      },
+      doRequest () {
+        this.request()
       }
     }
   }
-</script>-->
+</script>
