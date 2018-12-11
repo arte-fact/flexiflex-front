@@ -6,7 +6,7 @@ Vue.use(VueResource)
 Vue.use(store)
 
 let urls = {
-  production: 'https://flexiflex.ddns.net:9090',
+  production: '//http://62.210.148.177:9090',
   development: 'http://localhost:8080'
 }
 
