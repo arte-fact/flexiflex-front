@@ -1,50 +1,52 @@
 import Vue from 'vue'
 
-const USERS_REQUEST = 'USERS_REQUEST'
-const RESET_USERS = 'RESET_USERS'
-const USERS_REQUEST_FAIL = 'USERS_REQUEST_FAIL'
+const USER_REQUEST = 'USER_REQUEST'
+const RESET_USER = 'RESET_USER'
+const USER_REQUEST_FAIL = 'USER_REQUEST_FAIL'
 
 const state = {
-  users: null,
-  usersRequestFail: null
+  user: null,
+  userRequestFail: false
 }
 
 const getters = {
-  users (state) {
-    return state.users
+  user (state) {
+    return state.user
   },
-  usersRequestFail (state) {
-    return state.users
+  userRequestFail (state) {
+    return state.user
   }
 }
 
 const mutations = {
-  [USERS_REQUEST] (state, response) {
-    state.users = response.body
-    state.usersRequestFail = false
+  [USER_REQUEST] (state, response) {
+    state.user = response.body
+    state.userRequestFail = false
   },
-  [RESET_USERS] (state) {
-    state.users = null
+  [RESET_USER] (state) {
+    state.user = null
   },
-  [USERS_REQUEST_FAIL] (state) {
-    state.usersRequestFail = true
+  [USER_REQUEST_FAIL] (state) {
+    state.userRequestFail = true
   }
 }
 
 const actions = {
-  requestUsers ({commit}) {
-    Vue.http.get('users'
+  requestUser ({commit}) {
+    Vue.http.post('user'
     ).then(
       response => {
-        commit(USERS_REQUEST, response)
+        console.log("user response ok")
+        commit(USER_REQUEST, response)
       },
       response => {
-        commit(USERS_REQUEST_FAIL)
+        console.log("user response not ok")
+        commit(USER_REQUEST_FAIL)
       }
     )
   },
-  resetUsers ({commit}) {
-    commit(RESET_USERS)
+  resetUser ({commit}) {
+    commit(RESET_USER)
   }
 }
 

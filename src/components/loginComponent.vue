@@ -1,10 +1,11 @@
 <template>
   <div class="login-component">
+    <div v-if="hasError">Email ou password incorrect</div>
     <form class="form-signin" @submit.prevent="submit" action="https://" method="post">
         <input id="name" v-model="email" type="text" name="email" placeholder="Email">
         <input id="password" v-model="password" type="password" name="password" placeholder="Mot de passe">
-        <input type="submit" value="Submit">
     </form>
+    <button v-on:click="submit">Login</button>
     <p class="mt-5 mb-3 text-muted">Vous nouveau sur Flexiflex?
       <router-link class="menu-item" to='/register'>
         Inscrivez-vous
@@ -17,7 +18,7 @@
   import { mapActions, mapGetters } from 'vuex'
 
   export default {
-    name: 'login page',
+    name: 'login-page',
     data () {
       return {
         msg: 'Login',
@@ -37,7 +38,7 @@
     created () {
       if (this.token !== null) {
         this.$router.push({
-          name: 'Home'
+          name: 'home-page'
         })
       }
     },
@@ -45,7 +46,7 @@
       token (newValue) {
         if (newValue !== null) {
           this.$router.push({
-            name: 'home'
+            name: 'home-page'
           })
         }
       }

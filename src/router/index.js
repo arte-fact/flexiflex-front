@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import splashComponent from '@/components/splashComponent'
 import loginComponent from '@/components/loginComponent'
 import registerComponent from '@/components/registerComponent'
-import catalogComponent from '@/components/catalogComponent'
+import catalogComponent from '@/components/homeComponent'
 import finalRegisterComponent from '@/components/finalRegisterComponent'
 
 Vue.use(Router)
@@ -17,7 +17,7 @@ export default new Router({
     },
     {
       path: '/login',
-      name: 'login page',
+      name: 'login-page',
       component: loginComponent
     },
     {
@@ -26,8 +26,8 @@ export default new Router({
       component: registerComponent
     },
     {
-      path: '/catalog',
-      name: 'catalog page',
+      path: '/home',
+      name: 'home-page',
       component: catalogComponent
     },
     {

@@ -1,11 +1,11 @@
 <template>
   <div class="login-component">
-
+    <div v-if="hasError">Email ou password incorrect</div>
     <form class="form-signin" @submit.prevent="submit" action="https://" method="post">
         <input id="name" v-model="email" type="text" name="email" placeholder="Email">
         <input id="password" v-model="password" type="password" name="password" placeholder="Mot de passe">
-        <button type="submit" value="Submit">Inscription</button>
     </form>
+    <button v-on:click="submit">Inscription</button>
 
     <p class="mt-5 mb-3 text-muted">Vous avez un compte?
       <router-link class="menu-item" to='/login'>
@@ -41,7 +41,7 @@ export default {
   created () {
     if (this.token !== null) {
       this.$router.push({
-        name: 'Home'
+        name: 'home-page'
       })
     }
   },
@@ -49,7 +49,7 @@ export default {
     token (newValue) {
       if (newValue !== null) {
         this.$router.push({
-          name: 'home'
+          name: 'home-page'
         })
       }
     },

@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import users from './user'
+import user from './user'
 import VueCookies from 'vue-cookies'
 
 Vue.use(VueCookies)
@@ -20,7 +20,8 @@ const state = {
   isRegistered: false,
   hasError: false,
   hasCookie: null,
-  token: window.$cookies.get('token')
+  token: window.$cookies.get('token'),
+  uuid: window.$cookies.get('uuid')
 }
 
 const getters = {
@@ -42,6 +43,9 @@ const getters = {
   },
   token (state) {
     return state.token
+  },
+  uuid (state) {
+    return state.uuid
   }
 }
 
@@ -75,14 +79,18 @@ const mutations = {
   [LOGOUT_FAIL] (state) {
     // Nothing
   },
-  [SET_USER_TOKEN] (state, token) {
-    window.$cookies.set('token', token)
-    state.token = token
+  [SET_USER_TOKEN] (state, response) {
+    window.$cookies.set('uuid', response.uuid)
+    window.$cookies.set('token', response.token)
+    state.token = response.token
+    state.uuid = response.uuid
     state.hasCookie = true
   },
   [RESET_USER_TOKEN] (state) {
     window.$cookies.remove('token')
+    window.$cookies.remove('uuid')
     state.token = null
+    state.uuid = null
     state.hasCookie = false
   }
 }
@@ -90,26 +98,25 @@ const mutations = {
 const actions = {
   login ({commit}, {username, password}) {
     commit(LOGIN_REQUEST)
-    Vue.http.post('login', {email: username, password: password}, {emulateJSON: true}
+    Vue.http.post('auth/login', {email: username, password: password}
     ).then(
       response => {
-        if (response.body.status === 200) {
-          console.log(response)
+        if (response.ok) {
           commit(LOGIN_SUCCESS)
-          Vue.http.headers.common['Authorization'] = 'Bearer ' + response.body.data.accessToken
+          commit(SET_USER_TOKEN, response.body)
+          Vue.http.headers.put['uuid'] = response.body.uuid;
+          Vue.http.headers.put['token'] = response.body.token;
         } else {
           commit(LOGIN_FAIL)
-          console.log(response)
         }
       },
       response => {
         commit(LOGIN_FAIL)
-        console.log(response)
       }
     )
   },
   register ({commit}, {email, password}) {
-    Vue.http.post('auth/register', {email: email, password: password}, {emulateJSON: true}
+    Vue.http.post('auth/register', {email: email, password: password}
     ).then(
       response => {
         console.log(response)
@@ -119,6 +126,9 @@ const actions = {
         console.log(response)
       }
     )
+  },
+  resetToken ({commit}) {
+    commit(RESET_USER_TOKEN)
   },
   logout ({commit, dispatch}) {
     commit(LOGOUT_REQUEST)
@@ -146,6 +156,6 @@ export default {
   mutations,
   actions,
   modules: {
-    users
+    user
   }
 }
