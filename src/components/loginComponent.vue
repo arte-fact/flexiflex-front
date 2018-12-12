@@ -57,7 +57,8 @@
     methods: {
       ...mapActions('auth', [
         'login',
-        'resetErrors'
+        'resetErrors',
+        'setAuthHeader'
       ]),
       submit () {
         this.login({

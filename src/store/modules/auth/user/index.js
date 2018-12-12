@@ -1,4 +1,7 @@
 import Vue from 'vue'
+import VueCookies from 'vue-cookies'
+
+Vue.use(VueCookies)
 
 const USER_REQUEST = 'USER_REQUEST'
 const RESET_USER = 'RESET_USER'

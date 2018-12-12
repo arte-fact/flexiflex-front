@@ -129,8 +129,7 @@ const actions = {
         if (response.ok) {
           commit(LOGIN_SUCCESS)
           commit(SET_USER_TOKEN, response.body)
-          Vue.http.headers.put['uuid'] = response.body.uuid;
-          Vue.http.headers.put['token'] = response.body.token;
+
         } else {
           commit(LOGIN_FAIL)
         }
@@ -181,6 +180,14 @@ const actions = {
   },
   resetErrors({commit}) {
     commit(RESET_ERRORS)
+  },
+  setAuthHeader({commit}, uuid, token) {
+    Vue.http.headers.put['uuid'] = uuid;
+    Vue.http.headers.put['token'] = token;
+  },
+  setAuthHeaderFromCookie() {
+    Vue.http.headers.put['uuid'] = window.$cookies.get('uuid');
+    Vue.http.headers.put['token'] = window.$cookies.get('token');
   }
 }
 

@@ -23,6 +23,7 @@ export default {
   computed: {
     ...mapGetters('auth', [
       'token',
+      'uuid',
       'user',
       'userRequestFail'
     ])
@@ -46,23 +47,27 @@ export default {
         })
       }
     },
-    //
-    // userRequestFail(state) {
-    //   if (state === true) {
-    //     this.resetToken()
-    //     this.resetUser()
-    //   }
-    // }
+
+    userRequestFail(state) {
+      if (state === true) {
+        this.resetToken()
+        this.resetUser()
+      }
+    }
   },
   methods: {
     ...mapActions('auth', [
       'requestUser',
       'resetUser',
       'resetToken',
+      'setAuthHeaderFromCookie',
       'logout'
     ]),
     request () {
       console.log("request user")
+
+      this.setAuthHeaderFromCookie()
+
       this.requestUser()
     },
     doLogout() {
