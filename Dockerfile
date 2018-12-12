@@ -19,5 +19,7 @@ COPY . .
 # construit l'app pour la production en la minifiant
 RUN npm run build
 
+RUN npm audit fix
+
 EXPOSE 8080
 CMD [ "http-server", "dist" ]

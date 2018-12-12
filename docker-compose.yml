@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  flexiflex-front-server:
+    ports:
+      - 9091:8080
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always

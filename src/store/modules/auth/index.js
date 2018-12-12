@@ -7,18 +7,23 @@ Vue.use(VueCookies)
 const LOGIN_REQUEST = 'LOGIN_REQUEST'
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
+const REGISTER_FAIL = 'REGISTER_FAIL'
+const REGISTER_REQUEST = 'REGISTER_REQUEST'
 const LOGIN_FAIL = 'LOGIN_FAIL'
 const LOGOUT_REQUEST = 'LOGOUT_REQUEST'
 const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
 const LOGOUT_FAIL = 'LOGOUT_FAIL'
 const SET_USER_TOKEN = 'SET_USER_TOKEN'
 const RESET_USER_TOKEN = 'RESET_USER_TOKEN'
+const RESET_ERRORS = 'RESET_ERRORS'
 
 const state = {
   isAuthenticating: false,
   isAuthenticated: false,
+  hasAuthenticationError: false,
+  isRegistering: false,
   isRegistered: false,
-  hasError: false,
+  hasRegistrationError: false,
   hasCookie: null,
   token: window.$cookies.get('token'),
   uuid: window.$cookies.get('uuid')
@@ -32,11 +37,17 @@ const getters = {
   isAuthenticated (state) {
     return state.isAuthenticated
   },
+  hasAuthenticationError (state) {
+    return state.hasAuthenticationError
+  },
   isRegistered (state) {
     return state.isRegistered
   },
-  hasError (state) {
-    return state.hasError
+  isRegistering (state) {
+    return state.isRegistering
+  },
+  hasRegistrationError (state) {
+    return state.hasRegistrationError
   },
   hasCookie (state) {
     return state.hasCookie
@@ -53,22 +64,32 @@ const mutations = {
   [LOGIN_REQUEST] (state) {
     state.isAuthenticating = true
     state.isAuthenticated = false
-    state.hasError = false
+    state.hasAuthenticationError = false
   },
   [LOGIN_SUCCESS] (state) {
     state.isAuthenticating = false
     state.isAuthenticated = true
-    state.hasError = false
-  },
-  [REGISTER_SUCCESS] (state) {
-    state.isAuthenticating = false
-    state.isRegistered = true
-    state.hasError = false
+    state.hasAuthenticationError = false
   },
   [LOGIN_FAIL] (state) {
     state.isAuthenticating = false
     state.isAuthenticated = false
-    state.hasError = true
+    state.hasAuthenticationError = true
+  },
+  [REGISTER_REQUEST] (state) {
+    state.isRegistering = true
+    state.isRegistered = false
+    state.hasRegistrationError = false
+  },
+  [REGISTER_SUCCESS] (state) {
+    state.isRegistering = false
+    state.isRegistered = true
+    state.hasRegistrationError = false
+  },
+  [REGISTER_FAIL] (state) {
+    state.isRegistering = false
+    state.isRegistered = false
+    state.hasRegistrationError = true
   },
   [LOGOUT_REQUEST] (state) {
     // Nothing
@@ -92,6 +113,10 @@ const mutations = {
     state.token = null
     state.uuid = null
     state.hasCookie = false
+  },
+  [RESET_ERRORS] (state) {
+    state.hasAuthenticationError = false
+    state.hasRegistrationError = false
   }
 }
 
@@ -116,14 +141,21 @@ const actions = {
     )
   },
   register ({commit}, {email, password}) {
+    commit(REGISTER_REQUEST)
     Vue.http.post('auth/register', {email: email, password: password}
     ).then(
       response => {
-        console.log(response)
-        commit(REGISTER_SUCCESS)
+        if (response.status === 201) {
+          console.log(response)
+          commit(REGISTER_SUCCESS)
+        } else {
+          console.log(response)
+          commit(REGISTER_FAIL)
+        }
       },
       response => {
         console.log(response)
+        commit(REGISTER_FAIL)
       }
     )
   },
@@ -146,6 +178,9 @@ const actions = {
   reset ({commit, dispatch}) {
     commit(RESET_USER_TOKEN)
     commit(LOGOUT_SUCCESS)
+  },
+  resetErrors({commit}) {
+    commit(RESET_ERRORS)
   }
 }
 

@@ -36,8 +36,12 @@ const actions = {
     Vue.http.post('user'
     ).then(
       response => {
-        console.log("user response ok")
-        commit(USER_REQUEST, response)
+        if (response.status === 200) {
+          console.log("user response ok")
+          commit(USER_REQUEST, response)
+        } else {
+          commit(USER_REQUEST_FAIL)
+        }
       },
       response => {
         console.log("user response not ok")
