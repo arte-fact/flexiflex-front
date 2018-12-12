@@ -1,14 +1,14 @@
 <template>
   <div class="login-component">
-    <div v-if="!isRegistering">
+    <span v-if="isRegistering">Chargement...</span>
+    <div v-else>
       <form class="form-signin" @submit.prevent="submit" action="https://" method="post">
         <input id="name" v-model="email" type="text" name="email" placeholder="Email">
         <input id="password" v-model="password" type="password" name="password" placeholder="Mot de passe">
       </form>
       <button v-if="!isRegistering" v-on:click="submit">Inscription</button>
-      <span v-if="isRegistering">Chargement...</span>
     </div>
-    <p v-else-if="isRegistered && !hasRegistrationError">
+    <p v-if="isRegistered">
       Un email de validation à été envoyé à l'adresse {{email}}.
       Merci de l'ouvrir et de cliquer sur le lien ;)
     </p>
