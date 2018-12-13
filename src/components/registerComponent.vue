@@ -1,6 +1,10 @@
 <template>
   <div class="login-component">
-    <span v-if="isRegistering">Chargement...</span>
+    <span v-if="isRegistering">
+      <div>
+    Chargement...
+      </div>
+    </span>
     <div v-else>
       <form class="form-signin" @submit.prevent="submit" action="https://" method="post">
         <div class="login-component-background"></div>
@@ -10,6 +14,12 @@
         <div class="form-button" v-if="!isRegistering" v-on:click="submit">Envoyer</div>
       </form>
     </div>
+
+
+    <p class="mt-5 mb-3 text-muted">Vous avez un compte?</p>
+    <router-link class="menu-item" to='/login'>
+      Connectez-vous
+    </router-link>
     <p v-if="isRegistered">
       Un email de validation à été envoyé à l'adresse {{email}}.
       Merci de l'ouvrir et de cliquer sur le lien ;)
@@ -17,12 +27,6 @@
     <p v-if="hasRegistrationError">
       Ooops... Il y a eu un probleme lors de votre inscription... :(
     </p>
-
-
-    <p class="mt-5 mb-3 text-muted">Vous avez un compte?</p>
-    <router-link class="menu-item" to='/login'>
-      Connectez-vous
-    </router-link>
   </div>
 </template>
 

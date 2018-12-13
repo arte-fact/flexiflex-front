@@ -32,7 +32,7 @@ html::after {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  transform: scaleX(1.1) translateX(-32px);
+  transform: scaleX(1.1);
   background-color: black;
   opacity: 0.8;
   z-index: -2;
@@ -41,6 +41,28 @@ html::after {
 body {
   height: 100%;
   width: 100%;
+}
+
+html::before {
+  position: fixed;
+  content: '';
+  z-index: 1;
+  background-color: #ffffff;
+  width: 100vw;
+  height: 100vh;
+  animation: ease-in fade 2s;
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes fade {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
 }
 
 #app {
@@ -126,4 +148,21 @@ body {
     padding: 10px;
     border-radius: 5px;
   }
+
+
+@media only screen and (max-width: 600px) {
+  .login-component {
+    width: 300px;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .login-component-background {
+    width: 300px;
+  }
+
+  .form-signin .form-input {
+    width: 250px;
+  }
+}
 </style>
