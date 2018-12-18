@@ -2,7 +2,7 @@
   <div class="login-component">
     <div class="login-component-background"></div>
     <form class="form-signin" @submit.prevent="submit" action="https://" method="post">
-      <h2 class="form-title">Connection</h2>
+      <h2 class="form-title">Connexion</h2>
       <input class="form-input" id="name" v-model="email" type="text" name="email" placeholder="Email">
       <input class="form-input" id="password" v-model="password" type="password" name="password" placeholder="Mot de passe">
       <div class="form-button" v-if="!isAuthenticating" v-on:click="submit">Envoyer</div>
