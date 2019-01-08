@@ -5,14 +5,20 @@
       <h2 class="form-title">Connexion</h2>
       <input class="form-input" id="name" v-model="email" type="text" name="email" placeholder="Email">
       <input class="form-input" id="password" v-model="password" type="password" name="password" placeholder="Mot de passe">
-      <div class="form-button" v-if="!isAuthenticating" v-on:click="submit">Envoyer</div>
+      <button class="form-button" v-if="!isAuthenticating" v-on:click="submit">Connexion</button>
     </form>
-    <p class="mt-5 mb-3 text-muted">Vous nouveau sur Flexiflex?</p>
+
+    <p class="mt-5 mb-3 text-muted">Vous êtes nouveau sur Flexiflex?</p>
     <router-link class="menu-item" to='/register'>
       Inscrivez-vous
     </router-link>
-    <div v-if="hasAuthenticationError">Email ou password incorrect</div>
+
+    <div  class="error" v-if="hasAuthenticationError">Email ou password incorrect</div>
     <span v-if="isAuthenticating" v-on:click="submit">Chargement</span>
+
+
+
+
   </div>
 </template>
 

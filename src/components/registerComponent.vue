@@ -11,22 +11,25 @@
         <h2 class="form-title">Inscription</h2>
         <input class="form-input" id="name" v-model="email" type="text" name="email" placeholder="Email">
         <input class="form-input" id="password" v-model="password" type="password" name="password" placeholder="Mot de passe">
-        <div class="form-button" v-if="!isRegistering" v-on:click="submit">Envoyer</div>
+        <input class="form-input" id="birthdate" v-model="birthdate" type="date" name="birthdate">
+        <button class="form-button" v-if="!isRegistering" v-on:click="submit">Inscription</button>
       </form>
     </div>
 
-
-    <p class="mt-5 mb-3 text-muted">Vous avez un compte?</p>
+    <p class="mt-5 mb-3 text-muted">Vous avez un compte...</p>
     <router-link class="menu-item" to='/login'>
       Connectez-vous
     </router-link>
-    <p v-if="isRegistered">
-      Un email de validation à été envoyé à l'adresse {{email}}.
-      Merci de l'ouvrir et de cliquer sur le lien ;)
+
+    <p class="ok" v-if="isRegistered">
+      Un email de validation à été envoyé à {{email}}.
     </p>
-    <p v-if="hasRegistrationError">
-      Ooops... Il y a eu un probleme lors de votre inscription... :(
+    <p class="error" v-if="hasRegistrationError">
+      Email ou password incorrect
     </p>
+
+
+
   </div>
 </template>
 
@@ -42,7 +45,8 @@ export default {
   data() {
     return {
       email: "",
-      password: ""
+      password: "",
+      birthdate: ""
     }
   },
   computed: {
@@ -82,6 +86,7 @@ export default {
       this.register({
         email: this.email,
         password: this.password,
+        birthdate: this.birthdate,
       })
     }
   }
