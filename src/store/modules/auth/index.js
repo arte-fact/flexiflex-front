@@ -101,10 +101,8 @@ const mutations = {
     // Nothing
   },
   [SET_USER_TOKEN] (state, response) {
-    window.$cookies.set('uuid', response.uuid)
-    window.$cookies.set('token', response.token)
+    window.$cookies.set('token', response.id_token)
     state.token = response.token
-    state.uuid = response.uuid
     state.hasCookie = true
   },
   [RESET_USER_TOKEN] (state) {
@@ -123,10 +121,15 @@ const mutations = {
 const actions = {
   login ({commit}, {username, password}) {
     commit(LOGIN_REQUEST)
-    Vue.http.post('auth/login', {email: username, password: password}
+    Vue.http.post('api/authenticate', {
+      password: password,
+      rememberMe: true,
+      username: username
+      }
     ).then(
       response => {
         if (response.ok) {
+          console.log(response)
           commit(LOGIN_SUCCESS)
           commit(SET_USER_TOKEN, response.body)
 
