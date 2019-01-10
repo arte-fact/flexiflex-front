@@ -12,7 +12,7 @@
         <input class="form-input" id="name" v-model="email" type="text" name="email" placeholder="Email">
         <input class="form-input" id="password" v-model="password" type="password" name="password" placeholder="Mot de passe">
         <input class="form-input" id="birthdate" v-model="birthdate" type="date" name="birthdate">
-        <button class="form-button" v-if="!isRegistering" v-on:click="submit">Inscription</button>
+        <button class="form-button" v-if="!isRegistering">Inscription</button>
       </form>
     </div>
 

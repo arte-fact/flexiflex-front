@@ -143,8 +143,9 @@ const actions = {
     )
   },
   register ({commit}, {email, password, birthdate}) {
+    console.log(birthdate)
     commit(REGISTER_REQUEST)
-    Vue.http.post('api/register', {email: email, password: password, birthdate: birthdate}
+    Vue.http.post('api/custom/register', {login: email, email: email, password: password, birthDate: birthdate}
     ).then(
       response => {
         if (response.status === 201) {
