@@ -160,8 +160,8 @@ body {
   }
 
 .birthdateClass:hover::after{
-  content: "";
-}
+   content: "";
+ }
 
 .birthdateClass:focus::after{
   content: "";
@@ -172,7 +172,7 @@ body {
   position:absolute;
   padding-left: 10px;
   background-color: white;
-  z-index: 1;
+  z-index: 0;
 }
 
   .form-button {

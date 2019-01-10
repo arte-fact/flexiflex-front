@@ -11,7 +11,7 @@
         <h2 class="form-title">Inscription</h2>
         <input class="form-input" id="name" v-model="email" type="text" name="email" placeholder="Email">
         <input class="form-input" id="password" v-model="password" type="password" name="password" placeholder="Mot de passe">
-        <input class="form-input form-input-date" v-bind:class="{birthdateClass: birthdate === null}" id="birthdate" v-model="birthdate" type="date" name="birthdate">
+        <input class="form-input form-input-date" v-bind:class="{birthdateClass: birthdate === null || birthdate === ''}" id="birthdate" v-model="birthdate" type="date" name="birthdate">
         <button class="form-button form-button-register" v-if="!isRegistering" v-on:click="submit">Inscription</button>
       </form>
     </div>
@@ -75,7 +75,6 @@ export default {
     },
 
     birthdate(newvalue){
-
     }
 
 
