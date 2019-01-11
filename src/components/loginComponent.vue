@@ -8,17 +8,19 @@
       <button class="form-button" v-bind:class="{'form-button-disabled': email === '' || password === '' || emailRegexValid === false || password.length < 3}"  v-if="!isAuthenticating" v-on:click="submit">Connexion</button>
     </form>
 
-    <p class="mt-5 mb-3 text-muted">Vous êtes nouveau sur Flexiflex?</p>
-    <router-link class="menu-item" to='/register'>
-      Inscrivez-vous
-    </router-link>
+    <div class="errorSaisieLogin">
+      <div class="sizeHomepageLinks">Vous êtes nouveau ?
+        <router-link class="menu-item" to='/register'>
+          Inscrivez-vous
+        </router-link>
+      </div>
+      <div v-if="emailRegexValid === false && email != ''">Format d'email incorrect</div>
+      <div v-if="password.length < 3 && password != ''">Mot de passe : 3 caractères minimum </div>
+      <div v-if="hasAuthenticationError">Email ou mot de passe invalides</div>
 
-    <div  class="error" v-if="hasAuthenticationError">Email ou password incorrect</div>
-    <span v-if="isAuthenticating" v-on:click="submit">Chargement</span>
-
-
-
-
+      <!--Message de Changerment quand Click bouton-->
+      <div class="ok" v-if="isAuthenticating" v-on:click="submit">Chargement...</div>
+    </div>
   </div>
 </template>
 
@@ -65,8 +67,15 @@
       email(email) {
         let regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         this.emailRegexValid = regex.test(email);
-      }
+        this.resetErrors()
+      },
+
+      password(){
+        this.resetErrors()
+      },
+
     },
+
     methods: {
       ...mapActions('auth', [
         'login',

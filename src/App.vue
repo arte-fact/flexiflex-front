@@ -112,17 +112,35 @@ body {
     font-style: normal;
   }
 
-  .error{
-    margin: 10px;
+  .errorSaisieLogin{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 65px;
+    width: 100%;
+    margin-top: 5px;
     font-size: 12px;
     color: crimson;
   }
 
-  .error-register{
-  margin: 5px;
+.errorSaisieRegister{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 75px;
+  width: 100%;
+  margin-top: 5px;
   font-size: 12px;
   color: crimson;
 }
+
+  .sizeHomepageLinks{
+    font-size: 13px;
+    color: #2c3e50;
+    padding-bottom: 5px;
+  }
 
   .ok{
     margin: 10px;
@@ -142,7 +160,6 @@ body {
 
   }
 
-
   .form-input {
     width: 220px;
     height: 25px;
@@ -153,13 +170,13 @@ body {
     text-align: center;
   }
 
-.invalidClass{
-  content:"3 caractères minimum";
-  border: 1px solid #ff0000;
-  outline: none;
-}
+  .invalidClass{
+    content:"3 caractères minimum";
+    border: 1px solid #ff0000;
+    outline: none;
+  }
 
-.form-input-date{
+  .form-input-date{
     background-color: white;
     color: grey;
     padding-right: 0px;
@@ -188,17 +205,13 @@ body {
     border: none;
     width: 220px;
     height: 25px;
-    margin: 15px 0px 40px;
+    margin: 15px 0px 0px;
     border-radius: 5px;
     background-color: white;
     font-weight: bold;
     cursor: pointer;
     justify-content: center;
     align-items: center;
-  }
-
-  .form-button-register{
-    margin: 15px 0px 25px;
   }
 
   .form-button:hover{
@@ -214,7 +227,7 @@ body {
   }
 
   .form-button-disabled{
-    background-color: #bbbbbb;
+    background-color: #b0b0b0;
     color: #8a8a8a;
     cursor: not-allowed;
     pointer-events: none;
@@ -237,13 +250,24 @@ body {
 
   .login-component-background {
     position: absolute;
-    height: 300px;
+    height: 240px;
     width: 300px;
     border-radius: 5px;
     background-color: #cccccc;
     opacity: 0.9;
     z-index: -1;
   }
+
+  .register-component-background {
+    position: absolute;
+    height: 280px;
+    width: 300px;
+    border-radius: 5px;
+    background-color: #cccccc;
+    opacity: 0.9;
+    z-index: -1;
+  }
+
   .login-component {
     padding: 10px;
     border-radius: 5px;
@@ -264,7 +288,6 @@ body {
   .form-signin .form-input {
     width: 250px;
   }
-
 
 }
 </style>
