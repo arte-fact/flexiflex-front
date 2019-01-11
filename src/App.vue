@@ -1,5 +1,9 @@
 <template>
   <div id="app" class="primary">
+    <div v-bind:style="styleObject">
+
+
+    </div>
     <div class="flexiflex-logo primary">
       <span class="title-left">Flexiflex</span>
     </div>
@@ -9,32 +13,42 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  data() {
+    return {
+      backgroundRandom: "../src/assets/homepage/background-splash-1.jpg",
+      num: null,
 
-  // data(){
-  //
-  //
-  // },
-  //
-  // created(){
-  //
-  //
-  //   var countFiles = require('count-files')
-  //   // var countFiles = require('url(../src/assets/homepage)')
-  //
-  //   var stats = countFiles('/assets/homepage', function (err, results) {
-  //     console.log('done counting')
-  //     console.log(results) // { files: 10, dirs: 2, bytes: 234 }
-  //   })
-  //   setInterval(function () {
-  //     console.log('current count', stats) // { files: 4, dirs: 1, bytes: 34 }
-  //   }, 500)
-  //
-  //   // let backgroundTable=['imageCycle1','imageCycle2'];
-  //   // var num = Math.ceil( Math.random() * totalCount );
-  //   // document.body.background = 'images/'+num+'.jpg';
-  //
-  // },
+      windowWidth: 0,
+      txt: '',
+      imageNumber:1,
+
+
+      styleObject: {
+        content: '',
+        backgroundImage : null,
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundColor: 'black',
+        opacity: 0.8,
+        zIndex: -2,
+        position: 'fixed',
+        width: '100%',
+        height: '100%',
+        transform: 'scaleX(1.1)',
+      }
+    }
+  },
+  created() {
+    this.imageNumber = Math.ceil( Math.random() * 7 )
+
+    if (window.innerWidth <= 812) {
+      this.styleObject.backgroundImage = 'url(' + require('@/assets/homepage_MaxWidth_600/background-splash-medium-' + this.imageNumber + '.jpg')
+    } else {
+      this.styleObject.backgroundImage = 'url(' + require('@/assets/homepage/background-splash-' + this.imageNumber + '.jpg')
+    }
+  },
 }
 </script>
 
@@ -48,26 +62,6 @@ html {
   background: black;
 }
 
-html::after {
-  content: '';
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: url(../src/assets/homepage/background-splash-4.jpg);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  transform: scaleX(1.1);
-  background-color: black;
-  opacity: 0.8;
-  z-index: -2;
-}
-
-body {
-  height: 100%;
-  width: 100%;
-}
-
 html::before {
   position: fixed;
   content: '';
@@ -75,9 +69,14 @@ html::before {
   background-color: #ffffff;
   width: 100vw;
   height: 100vh;
-  animation: ease-in fade 2s;
+  animation: ease-in fade 0.5s;
   opacity: 0;
   pointer-events: none;
+}
+
+body {
+  height: 100%;
+  width: 100%;
 }
 
 @keyframes fade {
@@ -113,15 +112,23 @@ html::before {
     font-style: normal;
   }
 
-.error{
-     margin: 10px;
-     color: crimson;
-   }
+  .error{
+    margin: 10px;
+    font-size: 12px;
+    color: crimson;
+  }
 
-.ok{
-  margin: 10px;
-  color: darkgreen;
+  .error-register{
+  margin: 5px;
+  font-size: 12px;
+  color: crimson;
 }
+
+  .ok{
+    margin: 10px;
+    font-size: 12px;
+    color: darkgreen;
+  }
 
   .flexiflex-logo {
     margin: 50px;
@@ -145,13 +152,35 @@ html::before {
     text-align: center;
   }
 
+  .form-input-date{
+    background-color: white;
+    color: grey;
+    padding-right: 0px;
+    padding-left: 46px;
+  }
+
+.birthdateClass:hover::after{
+   content: "";
+ }
+
+.birthdateClass:focus::after{
+  content: "";
+}
+
+.birthdateClass:after{
+  content: "Date de naissance";
+  position:absolute;
+  padding-left: 10px;
+  background-color: white;
+  z-index: 0;
+}
+
   .form-button {
     align-self: center;
     padding: 3px;
     border: none;
     width: 220px;
     height: 25px;
-    /*margin: 20px 40px 35px;*/
     margin: 15px 0px 40px;
     border-radius: 5px;
     background-color: white;
@@ -160,6 +189,10 @@ html::before {
     justify-content: center;
     align-items: center;
   }
+
+.form-button-register {
+  margin: 15px 0px 25px;
+}
 
   .form-button:hover{
     box-shadow: 0px 2px 2px grey;
@@ -203,7 +236,7 @@ html::before {
   }
 
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 812px) {
   .login-component {
     width: 300px;
     padding: 10px;
@@ -217,5 +250,7 @@ html::before {
   .form-signin .form-input {
     width: 250px;
   }
+
+
 }
 </style>

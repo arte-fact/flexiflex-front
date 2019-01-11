@@ -11,8 +11,8 @@
         <h2 class="form-title">Inscription</h2>
         <input class="form-input" id="name" v-model="email" type="text" name="email" placeholder="Email">
         <input class="form-input" id="password" v-model="password" type="password" name="password" placeholder="Mot de passe">
-        <input class="form-input" id="birthdate" v-model="birthdate" type="date" name="birthdate">
-        <button class="form-button" v-if="!isRegistering">Inscription</button>
+        <input class="form-input form-input-date" v-bind:class="{birthdateClass: birthdate === null || birthdate === ''}" id="birthdate" v-model="birthdate" type="date" name="birthdate">
+        <button class="form-button form-button-register" v-if="!isRegistering" v-on:click="submit">Inscription</button>
       </form>
     </div>
 
@@ -24,8 +24,8 @@
     <p class="ok" v-if="isRegistered">
       Un email de validation à été envoyé à {{email}}.
     </p>
-    <p class="error" v-if="hasRegistrationError">
-      Email ou password incorrect
+    <p class="error-register" v-if="hasRegistrationError">
+      Email, mot de passe ou date de naissance incorrect
     </p>
 
 
@@ -46,7 +46,7 @@ export default {
     return {
       email: "",
       password: "",
-      birthdate: ""
+      birthdate: null
     }
   },
   computed: {
@@ -72,8 +72,14 @@ export default {
           name: 'home-page'
         })
       }
+    },
+
+    birthdate(newvalue){
     }
-  },
+
+
+
+    },
   methods: {
     ...mapActions('auth', [
       'login',
