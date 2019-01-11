@@ -143,7 +143,6 @@ body {
   }
 
   .ok{
-    margin: 10px;
     font-size: 12px;
     color: darkgreen;
   }

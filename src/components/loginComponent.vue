@@ -19,6 +19,7 @@
       <div v-if="hasAuthenticationError">Email ou mot de passe invalides</div>
 
       <!--Message de Changerment quand Click bouton-->
+
       <div class="ok" v-if="isAuthenticating" v-on:click="submit">Chargement...</div>
     </div>
   </div>

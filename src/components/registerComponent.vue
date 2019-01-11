@@ -30,7 +30,8 @@
 
           <!--Message d'envoi d'email quand l'inscription réussit-->
           <div class="ok" v-if="isRegistered">
-            Un email de validation à été envoyé à {{email}}.
+            Un email vous a été envoyé à l'adresse :
+            <br> {{email}}
           </div>
         </div>
    </div>
