@@ -18,8 +18,7 @@
       <div v-if="password.length < 3 && password != ''">Mot de passe : 3 caractères minimum </div>
       <div v-if="hasAuthenticationError">Email ou mot de passe invalides</div>
 
-      <!--Message de Changerment quand Click bouton-->
-
+      <!--Message de Chargement quand clique sur le bouton-->
       <div class="ok" v-if="isAuthenticating" v-on:click="submit">Chargement...</div>
     </div>
   </div>

@@ -28,7 +28,7 @@
           <div v-if="agevalidate === false && birthdate != ''">Vous devez avoir 16 ans</div>
           <div v-if="hasRegistrationError">Erreur inscription</div>
 
-          <!--Message d'envoi d'email quand l'inscription réussit-->
+          <!--Message d'envoi d'email quand l'inscription réussi-->
           <div class="ok" v-if="isRegistered">
             Un email vous a été envoyé à l'adresse :
             <br> {{email}}
