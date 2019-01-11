@@ -3,9 +3,9 @@
     <div class="login-component-background"></div>
     <form class="form-signin" @submit.prevent="submit" action="https://" method="post">
       <h2 class="form-title">Connexion</h2>
-      <input class="form-input" id="name" v-model="email" type="text" name="email" placeholder="Email">
-      <input class="form-input" id="password" v-model="password" type="password" name="password" placeholder="Mot de passe">
-      <button class="form-button" v-if="!isAuthenticating" v-on:click="submit">Connexion</button>
+      <input class="form-input" v-bind:class="{invalidClass: emailRegexValid === false && email != ''}" id="name" v-model="email" type="text" name="email" placeholder="Email">
+      <input class="form-input" v-bind:class="{invalidClass: password.length < 3 && password != ''}" id="password" v-model="password" type="password" name="password" placeholder="Mot de passe">
+      <button class="form-button" v-bind:class="{'form-button-disabled': email === '' || password === '' || emailRegexValid === false || password.length < 3}"  v-if="!isAuthenticating" v-on:click="submit">Connexion</button>
     </form>
 
     <p class="mt-5 mb-3 text-muted">Vous êtes nouveau sur Flexiflex?</p>
@@ -32,7 +32,8 @@
         msg: 'Login',
         email: '',
         password: '',
-        error: this.hasError
+        error: this.hasError,
+        emailRegexValid: true,
       }
     },
     computed: {
@@ -59,6 +60,11 @@
             name: 'home-page'
           })
         }
+      },
+
+      email(email) {
+        let regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        this.emailRegexValid = regex.test(email);
       }
     },
     methods: {
