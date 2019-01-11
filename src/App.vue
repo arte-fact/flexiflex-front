@@ -122,7 +122,6 @@ body {
     margin-top: 5px;
     font-size: 12px;
     color: crimson;
-    border: 1px solid crimson;
   }
 
 .errorSaisieRegister{
