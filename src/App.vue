@@ -142,6 +142,7 @@ body {
 
   }
 
+
   .form-input {
     width: 220px;
     height: 25px;
@@ -152,28 +153,34 @@ body {
     text-align: center;
   }
 
-  .form-input-date{
+.invalidClass{
+  content:"3 caractères minimum";
+  border: 1px solid #ff0000;
+  outline: none;
+}
+
+.form-input-date{
     background-color: white;
     color: grey;
     padding-right: 0px;
     padding-left: 46px;
   }
 
-.birthdateClass:hover::after{
-   content: "";
- }
+  .birthdateClass:hover::after{
+     content: "";
+   }
 
-.birthdateClass:focus::after{
-  content: "";
-}
+  .birthdateClass:focus::after{
+    content: "";
+  }
 
-.birthdateClass:after{
-  content: "Date de naissance";
-  position:absolute;
-  padding-left: 10px;
-  background-color: white;
-  z-index: 0;
-}
+  .birthdateClass:after{
+    content: "Date de naissance";
+    position:absolute;
+    padding-left: 10px;
+    background-color: white;
+    z-index: 0;
+  }
 
   .form-button {
     align-self: center;
@@ -190,9 +197,9 @@ body {
     align-items: center;
   }
 
-.form-button-register {
-  margin: 15px 0px 25px;
-}
+  .form-button-register{
+    margin: 15px 0px 25px;
+  }
 
   .form-button:hover{
     box-shadow: 0px 2px 2px grey;
@@ -206,10 +213,17 @@ body {
     color: white;
   }
 
-.login-component {
-  width: 320px;
-  margin: 5px;
-}
+  .form-button-disabled{
+    background-color: #bbbbbb;
+    color: #8a8a8a;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .login-component {
+    width: 320px;
+    margin: 5px;
+  }
 
   .reverse-primary {
     background-color: transparent;
