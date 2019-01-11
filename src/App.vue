@@ -112,7 +112,7 @@ body {
     font-style: normal;
   }
 
-  .errorSaisieLogin{
+  .placeMessageSousBoutton{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -122,6 +122,7 @@ body {
     margin-top: 5px;
     font-size: 12px;
     color: crimson;
+    border: 1px solid crimson;
   }
 
 .errorSaisieRegister{
@@ -232,11 +233,6 @@ body {
     pointer-events: none;
   }
 
-  .login-component {
-    width: 320px;
-    margin: 5px;
-  }
-
   .reverse-primary {
     background-color: transparent;
     color: #e6e6e6;
@@ -247,6 +243,10 @@ body {
     font-weight: bold;
   }
 
+  .form-title-second {
+    font-size: 20px;
+    font-weight: bold;
+  }
   .login-component-background {
     position: absolute;
     height: 240px;
@@ -258,6 +258,16 @@ body {
   }
 
   .register-component-background {
+     position: absolute;
+     height: 280px;
+     width: 300px;
+     border-radius: 5px;
+     background-color: #cccccc;
+     opacity: 0.9;
+     z-index: -1;
+   }
+
+  .finalRegister-component-background {
     position: absolute;
     height: 280px;
     width: 300px;
@@ -267,20 +277,32 @@ body {
     z-index: -1;
   }
 
-  .login-component {
+  .center{
+    text-align: center;
+    align-items: center;
+    padding : 85px 90px;
+  }
+
+  .loadingRingLoader{
+    padding-top: 20px;
+  }
+
+  .form-component {
+    width: 320px;
+    margin: 5px;
     padding: 10px;
     border-radius: 5px;
   }
 
 
 @media only screen and (max-width: 812px) {
-  .login-component {
+  .form-component {
     width: 300px;
     padding: 10px;
     border-radius: 5px;
   }
 
-  .login-component-background {
+  .form-component-background {
     width: 300px;
   }
 

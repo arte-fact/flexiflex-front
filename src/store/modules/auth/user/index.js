@@ -8,8 +8,8 @@ const RESET_USER = 'RESET_USER'
 const USER_REQUEST_FAIL = 'USER_REQUEST_FAIL'
 
 const state = {
+  userRequestFail: false,
   user: null,
-  userRequestFail: false
 }
 
 const getters = {
