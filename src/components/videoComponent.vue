@@ -1,93 +1,39 @@
 <template xmlns:v-video-player="http://www.w3.org/1999/xhtml">
   <section class="container">
-    <div class="video-player-box"
-         :playsinline="playsinline"
-         @play="onPlayerPlay($event)"
-         @pause="onPlayerPause($event)"
-         @ended="onPlayerEnded($event)"
-         @loadeddata="onPlayerLoadeddata($event)"
-         @waiting="onPlayerWaiting($event)"
-         @playing="onPlayerPlaying($event)"
-         @timeupdate="onPlayerTimeupdate($event)"
-         @canplay="onPlayerCanplay($event)"
-         @canplaythrough="onPlayerCanplaythrough($event)"
-         @ready="playerReadied"
-         @statechanged="playerStateChanged($event)"
-         v-video-player:myVideoPlayer="playerOptions">
+    <div class="login-component-background">
+      <video width="100%" height="auto" controls>
+        <source
+          :src="videoUrl"
+          type="video/mp4">
+      </video>
     </div>
   </section>
 </template>
 
-<style>
-  .container {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-</style>
 
 <script>
   export default {
     name: 'video-page',
+
     data () {
       return {
-        // component options
-        playsinline: true,
-
-        // videojs options
-        playerOptions: {
-          muted: true,
-          language: 'en',
-          playbackRates: [0.7, 1.0, 1.5, 2.0],
-          sources: [{
-            type: "video/mp4",
-            src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-          }],
-        }
-      }
-    },
-    mounted() {
-      // console.log('this is current player instance object', this.myVideoPlayer)
-    },
-    methods: {
-      // listen event
-      onPlayerPlay(player) {
-        // console.log('player play!', player)
-      },
-      onPlayerPause(player) {
-        // console.log('player pause!', player)
-      },
-      onPlayerEnded(player) {
-        // console.log('player ended!', player)
-      },
-      onPlayerLoadeddata(player) {
-        // console.log('player Loadeddata!', player)
-      },
-      onPlayerWaiting(player) {
-        // console.log('player Waiting!', player)
-      },
-      onPlayerPlaying(player) {
-        // console.log('player Playing!', player)
-      },
-      onPlayerTimeupdate(player) {
-        // console.log('player Timeupdate!', player.currentTime())
-      },
-      onPlayerCanplay(player) {
-        // console.log('player Canplay!', player)
-      },
-      onPlayerCanplaythrough(player) {
-        // console.log('player Canplaythrough!', player)
-      },
-      // or listen state event
-      playerStateChanged(playerCurrentState) {
-      },
-      // player is ready
-      playerReadied(player) {
+        videoUrl: 'http://62.210.148.177:9001/flexiflex/kingsman.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=flexiflexadmin%2F20190111%2F%2Fs3%2Faws4_request&X-Amz-Date=20190111T115624Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=03150dcf0ab56edb5ab32341ac478addfc6cb7a4461922e0b1152fcfabf980c1'
       }
     }
   }
+
 </script>
 
+
+<style>
+  .container {
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+  }
+
+</style>

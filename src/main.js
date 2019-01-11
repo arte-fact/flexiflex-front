@@ -5,7 +5,6 @@ import App from './App'
 import router from './router'
 import store from './store'
 import './plugins/vueresources'
-import './plugins/videoPlayer'
 
 Vue.config.productionTip = false
 
