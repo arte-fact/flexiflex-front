@@ -26,18 +26,13 @@
           <div v-if="emailRegexValid === false && email != ''">Format d'email incorrect</div>
           <div v-if="password.length < 3 && password != ''">Mot de passe : 3 caractères minimum </div>
           <div v-if="agevalidate === false && birthdate != ''">Vous devez avoir 16 ans</div>
-          <div v-if="emailRegexValid === true && email != '' && password.length >= 3 && password != '' && hasAuthenticationError">Email, mot de passe ou âge invalides</div>
+          <div v-if="hasRegistrationError">Erreur inscription</div>
+
+          <!--Message d'envoi d'email quand l'inscription réussit-->
+          <div class="ok" v-if="isRegistered">
+            Un email de validation à été envoyé à {{email}}.
+          </div>
         </div>
-
-<!--//TODO-->
-        <p class="ok" v-if="isRegistered">
-          Un email de validation à été envoyé à {{email}}.
-        </p>
-        <p class="error-register" v-if="hasRegistrationError">
-          Email, mot de passe ou date de naissance incorrect
-        </p>
-<!--//TODO-->
-
    </div>
   </div>
 </template>
@@ -102,12 +97,19 @@ export default {
         }else{
           this.agevalidate = false
         }
+
+      this.resetErrors()
     },
 
     email(email) {
       let regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       this.emailRegexValid = regex.test(email);
-    }
+      this.resetErrors()
+    },
+
+    password(){
+      this.resetErrors()
+    },
 
     },
 

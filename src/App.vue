@@ -227,7 +227,7 @@ body {
   }
 
   .form-button-disabled{
-    background-color: #bbbbbb;
+    background-color: #b0b0b0;
     color: #8a8a8a;
     cursor: not-allowed;
     pointer-events: none;
