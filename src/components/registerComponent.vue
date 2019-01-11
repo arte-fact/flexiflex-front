@@ -6,30 +6,39 @@
       </div>
     </span>
     <div v-else>
-      <form class="form-signin" @submit.prevent="submit" action="https://" method="post">
-        <div class="login-component-background"></div>
-        <h2 class="form-title">Inscription</h2>
-        <input class="form-input" v-bind:class="{invalidClass: emailRegexValid === false && email != ''}" id="name" v-model="email" type="text" name="email" placeholder="Email">
-        <input class="form-input" v-bind:class="{invalidClass: password.length < 3 && password != ''}" id="password" v-model="password" type="password" name="password" placeholder="Mot de passe">
-        <input class="form-input form-input-date" v-bind:class="{birthdateClass: birthdate === null || birthdate === '', invalidClass: agevalidate === false && birthdate != ''}" id="birthdate" v-model="birthdate" type="date" name="birthdate">
-        <button class="form-button form-button-register" v-bind:class="{'form-button-disabled': email === '' || password === '' || birthdate === null || emailRegexValid === false || password.length < 3 || agevalidate === false}" v-if="!isRegistering" v-on:click="submit">Inscription</button>
-      </form>
-    </div>
+      <div class="register-component-background"></div>
 
-    <p class="mt-5 mb-3 text-muted">Vous avez un compte...</p>
-    <router-link class="menu-item" to='/login'>
-      Connectez-vous
-    </router-link>
+        <form class="form-signin" @submit.prevent="submit" action="https://" method="post">
 
-    <p class="ok" v-if="isRegistered">
-      Un email de validation à été envoyé à {{email}}.
-    </p>
-    <p class="error-register" v-if="hasRegistrationError">
-      Email, mot de passe ou date de naissance incorrect
-    </p>
+          <h2 class="form-title">Inscription</h2>
+          <input class="form-input" v-bind:class="{invalidClass: emailRegexValid === false && email != ''}" id="name" v-model="email" type="text" name="email" placeholder="Email">
+          <input class="form-input" v-bind:class="{invalidClass: password.length < 3 && password != ''}" id="password" v-model="password" type="password" name="password" placeholder="Mot de passe">
+          <input class="form-input form-input-date" v-bind:class="{birthdateClass: birthdate === null || birthdate === '', invalidClass: agevalidate === false && birthdate != ''}" id="birthdate" v-model="birthdate" type="date" name="birthdate">
+          <button class="form-button form-button-register" v-bind:class="{'form-button-disabled': email === '' || password === '' || birthdate === null || emailRegexValid === false || password.length < 3 || agevalidate === false}" v-if="!isRegistering" v-on:click="submit">Inscription</button>
+        </form>
 
+        <div class="errorSaisieRegister">
+          <div class="sizeHomepageLinks">Vous avez un compte...
+          <router-link class="menu-item" to='/login'>
+            Connectez-vous
+          </router-link>
+          </div>
+          <div v-if="emailRegexValid === false && email != ''">Format d'email incorrect</div>
+          <div v-if="password.length < 3 && password != ''">Mot de passe : 3 caractères minimum </div>
+          <div v-if="agevalidate === false && birthdate != ''">Vous devez avoir 16 ans</div>
+          <div v-if="emailRegexValid === true && email != '' && password.length >= 3 && password != '' && hasAuthenticationError">Email, mot de passe ou âge invalides</div>
+        </div>
 
+<!--//TODO-->
+        <p class="ok" v-if="isRegistered">
+          Un email de validation à été envoyé à {{email}}.
+        </p>
+        <p class="error-register" v-if="hasRegistrationError">
+          Email, mot de passe ou date de naissance incorrect
+        </p>
+<!--//TODO-->
 
+   </div>
   </div>
 </template>
 
