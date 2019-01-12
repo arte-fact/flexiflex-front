@@ -115,7 +115,6 @@ import RingLoader from 'vue-spinner/src/RingLoader.vue'
         'resetErrors'
       ]),
       submit () {
-        console.log("submit")
         this.register({
           email: this.email,
           password: this.password,

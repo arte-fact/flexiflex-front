@@ -45,7 +45,6 @@ const actions = {
     }).then(
       response => {
         if (response.status === 200) {
-          console.log(response)
           commit(USER_REQUEST, response)
         } else {
           commit(USER_REQUEST_FAIL)

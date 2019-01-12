@@ -1,8 +1,6 @@
 <template>
   <div id="app" class="primary">
     <div v-bind:style="styleObject">
-
-
     </div>
     <div class="flexiflex-logo primary">
       <span class="title-left">Flexiflex</span>

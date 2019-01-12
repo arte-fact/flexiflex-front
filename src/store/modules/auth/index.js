@@ -189,7 +189,6 @@ const actions = {
     Vue.http.headers.put['Authorization'] = token;
   },
   setAuthHeaderFromCookie() {
-    console.log(window.$cookies.get('Authorization'))
     Vue.http.headers.put['Authorization'] = window.$cookies.get('Authorization');
   },
   setTokenFromCookie({commit}) {
