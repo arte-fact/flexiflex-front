@@ -101,13 +101,12 @@ const mutations = {
     // Nothing
   },
   [SET_USER_TOKEN] (state, response) {
-    window.$cookies.set('token', response.id_token)
+    window.$cookies.set('Authorization', 'Bearer ' + response.id_token)
     state.token = response.token
     state.hasCookie = true
   },
   [RESET_USER_TOKEN] (state) {
-    window.$cookies.remove('token')
-    window.$cookies.remove('uuid')
+    window.$cookies.remove('Authorization')
     state.token = null
     state.uuid = null
     state.hasCookie = false
@@ -191,12 +190,11 @@ const actions = {
     commit(RESET_ERRORS)
   },
   setAuthHeader({commit}, uuid, token) {
-    Vue.http.headers.put['uuid'] = uuid;
-    Vue.http.headers.put['token'] = token;
+    Vue.http.headers.put['Authorization'] = 'Bearer ' + token;
   },
   setAuthHeaderFromCookie() {
-    Vue.http.headers.put['uuid'] = window.$cookies.get('uuid');
-    Vue.http.headers.put['token'] = window.$cookies.get('token');
+    console.log(window.$cookies.get('Authorization'))
+    Vue.http.headers.put['Authorization'] = window.$cookies.get('Authorization');
   }
 }
 

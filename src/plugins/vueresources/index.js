@@ -12,5 +12,6 @@ let urls = {
 
 Vue.http.headers.common['Access-Control-Allow-Origin'] = '*'
 Vue.http.headers.common['Accept'] = 'application/json'
+
 Vue.http.options.root = urls[process.env.NODE_ENV] + '/'
 Vue.http.options.credentials = true

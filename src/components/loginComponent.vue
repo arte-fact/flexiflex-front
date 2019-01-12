@@ -5,7 +5,7 @@
       <h2 class="form-title">Connexion</h2>
       <input class="form-input" v-bind:class="{invalidClass: emailRegexValid === false && email != ''}" id="name" v-model="email" type="text" name="email" placeholder="Email">
       <input class="form-input" v-bind:class="{invalidClass: password.length < 3 && password != ''}" id="password" v-model="password" type="password" name="password" placeholder="Mot de passe">
-      <button class="form-button" v-bind:class="{'form-button-disabled': email === '' || password === '' || emailRegexValid === false || password.length < 3}"  v-if="!isAuthenticating" v-on:click="submit">Connexion</button>
+      <button class="form-button" v-bind:class="{'form-button-disabled': email === '' || password === '' || emailRegexValid === false || password.length < 3}"  v-if="!isAuthenticating">Connexion</button>
     </form>
     <div class="placeMessageSousBoutton" v-if="!isAuthenticating">
       <div class="sizeHomepageLinks">Vous êtes nouveau ?

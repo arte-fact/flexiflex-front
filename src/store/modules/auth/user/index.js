@@ -36,8 +36,11 @@ const mutations = {
 
 const actions = {
   requestUser ({commit}) {
-    Vue.http.get('api/account'
-    ).then(
+    Vue.http.get('api/account', {
+      headers: {
+        'Authorization': window.$cookies.get('Authorization')
+      }
+    }).then(
       response => {
         if (response.status === 200) {
           console.log("user response ok")

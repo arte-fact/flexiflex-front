@@ -12,7 +12,9 @@
 </template>
 
 <script>
-export default {
+  import { mapActions, mapGetters } from 'vuex'
+
+  export default {
   name: 'App',
   data() {
     return {
@@ -43,12 +45,21 @@ export default {
   created() {
     this.imageNumber = Math.ceil( Math.random() * 7 )
 
+    this.setAuthHeaderFromCookie()
+
     if (window.innerWidth <= 812) {
       this.styleObject.backgroundImage = 'url(' + require('@/assets/homepage_MaxWidth_600/background-splash-medium-' + this.imageNumber + '.jpg')
     } else {
       this.styleObject.backgroundImage = 'url(' + require('@/assets/homepage/background-splash-' + this.imageNumber + '.jpg')
     }
   },
+    methods: {
+      ...mapActions('auth', [
+        'setAuthHeader',
+        'setAuthHeaderFromCookie'
+      ]),
+    }
+
 }
 </script>
 
