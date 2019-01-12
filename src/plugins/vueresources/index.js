@@ -1,9 +1,7 @@
 import Vue from 'vue'
-import store from '../../store'
 import VueResource from 'vue-resource'
 
 Vue.use(VueResource)
-Vue.use(store)
 
 let urls = {
   production: 'http://62.210.148.177:9090',

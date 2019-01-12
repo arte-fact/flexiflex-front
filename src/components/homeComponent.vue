@@ -23,36 +23,13 @@ export default {
   computed: {
     ...mapGetters('auth', [
       'token',
-      'uuid',
       'user',
       'userRequestFail'
     ])
   },
   created () {
-    if (this.token === null) {
-      this.$router.push({
-        name: 'login-page'
-      })
-    }
-
     if (this.user === null) {
       this.request()
-    }
-  },
-  watch: {
-    token (newValue) {
-      if (newValue === null) {
-        this.$router.push({
-          name: 'login-page'
-        })
-      }
-    },
-
-    userRequestFail(state) {
-      if (state === true) {
-        this.resetToken()
-        this.resetUser()
-      }
     }
   },
   methods: {
@@ -64,10 +41,6 @@ export default {
       'logout'
     ]),
     request () {
-      console.log("request user")
-
-      this.setAuthHeaderFromCookie()
-
       this.requestUser()
     },
     doLogout() {

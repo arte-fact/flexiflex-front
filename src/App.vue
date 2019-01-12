@@ -15,52 +15,78 @@
   import { mapActions, mapGetters } from 'vuex'
 
   export default {
-  name: 'App',
-  data() {
-    return {
-      backgroundRandom: "../src/assets/homepage/background-splash-1.jpg",
-      num: null,
+    name: 'App',
+    data() {
+      return {
+        backgroundRandom: "../src/assets/homepage/background-splash-1.jpg",
+        num: null,
 
-      windowWidth: 0,
-      txt: '',
-      imageNumber:1,
+        windowWidth: 0,
+        txt: '',
+        imageNumber:1,
 
 
-      styleObject: {
-        content: '',
-        backgroundImage : null,
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',
-        backgroundSize: 'cover',
-        backgroundColor: 'black',
-        opacity: 0.8,
-        zIndex: -2,
-        position: 'fixed',
-        width: '100%',
-        height: '100%',
-        transform: 'scaleX(1.1)',
+        styleObject: {
+          content: '',
+          backgroundImage : null,
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundColor: 'black',
+          opacity: 0.8,
+          zIndex: -2,
+          position: 'fixed',
+          width: '100%',
+          height: '100%',
+          transform: 'scaleX(1.1)',
+        }
       }
-    }
-  },
-  created() {
-    this.imageNumber = Math.ceil( Math.random() * 7 )
+    },
+    created() {
+      this.imageNumber = Math.ceil( Math.random() * 7 )
 
-    this.setAuthHeaderFromCookie()
+      this.setTokenFromCookie()
 
-    if (window.innerWidth <= 812) {
-      this.styleObject.backgroundImage = 'url(' + require('@/assets/homepage_MaxWidth_600/background-splash-medium-' + this.imageNumber + '.jpg')
-    } else {
-      this.styleObject.backgroundImage = 'url(' + require('@/assets/homepage/background-splash-' + this.imageNumber + '.jpg')
-    }
-  },
+      if (window.innerWidth <= 812) {
+        this.styleObject.backgroundImage = 'url(' + require('@/assets/homepage_MaxWidth_600/background-splash-medium-' + this.imageNumber + '.jpg')
+      } else {
+        this.styleObject.backgroundImage = 'url(' + require('@/assets/homepage/background-splash-' + this.imageNumber + '.jpg')
+      }
+      if (this.token === null) {
+        this.$router.push({
+          name: 'login-page'
+        })
+      }
+    },
+    watch: {
+      token (newValue) {
+        if (newValue === null) {
+          this.$router.push({
+            name: 'login-page'
+          })
+        }
+      },
+
+      userRequestFail(state) {
+        if (state === true) {
+          this.resetToken()
+          this.resetUser()
+        }
+      }
+    },
     methods: {
       ...mapActions('auth', [
         'setAuthHeader',
-        'setAuthHeaderFromCookie'
+        'setAuthHeaderFromCookie',
+        'setTokenFromCookie'
       ]),
+    },
+    computed: {
+      ...mapGetters('auth', [
+        'token'
+      ])
     }
-
-}
+  }
 </script>
 
 <style>

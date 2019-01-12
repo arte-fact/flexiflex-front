@@ -38,12 +38,13 @@ const actions = {
   requestUser ({commit}) {
     Vue.http.get('api/account', {
       headers: {
-        'Authorization': window.$cookies.get('Authorization')
+        'Access-Control-Allow-Origin': '*',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + window.$cookies.get('Authorization')
       }
     }).then(
       response => {
         if (response.status === 200) {
-          console.log("user response ok")
           console.log(response)
           commit(USER_REQUEST, response)
         } else {
@@ -51,7 +52,6 @@ const actions = {
         }
       },
       response => {
-        console.log("user response not ok")
         commit(USER_REQUEST_FAIL)
       }
     )

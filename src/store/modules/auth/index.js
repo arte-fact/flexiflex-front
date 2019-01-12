@@ -101,7 +101,7 @@ const mutations = {
     // Nothing
   },
   [SET_USER_TOKEN] (state, response) {
-    window.$cookies.set('Authorization', 'Bearer ' + response.id_token)
+    window.$cookies.set('Authorization', response.id_token)
     state.token = response.token
     state.hasCookie = true
   },
@@ -129,7 +129,6 @@ const actions = {
     ).then(
       response => {
         if (response.ok) {
-          console.log(response)
           commit(LOGIN_SUCCESS)
           commit(SET_USER_TOKEN, response.body)
 
@@ -153,15 +152,12 @@ const actions = {
     ).then(
       response => {
         if (response.status === 201) {
-          console.log(response)
           commit(REGISTER_SUCCESS)
         } else {
-          console.log(response)
           commit(REGISTER_FAIL)
         }
       },
       response => {
-        console.log(response)
         commit(REGISTER_FAIL)
       }
     )
@@ -190,11 +186,17 @@ const actions = {
     commit(RESET_ERRORS)
   },
   setAuthHeader({commit}, uuid, token) {
-    Vue.http.headers.put['Authorization'] = 'Bearer ' + token;
+    Vue.http.headers.put['Authorization'] = token;
   },
   setAuthHeaderFromCookie() {
     console.log(window.$cookies.get('Authorization'))
     Vue.http.headers.put['Authorization'] = window.$cookies.get('Authorization');
+  },
+  setTokenFromCookie({commit}) {
+    let token = window.$cookies.get("Authorization")
+    if (token !== null) {
+      commit(SET_USER_TOKEN, {'id_token': window.$cookies.get('Authorization')});
+    }
   }
 }
 
