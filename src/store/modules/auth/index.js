@@ -124,7 +124,8 @@ const actions = {
     Vue.http.post('api/authenticate', {
       password: password,
       rememberMe: true,
-      username: username
+      username: username,
+      email: username
       }
     ).then(
       response => {
@@ -144,7 +145,12 @@ const actions = {
   },
   register ({commit}, {email, password, birthdate}) {
     commit(REGISTER_REQUEST)
-    Vue.http.post('api/register', {email: email, password: password, birthdate: birthdate}
+    Vue.http.post('api/custom/register', {
+      email: email,
+      login: email,
+      password: password,
+      birthDate: birthdate
+    }
     ).then(
       response => {
         if (response.status === 201) {
