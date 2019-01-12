@@ -112,20 +112,37 @@ body {
     font-style: normal;
   }
 
-  .error{
-    margin: 10px;
+  .placeMessageSousBoutton{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 65px;
+    width: 100%;
+    margin-top: 5px;
     font-size: 12px;
     color: crimson;
   }
 
-  .error-register{
-  margin: 5px;
+.errorSaisieRegister{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 75px;
+  width: 100%;
+  margin-top: 5px;
   font-size: 12px;
   color: crimson;
 }
 
+  .sizeHomepageLinks{
+    font-size: 13px;
+    color: #2c3e50;
+    padding-bottom: 5px;
+  }
+
   .ok{
-    margin: 10px;
     font-size: 12px;
     color: darkgreen;
   }
@@ -152,6 +169,12 @@ body {
     text-align: center;
   }
 
+  .invalidClass{
+    content:"3 caractères minimum";
+    border: 1px solid #ff0000;
+    outline: none;
+  }
+
   .form-input-date{
     background-color: white;
     color: grey;
@@ -159,21 +182,21 @@ body {
     padding-left: 46px;
   }
 
-.birthdateClass:hover::after{
-  content: "";
-}
+  .birthdateClass:hover::after{
+     content: "";
+   }
 
-.birthdateClass:focus::after{
-  content: "";
-}
+  .birthdateClass:focus::after{
+    content: "";
+  }
 
-.birthdateClass:after{
-  content: "Date de naissance";
-  position:absolute;
-  padding-left: 10px;
-  background-color: white;
-  z-index: 1;
-}
+  .birthdateClass:after{
+    content: "Date de naissance";
+    position:absolute;
+    padding-left: 10px;
+    background-color: white;
+    z-index: 0;
+  }
 
   .form-button {
     align-self: center;
@@ -181,7 +204,7 @@ body {
     border: none;
     width: 220px;
     height: 25px;
-    margin: 15px 0px 40px;
+    margin: 15px 0px 0px;
     border-radius: 5px;
     background-color: white;
     font-weight: bold;
@@ -189,10 +212,6 @@ body {
     justify-content: center;
     align-items: center;
   }
-
-.form-button-register {
-  margin: 15px 0px 25px;
-}
 
   .form-button:hover{
     box-shadow: 0px 2px 2px grey;
@@ -206,10 +225,12 @@ body {
     color: white;
   }
 
-.login-component {
-  width: 320px;
-  margin: 5px;
-}
+  .form-button-disabled{
+    background-color: #b0b0b0;
+    color: #8a8a8a;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
 
   .reverse-primary {
     background-color: transparent;
@@ -221,36 +242,72 @@ body {
     font-weight: bold;
   }
 
+  .form-title-second {
+    font-size: 20px;
+    font-weight: bold;
+  }
   .login-component-background {
     position: absolute;
-    height: 300px;
+    height: 240px;
     width: 300px;
     border-radius: 5px;
     background-color: #cccccc;
     opacity: 0.9;
     z-index: -1;
   }
-  .login-component {
+
+  .register-component-background {
+     position: absolute;
+     height: 280px;
+     width: 300px;
+     border-radius: 5px;
+     background-color: #cccccc;
+     opacity: 0.9;
+     z-index: -1;
+   }
+
+  .finalRegister-component-background {
+    position: absolute;
+    height: 280px;
+    width: 300px;
+    border-radius: 5px;
+    background-color: #cccccc;
+    opacity: 0.9;
+    z-index: -1;
+  }
+
+  .center{
+    text-align: center;
+    align-items: center;
+    padding : 85px 90px;
+  }
+
+  .loadingRingLoader{
+    padding-top: 20px;
+  }
+
+  .form-component {
+    width: 320px;
+    margin: 5px;
     padding: 10px;
     border-radius: 5px;
   }
 
 
 @media only screen and (max-width: 812px) {
-  .login-component {
+  .form-component {
     width: 300px;
     padding: 10px;
     border-radius: 5px;
   }
 
-  .login-component-background {
+  .form-component-background {
     width: 300px;
   }
 
   .form-signin .form-input {
     width: 250px;
   }
-
 
 }
 </style>
