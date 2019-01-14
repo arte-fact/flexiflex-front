@@ -1,8 +1,6 @@
 <template>
   <div id="app" class="primary">
     <div v-bind:style="styleObject">
-
-
     </div>
     <div class="flexiflex-logo primary">
       <span class="title-left">Flexiflex</span>
@@ -12,44 +10,81 @@
 </template>
 
 <script>
-export default {
-  name: 'App',
-  data() {
-    return {
-      backgroundRandom: "../src/assets/homepage/background-splash-1.jpg",
-      num: null,
+  import { mapActions, mapGetters } from 'vuex'
 
-      windowWidth: 0,
-      txt: '',
-      imageNumber:1,
+  export default {
+    name: 'App',
+    data() {
+      return {
+        backgroundRandom: "../src/assets/homepage/background-splash-1.jpg",
+        num: null,
+
+        windowWidth: 0,
+        txt: '',
+        imageNumber:1,
 
 
-      styleObject: {
-        content: '',
-        backgroundImage : null,
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',
-        backgroundSize: 'cover',
-        backgroundColor: 'black',
-        opacity: 0.8,
-        zIndex: -2,
-        position: 'fixed',
-        width: '100%',
-        height: '100%',
-        transform: 'scaleX(1.1)',
+        styleObject: {
+          content: '',
+          backgroundImage : null,
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundColor: 'black',
+          opacity: 0.8,
+          zIndex: -2,
+          position: 'fixed',
+          width: '100%',
+          height: '100%',
+          transform: 'scaleX(1.1)',
+        }
       }
-    }
-  },
-  created() {
-    this.imageNumber = Math.ceil( Math.random() * 7 )
+    },
+    created() {
+      this.imageNumber = Math.ceil( Math.random() * 7 )
 
-    if (window.innerWidth <= 812) {
-      this.styleObject.backgroundImage = 'url(' + require('@/assets/homepage_MaxWidth_600/background-splash-medium-' + this.imageNumber + '.jpg')
-    } else {
-      this.styleObject.backgroundImage = 'url(' + require('@/assets/homepage/background-splash-' + this.imageNumber + '.jpg')
+      this.setTokenFromCookie()
+
+      if (window.innerWidth <= 812) {
+        this.styleObject.backgroundImage = 'url(' + require('@/assets/homepage_MaxWidth_600/background-splash-medium-' + this.imageNumber + '.jpg')
+      } else {
+        this.styleObject.backgroundImage = 'url(' + require('@/assets/homepage/background-splash-' + this.imageNumber + '.jpg')
+      }
+      if (this.token === null) {
+        this.$router.push({
+          name: 'login-page'
+        })
+      }
+    },
+    watch: {
+      token (newValue) {
+        if (newValue === null) {
+          this.$router.push({
+            name: 'login-page'
+          })
+        }
+      },
+
+      userRequestFail(state) {
+        if (state === true) {
+          this.resetToken()
+          this.resetUser()
+        }
+      }
+    },
+    methods: {
+      ...mapActions('auth', [
+        'setAuthHeader',
+        'setAuthHeaderFromCookie',
+        'setTokenFromCookie'
+      ]),
+    },
+    computed: {
+      ...mapGetters('auth', [
+        'token'
+      ])
     }
-  },
-}
+  }
 </script>
 
 <style>
@@ -112,7 +147,7 @@ body {
     font-style: normal;
   }
 
-  .errorSaisieLogin{
+  .placeMessageSousBoutton{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -143,7 +178,6 @@ body {
   }
 
   .ok{
-    margin: 10px;
     font-size: 12px;
     color: darkgreen;
   }
@@ -233,11 +267,6 @@ body {
     pointer-events: none;
   }
 
-  .login-component {
-    width: 320px;
-    margin: 5px;
-  }
-
   .reverse-primary {
     background-color: transparent;
     color: #e6e6e6;
@@ -248,6 +277,10 @@ body {
     font-weight: bold;
   }
 
+  .form-title-second {
+    font-size: 20px;
+    font-weight: bold;
+  }
   .login-component-background {
     position: absolute;
     height: 240px;
@@ -259,6 +292,16 @@ body {
   }
 
   .register-component-background {
+     position: absolute;
+     height: 280px;
+     width: 300px;
+     border-radius: 5px;
+     background-color: #cccccc;
+     opacity: 0.9;
+     z-index: -1;
+   }
+
+  .finalRegister-component-background {
     position: absolute;
     height: 280px;
     width: 300px;
@@ -268,20 +311,32 @@ body {
     z-index: -1;
   }
 
-  .login-component {
+  .center{
+    text-align: center;
+    align-items: center;
+    padding : 85px 90px;
+  }
+
+  .loadingRingLoader{
+    padding-top: 20px;
+  }
+
+  .form-component {
+    width: 320px;
+    margin: 5px;
     padding: 10px;
     border-radius: 5px;
   }
 
 
 @media only screen and (max-width: 812px) {
-  .login-component {
+  .form-component {
     width: 300px;
     padding: 10px;
     border-radius: 5px;
   }
 
-  .login-component-background {
+  .form-component-background {
     width: 300px;
   }
 

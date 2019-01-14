@@ -1,4 +1,4 @@
-FROM node:9.11.1-alpine
+FROM node:11.6.0-alpine
 
 # installe un simple serveur http pour servir un contenu statique
 RUN npm i npm@latest -g

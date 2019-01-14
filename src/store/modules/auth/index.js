@@ -101,13 +101,12 @@ const mutations = {
     // Nothing
   },
   [SET_USER_TOKEN] (state, response) {
-    window.$cookies.set('token', response.id_token)
+    window.$cookies.set('Authorization', response.id_token)
     state.token = response.token
     state.hasCookie = true
   },
   [RESET_USER_TOKEN] (state) {
-    window.$cookies.remove('token')
-    window.$cookies.remove('uuid')
+    window.$cookies.remove('Authorization')
     state.token = null
     state.uuid = null
     state.hasCookie = false
@@ -124,12 +123,12 @@ const actions = {
     Vue.http.post('api/authenticate', {
       password: password,
       rememberMe: true,
-      username: username
+      username: username,
+      email: username
       }
     ).then(
       response => {
         if (response.ok) {
-          console.log(response)
           commit(LOGIN_SUCCESS)
           commit(SET_USER_TOKEN, response.body)
 
@@ -146,18 +145,16 @@ const actions = {
     console.log(birthdate)
     commit(REGISTER_REQUEST)
     Vue.http.post('api/custom/register', {login: email, email: email, password: password, birthDate: birthdate}
+
     ).then(
       response => {
         if (response.status === 201) {
-          console.log(response)
           commit(REGISTER_SUCCESS)
         } else {
-          console.log(response)
           commit(REGISTER_FAIL)
         }
       },
       response => {
-        console.log(response)
         commit(REGISTER_FAIL)
       }
     )
@@ -186,12 +183,16 @@ const actions = {
     commit(RESET_ERRORS)
   },
   setAuthHeader({commit}, uuid, token) {
-    Vue.http.headers.put['uuid'] = uuid;
-    Vue.http.headers.put['token'] = token;
+    Vue.http.headers.put['Authorization'] = token;
   },
   setAuthHeaderFromCookie() {
-    Vue.http.headers.put['uuid'] = window.$cookies.get('uuid');
-    Vue.http.headers.put['token'] = window.$cookies.get('token');
+    Vue.http.headers.put['Authorization'] = window.$cookies.get('Authorization');
+  },
+  setTokenFromCookie({commit}) {
+    let token = window.$cookies.get("Authorization")
+    if (token !== null) {
+      commit(SET_USER_TOKEN, {'id_token': window.$cookies.get('Authorization')});
+    }
   }
 }
 

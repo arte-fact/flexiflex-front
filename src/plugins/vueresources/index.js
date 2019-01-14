@@ -1,9 +1,7 @@
 import Vue from 'vue'
-import store from '../../store'
 import VueResource from 'vue-resource'
 
 Vue.use(VueResource)
-Vue.use(store)
 
 let urls = {
   production: 'http://62.210.148.177:9090',
@@ -12,5 +10,6 @@ let urls = {
 
 Vue.http.headers.common['Access-Control-Allow-Origin'] = '*'
 Vue.http.headers.common['Accept'] = 'application/json'
+
 Vue.http.options.root = urls[process.env.NODE_ENV] + '/'
 Vue.http.options.credentials = true

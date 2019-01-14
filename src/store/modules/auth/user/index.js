@@ -8,8 +8,8 @@ const RESET_USER = 'RESET_USER'
 const USER_REQUEST_FAIL = 'USER_REQUEST_FAIL'
 
 const state = {
+  userRequestFail: false,
   user: null,
-  userRequestFail: false
 }
 
 const getters = {
@@ -36,12 +36,15 @@ const mutations = {
 
 const actions = {
   requestUser ({commit}) {
-    Vue.http.get('api/account'
-    ).then(
+    Vue.http.get('api/account', {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + window.$cookies.get('Authorization')
+      }
+    }).then(
       response => {
         if (response.status === 200) {
-          console.log("user response ok")
-          console.log(response)
           commit(USER_REQUEST, response)
         } else {
           commit(USER_REQUEST_FAIL)
