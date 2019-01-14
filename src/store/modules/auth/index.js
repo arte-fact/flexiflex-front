@@ -120,11 +120,18 @@ const mutations = {
 const actions = {
   login ({commit}, {username, password}) {
     commit(LOGIN_REQUEST)
-    Vue.http.post('api/authenticate', {
+    Vue.http.post(
+      'api/authenticate', {
       password: password,
       rememberMe: true,
       username: username,
       email: username
+      },
+      {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Accept': 'application/json'
+        }
       }
     ).then(
       response => {
@@ -144,9 +151,21 @@ const actions = {
   register ({commit}, {email, password, birthdate}) {
     console.log(birthdate)
     commit(REGISTER_REQUEST)
-    Vue.http.post('api/custom/register', {login: email, email: email, password: password, birthDate: birthdate}
-
-    ).then(
+    Vue.http.post(
+      'api/custom/register',
+      {
+        login: email,
+        email: email,
+        password: password,
+        birthDate: birthdate
+      },
+      {
+        headers: {
+      'Access-Control-Allow-Origin': '*',
+        'Accept': 'application/json'
+        }
+      }
+      ).then(
       response => {
         if (response.status === 201) {
           commit(REGISTER_SUCCESS)
