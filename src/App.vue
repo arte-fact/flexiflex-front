@@ -1,10 +1,6 @@
 <template>
-  <div id="app" class="primary">
-    <div v-bind:style="styleObject">
-    </div>
-    <div class="flexiflex-logo primary">
-      <span class="title-left">Flexiflex</span>
-    </div>
+  <div id="app">
+    <div v-bind:style="styleObject"></div>
     <router-view/>
   </div>
 </template>
@@ -22,7 +18,6 @@
         windowWidth: 0,
         txt: '',
         imageNumber:1,
-
 
         styleObject: {
           content: '',
@@ -97,18 +92,6 @@ html {
   background: black;
 }
 
-html::before {
-  position: fixed;
-  content: '';
-  z-index: 1;
-  background-color: #ffffff;
-  width: 100vw;
-  height: 100vh;
-  animation: ease-in fade 0.5s;
-  opacity: 0;
-  pointer-events: none;
-}
-
 body {
   height: 100%;
   width: 100%;
@@ -147,6 +130,40 @@ body {
     font-style: normal;
   }
 
+  .centerDisplayFlex{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .centerDisplayFlexColumn{
+     display: flex;
+     flex-direction: column;
+     width: 96.5vw;
+     height : 100vh;
+    /*border: 1px solid crimson;*/
+   }
+
+  .centerDisplayFlexRow{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: initial;
+    min-height: 65px;
+    /*border: 1px solid crimson;*/
+
+  }
+
+  .centerDisplayFlexRowRight{
+    /*padding-top: 6px;*/
+    padding-top: 2px;
+    position: absolute;
+    right: 0;
+    align-self: center;
+    /*border: 1px solid #dcd521;*/
+  }
+
   .placeMessageSousBoutton{
     display: flex;
     flex-direction: column;
@@ -159,17 +176,17 @@ body {
     color: crimson;
   }
 
-.errorSaisieRegister{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 75px;
-  width: 100%;
-  margin-top: 5px;
-  font-size: 12px;
-  color: crimson;
-}
+  .errorSaisieRegister{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 75px;
+    width: 100%;
+    margin-top: 5px;
+    font-size: 12px;
+    color: crimson;
+  }
 
   .sizeHomepageLinks{
     font-size: 13px;
@@ -183,15 +200,17 @@ body {
   }
 
   .flexiflex-logo {
-    margin: 50px;
-  }
-
-  .title-left {
     font-family: "vegan", fantasy;
     font-size: 100px;
     padding: 20px;
     text-shadow: 4px 4px 10px #cdcdcd;
+  }
 
+  .flexiflex-logo-HomePage {
+    font-family: "vegan", fantasy;
+    font-size: 40px;
+    text-shadow: 4px 4px 10px #cdcdcd;
+    /*border: 1px solid crimson;*/
   }
 
   .form-input {
@@ -267,6 +286,17 @@ body {
     pointer-events: none;
   }
 
+  .useraccount-button{
+    border: none;
+    width: auto;
+    height: 20px;
+    /*border: 1px solid crimson;*/
+    border-radius: 5px;
+    background-color: #2c3e50;
+    color: #cdcdcd;
+    cursor: pointer;
+  }
+
   .reverse-primary {
     background-color: transparent;
     color: #e6e6e6;
@@ -311,6 +341,16 @@ body {
     z-index: -1;
   }
 
+
+  .movies-component-background{
+    height: 96%;
+    width: 100%;
+    border-radius: 5px;
+    background-color: #cccccc;
+    opacity: 0.9;
+    z-index: -1;
+  }
+
   .center{
     text-align: center;
     align-items: center;
@@ -319,6 +359,13 @@ body {
 
   .loadingRingLoader{
     padding-top: 20px;
+  }
+
+  .loadingRingLoaderHeightCenter{
+    padding-top: 20vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .form-component {
@@ -343,6 +390,6 @@ body {
   .form-signin .form-input {
     width: 250px;
   }
-
 }
+
 </style>
