@@ -51,6 +51,8 @@ const actions = {
         }
       },
       response => {
+        console.log("user response not ok")
+        console.log(response)
         commit(USER_REQUEST_FAIL)
       }
     )

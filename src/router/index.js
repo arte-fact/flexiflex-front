@@ -4,6 +4,7 @@ import loginComponent from '@/components/loginComponent'
 import registerComponent from '@/components/registerComponent'
 import catalogComponent from '@/components/homeComponent'
 import finalRegisterComponent from '@/components/finalRegisterComponent'
+import videoComponent from '@/components/videoComponent'
 
 Vue.use(Router)
 
@@ -14,6 +15,11 @@ export default new Router({
       path: '/',
       name: 'login-page',
       component: loginComponent
+    },
+    {
+      path: '/video',
+      name: 'video-page',
+      component: videoComponent
     },
     {
       path: '/register',
