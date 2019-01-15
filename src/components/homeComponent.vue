@@ -43,6 +43,7 @@ export default {
   data() {
     return {
       email: "",
+      products: null,
       colorRingLoader: '#2c3e50',
       sizeRingLoader: '200px'
     }
@@ -60,6 +61,7 @@ export default {
   created () {
     if (this.user === null) {
       this.request()
+      setTimeout(this.getProducts(), 1500)
     }
 
 
@@ -78,6 +80,238 @@ export default {
     doLogout() {
       this.resetToken()
       this.resetUser()
+    },
+    getProducts () {
+      this.products = [
+        {
+          "actors": [
+            {
+              "id": 0,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            },
+            {
+              "id": 1,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            },
+            {
+              "id": 2,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            }
+          ],
+          "addDate": "2019-01-15",
+          "ageRequired": 0,
+          "directors": [
+            {
+              "id": 0,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            },
+            {
+              "id": 1,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            }
+          ],
+          "genre": {
+            "firstName": "string",
+            "id": 0
+          },
+          "id": 0,
+          "releaseDate": "2019-01-15",
+          "synopsis": "string",
+          "title": "string",
+          "url": "string"
+        },
+        {
+          "actors": [
+            {
+              "id": 0,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            },
+            {
+              "id": 1,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            },
+            {
+              "id": 2,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            }
+          ],
+          "addDate": "2019-01-15",
+          "ageRequired": 0,
+          "directors": [
+            {
+              "id": 0,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            },
+            {
+              "id": 1,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            }
+          ],
+          "genre": {
+            "firstName": "string",
+            "id": 0
+          },
+          "id": 2,
+          "releaseDate": "2019-01-15",
+          "synopsis": "string",
+          "title": "string",
+          "url": "string"
+        },
+        {
+          "actors": [
+            {
+              "id": 0,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            },
+            {
+              "id": 1,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            },
+            {
+              "id": 2,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            }
+          ],
+          "addDate": "2019-01-15",
+          "ageRequired": 0,
+          "directors": [
+            {
+              "id": 0,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            },
+            {
+              "id": 1,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            }
+          ],
+          "genre": {
+            "firstName": "string",
+            "id": 0
+          },
+          "id": 0,
+          "releaseDate": "2019-01-15",
+          "synopsis": "string",
+          "title": "string",
+          "url": "string"
+        },
+        {
+          "actors": [
+            {
+              "id": 0,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            },
+            {
+              "id": 1,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            },
+            {
+              "id": 2,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            }
+          ],
+          "addDate": "2019-01-15",
+          "ageRequired": 0,
+          "directors": [
+            {
+              "id": 0,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            },
+            {
+              "id": 1,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            }
+          ],
+          "genre": {
+            "firstName": "string",
+            "id": 0
+          },
+          "id": 2,
+          "releaseDate": "2019-01-15",
+          "synopsis": "string",
+          "title": "string",
+          "url": "string"
+        },
+      ]
     }
   }
 }
