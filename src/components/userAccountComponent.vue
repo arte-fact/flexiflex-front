@@ -1,7 +1,6 @@
 <template>
 
   <div class="centerDisplayFlexColumn">
-
     <div class="centerDisplayFlexRow">
       <router-link :to="{name: 'home-page'}">
         <div class="flexiflex-logo-HomePage">Flexiflex</div>
@@ -12,35 +11,27 @@
         </router-link>
         <button class="useraccount-button" v-on:click="doLogout">Logout</button>
       </div>
-
     </div>
-
-
     <div class="centerDisplayFlex">
       <div class="useraccount-form-component">
-      <div class="useraccount-component-background"></div>
-      <div class="center" v-if="user === null">
-        <ring-loader :color="colorRingLoader" :size="sizeRingLoader"></ring-loader>
+        <div class="useraccount-component-background"></div>
+        <div class="center" v-if="user === null">
+          <ring-loader :color="colorRingLoader" :size="sizeRingLoader"></ring-loader>
+        </div>
+        <div v-else>
+          <form @submit.prevent="submit" action="https://" method="post">
+            <h2 class="form-title">Modifier votre profil</h2>
+            <br>
+            <input class="form-input" v-bind:class="{invalidClass: user.firstName === ''}" id="prenom" v-model="user.firstName" type="text" name="prenom" placeholder="Prénom" maxlength="50">
+            <input class="form-input" id="email" type="text" v-model="user.email" placeholder="Email" disabled>
+            <input class="form-input" v-bind:class="{invalidClass: user.lastName === ''}" id="nom" v-model="user.lastName" type="text" name="nom" placeholder="Nom" maxlength="50">
+            <input class="form-input" id="birthdate" type="text" v-model="user.birthdate" placeholder="Date de naissance" disabled>
+          </form>
+          <button class="form-button" v-bind:class="{'form-button-disabled': user.firstName === '' || user.lastName === ''}" v-on:click="submit">Modifier Compte</button>
+          <button class="form-button-delete" v-on:click="deleteUser">Supprimer Compte</button>
+        </div>
       </div>
-      <div v-else>
-        <form @submit.prevent="submit" action="https://" method="post">
-          <h2 class="form-title">Modifier votre profil</h2>
-          <br>
-          <input class="form-input" v-bind:class="{invalidClass: prenom === ''}" id="prenom" v-model="user.firstName" type="text" name="prenom" placeholder="Prénom" maxlength="50">
-          <input class="form-input" id="email" type="text" v-model="user.email" placeholder="Email" disabled>
-          <input class="form-input" v-bind:class="{invalidClass: nom === ''}" id="nom" v-model="user.lastName" type="text" name="nom" placeholder="Nom" maxlength="50">
-          <input class="form-input" id="birthdate" type="text" v-model="user.birthdate" placeholder="Date de naissance" disabled>
-          <button class="form-button" v-bind:class="{'form-button-disabled': prenom === '' || nom === ''}" type="submit" value="Submit">Modifier</button>
-        </form>
-      </div>
-
     </div>
-    </div>
-
-
-
-
-
   </div>
 </template>
 
@@ -75,7 +66,6 @@
       if (this.user === null) {
         this.request()
       }
-
     },
     methods: {
       ...mapActions('auth', [
@@ -83,10 +73,19 @@
         'resetUser',
         'resetToken',
         'setAuthHeaderFromCookie',
-        'logout'
+        'logout',
+        'deleteUser',
+        'updateUser'
       ]),
       request () {
         this.requestUser()
+      },
+      submit () {
+        this.updateUser({
+          login: this.email,
+          firstName: this.firstName,
+          lastName: this.lastName,
+        })
       },
       doLogout() {
         this.resetToken()

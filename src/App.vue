@@ -142,7 +142,6 @@ body {
      flex-direction: column;
      width: 96.5vw;
      height : 100vh;
-    /*border: 1px solid crimson;*/
    }
 
   .centerDisplayFlexRow{
@@ -151,7 +150,6 @@ body {
     flex-direction: row;
     align-items: initial;
     min-height: 65px;
-    /*border: 1px solid crimson;*/
 
   }
 
@@ -212,16 +210,12 @@ body {
     text-shadow: 4px 4px 10px #cdcdcd;
     text-decoration: none;
     color: #2c3e50;
-    /*display: none;*/
-
-    /*border: 1px solid crimson;*/
   }
 .flexiflex-logo-HomePage:hover {
   font-family: "vegan", fantasy;
   font-size: 40px;
   text-shadow: 4px 4px 10px #cdcdcd;
   text-decoration: none;
-  /*border: 1px solid crimson;*/
 }
 
   .form-input {
@@ -236,7 +230,7 @@ body {
 
   .invalidClass{
     content:"3 caractères minimum";
-    border: 1px solid #ff0000;
+    border: 1px solid crimson;
     outline: none;
   }
 
@@ -278,11 +272,34 @@ body {
     align-items: center;
   }
 
+.form-button-delete {
+  align-self: center;
+  padding: 3px;
+  border: none;
+  width: 220px;
+  height: 25px;
+  margin: 15px 0px 0px;
+  border-radius: 5px;
+  background-color: white;
+  font-weight: bold;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+}
+
+  .form-button-delete:hover{
+    box-shadow: 0px 2px 2px grey;
+    background-color: crimson;
+    color: white;
+  }
+
   .form-button:hover{
     box-shadow: 0px 2px 2px grey;
     background-color: darkgreen;
     color: white;
   }
+
+
 
   .form-button:focus {
     box-shadow: 0px 2px 2px grey;
@@ -301,7 +318,6 @@ body {
     border: none;
     width: auto;
     height: 20px;
-    /*border: 1px solid crimson;*/
     border-radius: 5px;
     background-color: #2c3e50;
     color: #cdcdcd;
@@ -360,6 +376,7 @@ body {
     background-color: #cccccc;
     opacity: 0.9;
     z-index: -1;
+
   }
 
 
