@@ -45,20 +45,20 @@
       } else {
         this.styleObject.backgroundImage = 'url(' + require('@/assets/homepage/background-splash-' + this.imageNumber + '.jpg')
       }
-      if (this.token === null) {
-        this.$router.push({
-          name: 'login-page'
-        })
-      }
+      // if (this.token === null) {
+      //   this.$router.push({
+      //     name: 'login-page'
+      //   })
+      // }
     },
     watch: {
-      token (newValue) {
-        if (newValue === null) {
-          this.$router.push({
-            name: 'login-page'
-          })
-        }
-      },
+      // token (newValue) {
+      //   if (newValue === null) {
+      //     this.$router.push({
+      //       name: 'login-page'
+      //     })
+      //   }
+      // },
 
       userRequestFail(state) {
         if (state === true) {
@@ -141,7 +141,6 @@ body {
      display: flex;
      flex-direction: column;
      width: 96.5vw;
-     height : 100vh;
    }
 
   .centerDisplayFlexRow{
@@ -377,16 +376,6 @@ body {
     opacity: 0.9;
     z-index: -1;
 
-  }
-
-
-  .movies-component-background{
-    height: 96%;
-    width: 100%;
-    border-radius: 5px;
-    background-color: #cccccc;
-    opacity: 0.9;
-    z-index: -1;
   }
 
   .center{

@@ -15,7 +15,7 @@
 
     </div>
 
-    <div class="movies-component-background">
+    <div>
       <product-list></product-list>
     </div>
   </div>
@@ -55,8 +55,6 @@ export default {
     if (this.user === null) {
       this.request()
     }
-
-
   },
   methods: {
     ...mapActions('auth', [
