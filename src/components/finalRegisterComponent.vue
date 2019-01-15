@@ -7,7 +7,7 @@
         <ring-loader :color="colorRingLoader" :size="sizeRingLoader"></ring-loader>
       </div>
       <div v-else>
-        <form class="form-signin" @submit.prevent="submit" action="https://" method="post">
+        <form @submit.prevent="submit" action="https://" method="post">
           <h2 class="form-title">Profil</h2>
           <input class="form-input" v-bind:class="{invalidClass: prenom === ''}" id="prenom" v-model="prenom" type="text" name="prenom" placeholder="Prénom" maxlength="50">
           <input class="form-input" v-bind:class="{invalidClass: nom === ''}" id="nom" v-model="nom" type="text" name="nom" placeholder="Nom" maxlength="50">

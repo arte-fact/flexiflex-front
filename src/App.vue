@@ -352,6 +352,16 @@ body {
     z-index: -1;
   }
 
+  .useraccount-component-background {
+    position: absolute;
+    height: 220px;
+    width: 480px;
+    border-radius: 5px;
+    background-color: #cccccc;
+    opacity: 0.9;
+    z-index: -1;
+  }
+
 
   .movies-component-background{
     height: 96%;
@@ -386,21 +396,10 @@ body {
     border-radius: 5px;
   }
 
-
-@media only screen and (max-width: 812px) {
-  .form-component {
-    width: 300px;
-    padding: 10px;
+  .useraccount-form-component {
+    width: 480px;
+    margin: 5px;
+    padding-top: 10px;
     border-radius: 5px;
   }
-
-  .form-component-background {
-    width: 300px;
-  }
-
-  .form-signin .form-input {
-    width: 250px;
-  }
-}
-
 </style>

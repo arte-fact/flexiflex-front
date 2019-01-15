@@ -3,7 +3,7 @@
     <div class="flexiflex-logo">Flexiflex</div>
     <div class="form-component">
      <div class="register-component-background"></div>
-      <form class="form-signin" @submit.prevent="submit" action="https://" method="post">
+      <form @submit.prevent="submit" action="https://" method="post">
         <h2 class="form-title">Inscription</h2>
         <input class="form-input" v-bind:class="{invalidClass: emailRegexValid === false && email != ''}" id="email" v-model="email" type="text" name="email" placeholder="Email">
         <input class="form-input" v-bind:class="{invalidClass: password.length < 3 && password != ''}" id="password" v-model="password" type="password" name="password" placeholder="Mot de passe">
