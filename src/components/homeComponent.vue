@@ -10,23 +10,14 @@
         <router-link :to="{name: 'user-account'}">
           <button v-if= "user != null" class="useraccount-button">Compte {{user.firstName}} {{user.lastName}}</button>
         </router-link>
-        <button class="useraccount-button" v-on:click="doLogout">Logout</button>
+        <div class="useraccount-button" v-on:click="doLogout">Logout</div>
       </div>
 
     </div>
 
     <div class="movies-component-background">
-
-      <div class="loadingRingLoaderHeightCenter">
-        <br><ring-loader :color="colorRingLoader" :size="sizeRingLoader"></ring-loader>
-      </div>
-
+      <product-list></product-list>
     </div>
-
-
-
-
-
   </div>
 </template>
 
@@ -34,6 +25,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import RingLoader from 'vue-spinner/src/RingLoader.vue'
+import ProductList from './productListComponent.vue'
 
 Vue.use(Vuex);
 import { mapActions, mapGetters } from 'vuex'
@@ -56,12 +48,12 @@ export default {
     ])
   },
   components: {
-    RingLoader
+    RingLoader,
+    ProductList
   },
   created () {
     if (this.user === null) {
       this.request()
-      setTimeout(this.getProducts(), 1500)
     }
 
 
@@ -80,238 +72,6 @@ export default {
     doLogout() {
       this.resetToken()
       this.resetUser()
-    },
-    getProducts () {
-      this.products = [
-        {
-          "actors": [
-            {
-              "id": 0,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            },
-            {
-              "id": 1,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            },
-            {
-              "id": 2,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            }
-          ],
-          "addDate": "2019-01-15",
-          "ageRequired": 0,
-          "directors": [
-            {
-              "id": 0,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            },
-            {
-              "id": 1,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            }
-          ],
-          "genre": {
-            "firstName": "string",
-            "id": 0
-          },
-          "id": 0,
-          "releaseDate": "2019-01-15",
-          "synopsis": "string",
-          "title": "string",
-          "url": "string"
-        },
-        {
-          "actors": [
-            {
-              "id": 0,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            },
-            {
-              "id": 1,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            },
-            {
-              "id": 2,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            }
-          ],
-          "addDate": "2019-01-15",
-          "ageRequired": 0,
-          "directors": [
-            {
-              "id": 0,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            },
-            {
-              "id": 1,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            }
-          ],
-          "genre": {
-            "firstName": "string",
-            "id": 0
-          },
-          "id": 2,
-          "releaseDate": "2019-01-15",
-          "synopsis": "string",
-          "title": "string",
-          "url": "string"
-        },
-        {
-          "actors": [
-            {
-              "id": 0,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            },
-            {
-              "id": 1,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            },
-            {
-              "id": 2,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            }
-          ],
-          "addDate": "2019-01-15",
-          "ageRequired": 0,
-          "directors": [
-            {
-              "id": 0,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            },
-            {
-              "id": 1,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            }
-          ],
-          "genre": {
-            "firstName": "string",
-            "id": 0
-          },
-          "id": 0,
-          "releaseDate": "2019-01-15",
-          "synopsis": "string",
-          "title": "string",
-          "url": "string"
-        },
-        {
-          "actors": [
-            {
-              "id": 0,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            },
-            {
-              "id": 1,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            },
-            {
-              "id": 2,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            }
-          ],
-          "addDate": "2019-01-15",
-          "ageRequired": 0,
-          "directors": [
-            {
-              "id": 0,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            },
-            {
-              "id": 1,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            }
-          ],
-          "genre": {
-            "firstName": "string",
-            "id": 0
-          },
-          "id": 2,
-          "releaseDate": "2019-01-15",
-          "synopsis": "string",
-          "title": "string",
-          "url": "string"
-        },
-      ]
     }
   }
 }
