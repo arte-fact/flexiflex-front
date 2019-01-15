@@ -45,5 +45,17 @@
         'user'
       ])
     },
+    methods: {
+      ...mapActions('auth', [
+        'updateUser'
+      ]),
+    submit () {
+      this.updateUser({
+        login: this.email,
+        firstName: this.firstName,
+        lastName: this.lastName,
+      })
+    },
+    }
   }
 </script>
