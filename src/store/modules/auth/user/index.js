@@ -7,8 +7,6 @@ Vue.use(VueCookies)
 const USER_REQUEST = 'USER_REQUEST'
 const RESET_USER = 'RESET_USER'
 const USER_REQUEST_FAIL = 'USER_REQUEST_FAIL'
-const USER_UPDATE = 'USER_UPDATE'
-const USER_DELETE = 'USER_DELETE'
 
 const state = {
   userRequestFail: false,
@@ -91,8 +89,8 @@ const actions = {
       }
     )
   },
-  deleteUser({commit},{login}){
-    Vue.http.delete('api//api/users/{login}',
+  deleteUser({commit}, login){
+    Vue.http.delete('api/users/' + login + "'",
       {
         login: login,
       },

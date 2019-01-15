@@ -22,8 +22,13 @@
 </template>
 
 <script>
-  import {mapGetters} from 'vuex'
+  import Vue from 'vue'
+  import Vuex from 'vuex'
   import RingLoader from 'vue-spinner/src/RingLoader.vue'
+
+  Vue.use(Vuex);
+  import { mapActions, mapGetters } from 'vuex'
+
   export default {
     name: 'finalRegister-page',
     data () {
@@ -45,5 +50,17 @@
         'user'
       ])
     },
+    methods: {
+      ...mapActions('auth', [
+        'updateUser'
+      ]),
+    submit () {
+      this.updateUser({
+        login: this.email,
+        firstName: this.firstName,
+        lastName: this.lastName,
+      })
+    },
+    }
   }
 </script>
