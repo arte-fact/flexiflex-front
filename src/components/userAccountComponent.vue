@@ -7,7 +7,7 @@
       </router-link>
       <div class="centerDisplayFlexRowRight">
         <router-link :to="{name: 'user-account'}">
-          <button v-if= "user != null" class="useraccount-button" v-on:click="">Compte {{user.firstName}} {{user.lastName}}</button>
+          <button v-if= "user != null" class="useraccount-button">Compte {{user.firstName}} {{user.lastName}}</button>
         </router-link>
         <button class="useraccount-button" v-on:click="doLogout">Logout</button>
       </div>
@@ -28,7 +28,7 @@
             <input class="form-input" id="birthdate" type="text" v-model="user.birthdate" placeholder="Date de naissance" disabled>
           </form>
           <button class="form-button" v-bind:class="{'form-button-disabled': user.firstName === '' || user.lastName === ''}" v-on:click="submit">Modifier Compte</button>
-          <button class="form-button-delete" v-on:click="deleteUser">Supprimer Compte</button>
+          <button class="form-button-delete" v-on:click="deleteUserNow">Supprimer Compte</button>
         </div>
       </div>
     </div>
@@ -82,10 +82,15 @@
       },
       submit () {
         this.updateUser({
-          login: this.email,
-          firstName: this.firstName,
-          lastName: this.lastName,
+          login: this.user.email,
+          firstName: this.user.firstName,
+          lastName: this.user.lastName,
         })
+      },
+      deleteUserNow(){
+        this.deleteUser(
+          this.user.email
+        )
       },
       doLogout() {
         this.resetToken()

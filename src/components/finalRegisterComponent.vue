@@ -22,8 +22,13 @@
 </template>
 
 <script>
-  import {mapGetters} from 'vuex'
+  import Vue from 'vue'
+  import Vuex from 'vuex'
   import RingLoader from 'vue-spinner/src/RingLoader.vue'
+
+  Vue.use(Vuex);
+  import { mapActions, mapGetters } from 'vuex'
+
   export default {
     name: 'finalRegister-page',
     data () {
