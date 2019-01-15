@@ -5,6 +5,7 @@ import registerComponent from '@/components/registerComponent'
 import catalogComponent from '@/components/homeComponent'
 import finalRegisterComponent from '@/components/finalRegisterComponent'
 import videoComponent from '@/components/videoComponent'
+import userAccountComponent from '@/components/userAccountComponent'
 
 Vue.use(Router)
 
@@ -30,6 +31,11 @@ export default new Router({
       path: '/home',
       name: 'home-page',
       component: catalogComponent
+    },
+    {
+      path: '/useraccount',
+      name: 'user-account',
+      component: userAccountComponent
     },
     {
        path: '/finalregister',

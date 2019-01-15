@@ -210,8 +210,19 @@ body {
     font-family: "vegan", fantasy;
     font-size: 40px;
     text-shadow: 4px 4px 10px #cdcdcd;
+    text-decoration: none;
+    color: #2c3e50;
+    /*display: none;*/
+
     /*border: 1px solid crimson;*/
   }
+.flexiflex-logo-HomePage:hover {
+  font-family: "vegan", fantasy;
+  font-size: 40px;
+  text-shadow: 4px 4px 10px #cdcdcd;
+  text-decoration: none;
+  /*border: 1px solid crimson;*/
+}
 
   .form-input {
     width: 220px;

@@ -3,12 +3,14 @@
   <div class="centerDisplayFlexColumn">
 
     <div class="centerDisplayFlexRow">
-
-    <div class="flexiflex-logo-HomePage">Flexiflex</div>
-
+      <router-link :to="{name: 'home-page'}">
+        <div class="flexiflex-logo-HomePage">Flexiflex</div>
+      </router-link>
       <div class="centerDisplayFlexRowRight">
-      <button v-if= "user != null" class="useraccount-button" >Compte {{user.firstName}} {{user.lastName}}</button>
-      <button class="useraccount-button" v-on:click="doLogout">Logout</button>
+        <router-link :to="{name: 'user-account'}">
+          <button v-if= "user != null" class="useraccount-button">Compte {{user.firstName}} {{user.lastName}}</button>
+        </router-link>
+        <button class="useraccount-button" v-on:click="doLogout">Logout</button>
       </div>
 
     </div>
