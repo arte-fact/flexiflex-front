@@ -161,7 +161,7 @@ const actions = {
       },
       {
         headers: {
-      'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Origin': '*',
         'Accept': 'application/json'
         }
       }
