@@ -1,316 +1,297 @@
-<template>
+const PRODUCT_REQUEST = 'PRODUCT_REQUEST'
+const RESET_PRODUCT = 'RESET_PRODUCT'
+const PRODUCT_REQUEST_FAIL = 'PRODUCT_REQUEST_FAIL'
 
-  <div class="centerDisplayFlexColumn">
+const state = {
+  productRequestFail: false,
+  product: null,
+}
 
-    <div class="centerDisplayFlexRow">
-
-    <div class="flexiflex-logo-HomePage">Flexiflex</div>
-
-      <div class="centerDisplayFlexRowRight">
-      <button v-if= "user != null" class="useraccount-button" >Compte {{user.firstName}} {{user.lastName}}</button>
-      <button class="useraccount-button" v-on:click="doLogout">Logout</button>
-      </div>
-
-    </div>
-
-    <div class="movies-component-background">
-
-      <div class="loadingRingLoaderHeightCenter">
-        <br><ring-loader :color="colorRingLoader" :size="sizeRingLoader"></ring-loader>
-      </div>
-
-    </div>
-
-
-
-
-
-  </div>
-</template>
-
-<script>
-import Vue from 'vue'
-import Vuex from 'vuex'
-import RingLoader from 'vue-spinner/src/RingLoader.vue'
-
-Vue.use(Vuex);
-import { mapActions, mapGetters } from 'vuex'
-
-export default {
-  name: 'home-page',
-  data() {
-    return {
-      email: "",
-      products: null,
-      colorRingLoader: '#2c3e50',
-      sizeRingLoader: '200px'
-    }
+const getters = {
+  products (state) {
+    return state.product
   },
-  computed: {
-    ...mapGetters('auth', [
-      'token',
-      'user',
-      'userRequestFail'
-    ])
-  },
-  components: {
-    RingLoader
-  },
-  created () {
-    if (this.user === null) {
-      this.request()
-      setTimeout(this.getProducts(), 1500)
-    }
-
-
-  },
-  methods: {
-    ...mapActions('auth', [
-      'requestUser',
-      'resetUser',
-      'resetToken',
-      'setAuthHeaderFromCookie',
-      'logout'
-    ]),
-    request () {
-      this.requestUser()
-    },
-    doLogout() {
-      this.resetToken()
-      this.resetUser()
-    },
-    getProducts () {
-      this.products = [
-        {
-          "actors": [
-            {
-              "id": 0,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            },
-            {
-              "id": 1,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            },
-            {
-              "id": 2,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            }
-          ],
-          "addDate": "2019-01-15",
-          "ageRequired": 0,
-          "directors": [
-            {
-              "id": 0,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            },
-            {
-              "id": 1,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            }
-          ],
-          "genre": {
-            "firstName": "string",
-            "id": 0
-          },
-          "id": 0,
-          "releaseDate": "2019-01-15",
-          "synopsis": "string",
-          "title": "string",
-          "url": "string"
-        },
-        {
-          "actors": [
-            {
-              "id": 0,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            },
-            {
-              "id": 1,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            },
-            {
-              "id": 2,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            }
-          ],
-          "addDate": "2019-01-15",
-          "ageRequired": 0,
-          "directors": [
-            {
-              "id": 0,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            },
-            {
-              "id": 1,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            }
-          ],
-          "genre": {
-            "firstName": "string",
-            "id": 0
-          },
-          "id": 2,
-          "releaseDate": "2019-01-15",
-          "synopsis": "string",
-          "title": "string",
-          "url": "string"
-        },
-        {
-          "actors": [
-            {
-              "id": 0,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            },
-            {
-              "id": 1,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            },
-            {
-              "id": 2,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            }
-          ],
-          "addDate": "2019-01-15",
-          "ageRequired": 0,
-          "directors": [
-            {
-              "id": 0,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            },
-            {
-              "id": 1,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            }
-          ],
-          "genre": {
-            "firstName": "string",
-            "id": 0
-          },
-          "id": 0,
-          "releaseDate": "2019-01-15",
-          "synopsis": "string",
-          "title": "string",
-          "url": "string"
-        },
-        {
-          "actors": [
-            {
-              "id": 0,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            },
-            {
-              "id": 1,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            },
-            {
-              "id": 2,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            }
-          ],
-          "addDate": "2019-01-15",
-          "ageRequired": 0,
-          "directors": [
-            {
-              "id": 0,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            },
-            {
-              "id": 1,
-              "identity": {
-                "firstName": "string",
-                "id": 0,
-                "lastName": "string"
-              }
-            }
-          ],
-          "genre": {
-            "firstName": "string",
-            "id": 0
-          },
-          "id": 2,
-          "releaseDate": "2019-01-15",
-          "synopsis": "string",
-          "title": "string",
-          "url": "string"
-        },
-      ]
-    }
+  productRequestFail (state) {
+    return state.product
   }
 }
-</script>
+
+const mutations = {
+  [PRODUCT_REQUEST] (state, response) {
+    state.product = response.body
+    state.productRequestFail = false
+  },
+  [RESET_PRODUCT] (state) {
+    state.product = null
+  },
+  [PRODUCT_REQUEST_FAIL] (state) {
+    state.productRequestFail = true
+  }
+}
+
+const actions = {
+  requestProducts ({commit}) {
+    setTimeout(function () {
+      commit(PRODUCT_REQUEST, [
+        {
+          "actors": [
+            {
+              "id": 0,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            },
+            {
+              "id": 1,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            },
+            {
+              "id": 2,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            }
+          ],
+          "addDate": "2019-01-15",
+          "ageRequired": 0,
+          "directors": [
+            {
+              "id": 0,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            },
+            {
+              "id": 1,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            }
+          ],
+          "genre": {
+            "firstName": "string",
+            "id": 0
+          },
+          "id": 0,
+          "releaseDate": "2019-01-15",
+          "synopsis": "string",
+          "title": "string",
+          "url": "string"
+        },
+        {
+          "actors": [
+            {
+              "id": 0,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            },
+            {
+              "id": 1,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            },
+            {
+              "id": 2,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            }
+          ],
+          "addDate": "2019-01-15",
+          "ageRequired": 0,
+          "directors": [
+            {
+              "id": 0,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            },
+            {
+              "id": 1,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            }
+          ],
+          "genre": {
+            "firstName": "string",
+            "id": 0
+          },
+          "id": 2,
+          "releaseDate": "2019-01-15",
+          "synopsis": "string",
+          "title": "string",
+          "url": "string"
+        },
+        {
+          "actors": [
+            {
+              "id": 0,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            },
+            {
+              "id": 1,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            },
+            {
+              "id": 2,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            }
+          ],
+          "addDate": "2019-01-15",
+          "ageRequired": 0,
+          "directors": [
+            {
+              "id": 0,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            },
+            {
+              "id": 1,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            }
+          ],
+          "genre": {
+            "firstName": "string",
+            "id": 0
+          },
+          "id": 0,
+          "releaseDate": "2019-01-15",
+          "synopsis": "string",
+          "title": "string",
+          "url": "string"
+        },
+        {
+          "actors": [
+            {
+              "id": 0,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            },
+            {
+              "id": 1,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            },
+            {
+              "id": 2,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            }
+          ],
+          "addDate": "2019-01-15",
+          "ageRequired": 0,
+          "directors": [
+            {
+              "id": 0,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            },
+            {
+              "id": 1,
+              "identity": {
+                "firstName": "string",
+                "id": 0,
+                "lastName": "string"
+              }
+            }
+          ],
+          "genre": {
+            "firstName": "string",
+            "id": 0
+          },
+          "id": 2,
+          "releaseDate": "2019-01-15",
+          "synopsis": "string",
+          "title": "string",
+          "url": "string"
+        },
+      ], 5000)
+    })
+    // Vue.http.get('api/products', {
+    //   headers: {
+    //     'Access-Control-Allow-Origin': '*',
+    //     'Accept': 'application/json',
+    //     'Authorization': 'Bearer ' + window.$cookies.get('Authorization')
+    //   }
+    // }).then(
+    //   response => {
+    //     if (response.status === 200) {
+    //       commit(PRODUCT_REQUEST, response)
+    //     } else {
+    //       commit(PRODUCT_REQUEST_FAIL)
+    //     }
+    //   },
+    //   response => {
+    //     console.log("product response not ok")
+    //     console.log(response)
+    //     commit(PRODUCT_REQUEST_FAIL)
+    //   }
+    // )
+  },
+  resetProduct ({commit}) {
+    commit(RESET_PRODUCT)
+  }
+}
+
+export default {
+  state,
+  getters,
+  mutations,
+  actions
+}
