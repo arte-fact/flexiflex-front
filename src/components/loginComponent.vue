@@ -1,4 +1,5 @@
 <template>
+  <div class="centerDisplayFlexColumn">
     <div class="centerDisplayFlex">
       <div class="flexiflex-logo">Flexiflex</div>
       <div class="form-component">
@@ -25,6 +26,7 @@
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>

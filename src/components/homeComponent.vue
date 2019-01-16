@@ -42,7 +42,6 @@ export default {
   created () {
     if (this.user === null) {
       this.request()
-      setTimeout(this.getProducts(), 1500)
     }
   },
   methods: {
@@ -74,6 +73,7 @@ export default {
     background-color: #cccccc;
     opacity: 0.9;
     z-index: -1;
+    margin-bottom: 0.3vh;
   }
 
 </style>

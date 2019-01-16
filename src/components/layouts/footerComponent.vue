@@ -1,10 +1,9 @@
 <template>
-  <div class="container">
-    <div class="copyright positionCenter"><i class="far fa-copyright"></i></div>
-    <div class="flexiflex positionCenter">Flexiflex</div>
-    <div class="year positionCenter"> {{this.whatYearAreWe}} </div>
-
-  </div>
+    <div class="container">
+      <div class="copyright positionCenter"><i class="far fa-copyright"></i></div>
+      <div class="flexiflex positionCenter">Flexiflex</div>
+      <div class="year positionCenter"> {{this.whatYearAreWe}} </div>
+    </div>
 </template>
 
 <script>
@@ -23,14 +22,14 @@
 </script>
 
 <style scoped>
-  .container{
+   .container{
     position: relative;
-    margin-top: 0.3vh;
-    margin-bottom: 0.3vh;
-    height:26px;
-    min-height: 26px;
     width: 96.5vw;
     min-width: 96.5vw;
+    height:26px;
+    min-height: 26px;
+    margin-top: 0.3vh;
+    margin-bottom: 0.3vh;
     font-size: 15px;
     color: #2c3e50;
     text-shadow: 1px 1px 1px #cdcdcd;

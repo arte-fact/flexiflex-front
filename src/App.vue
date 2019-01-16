@@ -34,7 +34,7 @@
           position: 'fixed',
           width: '100%',
           height: '100%',
-          transform: 'scaleX(1.1)',
+          // transform: 'scaleX(1.1)',
         }
       }
     },
@@ -45,8 +45,10 @@
 
       if (window.innerWidth <= 812) {
         this.styleObject.backgroundImage = 'url(' + require('@/assets/homepage_MaxWidth_600/background-splash-medium-' + this.imageNumber + '.jpg')
+        console.log(this.styleObject)
       } else {
         this.styleObject.backgroundImage = 'url(' + require('@/assets/homepage/background-splash-' + this.imageNumber + '.jpg')
+        console.log(this.styleObject)
       }
       if (this.token === null) {
         this.$router.push({
@@ -384,10 +386,6 @@ body {
     z-index: -1;
 
   }
-
-
-
-
   .center{
     text-align: center;
     align-items: center;
