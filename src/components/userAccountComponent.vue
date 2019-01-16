@@ -1,17 +1,6 @@
 <template>
-
   <div class="centerDisplayFlexColumn">
-    <div class="centerDisplayFlexRow">
-      <router-link :to="{name: 'home-page'}">
-        <div class="flexiflex-logo-HomePage">Flexiflex</div>
-      </router-link>
-      <div class="centerDisplayFlexRowRight">
-        <router-link :to="{name: 'user-account'}">
-          <button v-if= "user != null" class="useraccount-button">Compte {{user.firstName}} {{user.lastName}}</button>
-        </router-link>
-        <button class="useraccount-button" v-on:click="doLogout">Logout</button>
-      </div>
-    </div>
+    <headerLayout></headerLayout>
     <div class="centerDisplayFlex">
       <div class="useraccount-form-component">
         <div class="useraccount-component-background"></div>
@@ -39,6 +28,8 @@
   import Vue from 'vue'
   import Vuex from 'vuex'
   import RingLoader from 'vue-spinner/src/RingLoader.vue'
+  import headerLayout from './layouts/headerComponent.vue'
+
 
   Vue.use(Vuex);
   import { mapActions, mapGetters } from 'vuex'
@@ -60,7 +51,8 @@
       ])
     },
     components: {
-      RingLoader
+      RingLoader,
+      headerLayout
     },
     created () {
       if (this.user === null) {

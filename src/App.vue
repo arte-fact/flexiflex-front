@@ -2,11 +2,14 @@
   <div id="app">
     <div v-bind:style="styleObject"></div>
     <router-view/>
+
+    <footerLayout></footerLayout>
   </div>
 </template>
 
 <script>
   import { mapActions, mapGetters } from 'vuex'
+  import footerLayout from './components/layouts/footerComponent.vue'
 
   export default {
     name: 'App',
@@ -78,7 +81,10 @@
       ...mapGetters('auth', [
         'token'
       ])
-    }
+    },
+    components: {
+      footerLayout
+    },
   }
 </script>
 
@@ -380,14 +386,7 @@ body {
   }
 
 
-  .movies-component-background{
-    height: 96%;
-    width: 100%;
-    border-radius: 5px;
-    background-color: #cccccc;
-    opacity: 0.9;
-    z-index: -1;
-  }
+
 
   .center{
     text-align: center;
