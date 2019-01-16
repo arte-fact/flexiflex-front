@@ -3,7 +3,7 @@
     <div class="centerDisplayFlex">
       <div class="flexiflex-logo">Flexiflex</div>
       <div class="form-component">
-        <div class="login-component-background"></div>
+        <div class="login-background-container"></div>
         <form @submit.prevent="submit" action="https://" method="post">
           <h2 class="form-title">Connexion</h2>
           <input class="form-input" v-bind:class="{invalidClass: emailRegexValid === false && email != ''}" id="name" v-model="email" type="text" name="email" placeholder="Email">
@@ -98,3 +98,15 @@
     }
   }
 </script>
+
+<style scoped>
+  .login-background-container {
+    position: absolute;
+    height: 240px;
+    width: 300px;
+    border-radius: 5px;
+    background-color: #cccccc;
+    opacity: 0.9;
+    z-index: -1;
+  }
+</style>

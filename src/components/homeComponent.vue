@@ -1,8 +1,7 @@
 <template>
   <div class="centerDisplayFlexColumn">
-    <!--<div>-->
     <headerLayout></headerLayout>
-    <div class="movies-component-background">
+    <div class="movies-background-container">
       <!--<div class="loadingRingLoaderHeightCenter">-->
         <!--<br><ring-loader :color="colorRingLoader" :size="sizeRingLoader"></ring-loader>-->
       <!--</div>-->
@@ -64,7 +63,7 @@ export default {
 </script>
 
 <style scoped>
-  .movies-component-background{
+  .movies-background-container{
     min-height: 0%;
     height: 100%;
     max-height: 100%;
@@ -75,5 +74,4 @@ export default {
     z-index: -1;
     margin-bottom: 0.3vh;
   }
-
 </style>

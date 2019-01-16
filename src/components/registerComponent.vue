@@ -3,7 +3,7 @@
     <div class="centerDisplayFlex">
       <div class="flexiflex-logo">Flexiflex</div>
       <div class="form-component">
-       <div class="register-component-background"></div>
+       <div class="register-background-container"></div>
         <form @submit.prevent="submit" action="https://" method="post">
           <h2 class="form-title">Inscription</h2>
           <input class="form-input" v-bind:class="{invalidClass: emailRegexValid === false && email != ''}" id="email" v-model="email" type="text" name="email" placeholder="Email">
@@ -131,3 +131,15 @@ import RingLoader from 'vue-spinner/src/RingLoader.vue'
     }
   }
 </script>
+
+<style scoped>
+  .register-background-container {
+    position: absolute;
+    height: 280px;
+    width: 300px;
+    border-radius: 5px;
+    background-color: #cccccc;
+    opacity: 0.9;
+    z-index: -1;
+  }
+</style>

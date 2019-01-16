@@ -3,7 +3,7 @@
     <div class="centerDisplayFlex">
       <div class="flexiflex-logo">Flexiflex</div>
       <div class="form-component">
-        <div class="finalRegister-component-background"></div>
+        <div class="finalRegister-background-container"></div>
         <div class="center" v-if="user === null">
           <ring-loader :color="colorRingLoader" :size="sizeRingLoader"></ring-loader>
         </div>
@@ -66,3 +66,15 @@
     }
   }
 </script>
+
+<style scoped>
+  .finalRegister-background-container {
+    position: absolute;
+    height: 280px;
+    width: 300px;
+    border-radius: 5px;
+    background-color: #cccccc;
+    opacity: 0.9;
+    z-index: -1;
+  }
+</style>
