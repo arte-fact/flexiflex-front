@@ -1,27 +1,29 @@
 <template>
-  <div class="centerDisplayFlex">
-    <div class="flexiflex-logo">Flexiflex</div>
-    <div class="form-component">
-      <div class="login-component-background"></div>
-      <form @submit.prevent="submit" action="https://" method="post">
-        <h2 class="form-title">Connexion</h2>
-        <input class="form-input" v-bind:class="{invalidClass: emailRegexValid === false && email != ''}" id="name" v-model="email" type="text" name="email" placeholder="Email">
-        <input class="form-input" v-bind:class="{invalidClass: password.length < 3 && password != ''}" id="password" v-model="password" type="password" name="password" placeholder="Mot de passe">
-        <button class="form-button" v-bind:class="{'form-button-disabled': email === '' || password === '' || emailRegexValid === false || password.length < 3}"  v-if="!isAuthenticating">Connexion</button>
-      </form>
-      <div class="placeMessageSousBoutton" v-if="!isAuthenticating">
-        <div class="sizeHomepageLinks">Vous êtes nouveau ?
-          <router-link class="menu-item" to='/register'>
-            Inscrivez-vous
-          </router-link>
+  <div class="centerDisplayFlexColumn">
+    <div class="centerDisplayFlex">
+      <div class="flexiflex-logo">Flexiflex</div>
+      <div class="form-component">
+        <div class="login-background-container"></div>
+        <form @submit.prevent="submit" action="https://" method="post">
+          <h2 class="form-title">Connexion</h2>
+          <input class="form-input" v-bind:class="{invalidClass: emailRegexValid === false && email != ''}" id="name" v-model="email" type="text" name="email" placeholder="Email">
+          <input class="form-input" v-bind:class="{invalidClass: password.length < 3 && password != ''}" id="password" v-model="password" type="password" name="password" placeholder="Mot de passe">
+          <button class="form-button" v-bind:class="{'form-button-disabled': email === '' || password === '' || emailRegexValid === false || password.length < 3}"  v-if="!isAuthenticating">Connexion</button>
+        </form>
+        <div class="placeMessageSousBoutton" v-if="!isAuthenticating">
+          <div class="sizeHomepageLinks">Vous êtes nouveau ?
+            <router-link class="menu-item" to='/register'>
+              Inscrivez-vous
+            </router-link>
+          </div>
+          <div v-if="emailRegexValid === false && email != ''">Format d'email incorrect</div>
+          <div v-if="password.length < 3 && password != ''">Mot de passe : 3 caractères minimum </div>
+          <div v-if="hasAuthenticationError">Email ou mot de passe invalides</div>
         </div>
-        <div v-if="emailRegexValid === false && email != ''">Format d'email incorrect</div>
-        <div v-if="password.length < 3 && password != ''">Mot de passe : 3 caractères minimum </div>
-        <div v-if="hasAuthenticationError">Email ou mot de passe invalides</div>
-      </div>
-      <!--Image de chargement quand clique sur le bouton-->
-      <div class="placeMessageSousBoutton loadingRingLoader" v-if="isAuthenticating" v-on:click="submit">
-        <br><ring-loader :color="colorRingLoader" :size="sizeRingLoader"></ring-loader>
+        <!--Image de chargement quand clique sur le bouton-->
+        <div class="placeMessageSousBoutton loadingRingLoader" v-if="isAuthenticating" v-on:click="submit">
+          <br><ring-loader :color="colorRingLoader" :size="sizeRingLoader"></ring-loader>
+        </div>
       </div>
     </div>
   </div>
@@ -96,3 +98,15 @@
     }
   }
 </script>
+
+<style scoped>
+  .login-background-container {
+    position: absolute;
+    height: 240px;
+    width: 300px;
+    border-radius: 5px;
+    background-color: #cccccc;
+    opacity: 0.9;
+    z-index: -1;
+  }
+</style>

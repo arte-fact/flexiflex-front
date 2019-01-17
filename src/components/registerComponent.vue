@@ -1,33 +1,35 @@
 <template>
-  <div class="centerDisplayFlex">
-    <div class="flexiflex-logo">Flexiflex</div>
-    <div class="form-component">
-     <div class="register-component-background"></div>
-      <form @submit.prevent="submit" action="https://" method="post">
-        <h2 class="form-title">Inscription</h2>
-        <input class="form-input" v-bind:class="{invalidClass: emailRegexValid === false && email != ''}" id="email" v-model="email" type="text" name="email" placeholder="Email">
-        <input class="form-input" v-bind:class="{invalidClass: password.length < 3 && password != ''}" id="password" v-model="password" type="password" name="password" placeholder="Mot de passe">
-        <input class="form-input form-input-date" v-bind:class="{birthdateClass: birthdate === null || birthdate === '', invalidClass: agevalidate === false && birthdate != ''}" id="birthdate" v-model="birthdate" type="date" name="birthdate">
-        <button class="form-button form-button-register" v-bind:class="{'form-button-disabled': email === '' || password === '' || birthdate === null || emailRegexValid === false || password.length < 3 || agevalidate === false}" v-if="!isRegistering">Inscription</button>
-      </form>
-      <div class="placeMessageSousBoutton" v-if="!isRegistering">
-        <div class="sizeHomepageLinks">Vous avez un compte...
-          <router-link class="menu-item" to='/login'>
-            Connectez-vous
-          </router-link>
+  <div class="centerDisplayFlexColumn">
+    <div class="centerDisplayFlex">
+      <div class="flexiflex-logo">Flexiflex</div>
+      <div class="form-component">
+       <div class="register-background-container"></div>
+        <form @submit.prevent="submit" action="https://" method="post">
+          <h2 class="form-title">Inscription</h2>
+          <input class="form-input" v-bind:class="{invalidClass: emailRegexValid === false && email != ''}" id="email" v-model="email" type="text" name="email" placeholder="Email">
+          <input class="form-input" v-bind:class="{invalidClass: password.length < 3 && password != ''}" id="password" v-model="password" type="password" name="password" placeholder="Mot de passe">
+          <input class="form-input form-input-date" v-bind:class="{birthdateClass: birthdate === null || birthdate === '', invalidClass: agevalidate === false && birthdate != ''}" id="birthdate" v-model="birthdate" type="date" name="birthdate">
+          <button class="form-button form-button-register" v-bind:class="{'form-button-disabled': email === '' || password === '' || birthdate === null || emailRegexValid === false || password.length < 3 || agevalidate === false}" v-if="!isRegistering">Inscription</button>
+        </form>
+        <div class="placeMessageSousBoutton" v-if="!isRegistering">
+          <div class="sizeHomepageLinks">Vous avez un compte...
+            <router-link class="menu-item" to='/login'>
+              Connectez-vous
+            </router-link>
+          </div>
+          <div v-if="emailRegexValid === false && email != ''">Format d'email incorrect</div>
+          <div v-if="password.length < 3 && password != ''">Mot de passe : 3 caractères minimum </div>
+          <div v-if="agevalidate === false && birthdate != ''">Vous devez avoir 16 ans</div>
+          <div v-if="hasRegistrationError">Erreur inscription</div>
+          <!--Message d'envoi d'email quand l'inscription réussi-->
+          <div class="ok" v-if="isRegistered">
+            Un email vous a été envoyé à l'adresse :
+            <br> {{email}}
+          </div>
         </div>
-        <div v-if="emailRegexValid === false && email != ''">Format d'email incorrect</div>
-        <div v-if="password.length < 3 && password != ''">Mot de passe : 3 caractères minimum </div>
-        <div v-if="agevalidate === false && birthdate != ''">Vous devez avoir 16 ans</div>
-        <div v-if="hasRegistrationError">Erreur inscription</div>
-        <!--Message d'envoi d'email quand l'inscription réussi-->
-        <div class="ok" v-if="isRegistered">
-          Un email vous a été envoyé à l'adresse :
-          <br> {{email}}
+        <div class="placeMessageSousBoutton loadingRingLoader" v-if="isRegistering" v-on:click="submit">
+          <br><ring-loader :color="colorRingLoader" :size="sizeRingLoader"></ring-loader>
         </div>
-      </div>
-      <div class="placeMessageSousBoutton loadingRingLoader" v-if="isRegistering" v-on:click="submit">
-        <br><ring-loader :color="colorRingLoader" :size="sizeRingLoader"></ring-loader>
       </div>
     </div>
   </div>
@@ -36,6 +38,7 @@
 <script>
 import Vue from 'vue'
 import Vuex from 'vuex'
+import footerLayout from './layouts/footerComponent.vue'
 
 Vue.use(Vuex);
 import { mapActions, mapGetters } from 'vuex'
@@ -63,7 +66,8 @@ import RingLoader from 'vue-spinner/src/RingLoader.vue'
       ])
     },
     components: {
-      RingLoader
+      RingLoader,
+      footerLayout
     },
     created () {
       this.resetErrors()
@@ -127,3 +131,15 @@ import RingLoader from 'vue-spinner/src/RingLoader.vue'
     }
   }
 </script>
+
+<style scoped>
+  .register-background-container {
+    position: absolute;
+    height: 280px;
+    width: 300px;
+    border-radius: 5px;
+    background-color: #cccccc;
+    opacity: 0.9;
+    z-index: -1;
+  }
+</style>

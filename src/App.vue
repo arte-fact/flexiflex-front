@@ -2,11 +2,13 @@
   <div id="app">
     <div v-bind:style="styleObject"></div>
     <router-view/>
+    <footerLayout></footerLayout>
   </div>
 </template>
 
 <script>
   import { mapActions, mapGetters } from 'vuex'
+  import footerLayout from './components/layouts/footerComponent.vue'
 
   export default {
     name: 'App',
@@ -42,8 +44,10 @@
 
       if (window.innerWidth <= 812) {
         this.styleObject.backgroundImage = 'url(' + require('@/assets/homepage_MaxWidth_600/background-splash-medium-' + this.imageNumber + '.jpg')
+        console.log(this.styleObject)
       } else {
         this.styleObject.backgroundImage = 'url(' + require('@/assets/homepage/background-splash-' + this.imageNumber + '.jpg')
+        console.log(this.styleObject)
       }
       // if (this.token === null) {
       //   this.$router.push({
@@ -78,7 +82,10 @@
       ...mapGetters('auth', [
         'token'
       ])
-    }
+    },
+    components: {
+      footerLayout
+    },
   }
 </script>
 
@@ -130,36 +137,82 @@ body {
     font-style: normal;
   }
 
+/* --------------------------------------------------------------------------------------------- */
+/* ------------------------------------------ Alignement du site ------------------------------- */
+.centerDisplayFlexColumn{
+  display: flex;
+  flex-direction: column;
+  width: 96.5vw;
+  height : 100vh;
+
+  /*border: 1px solid #29ce12;*/
+}
+
   .centerDisplayFlex{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    /*border: 1px solid #00ffff;*/
   }
 
+<<<<<<< HEAD
   .centerDisplayFlexColumn{
      display: flex;
      flex-direction: column;
      width: 96.5vw;
    }
+=======
+>>>>>>> 0a103998db931656979c6771ded1be3f3895e649
 
-  .centerDisplayFlexRow{
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    align-items: initial;
-    min-height: 65px;
 
+
+  .reverse-primary {
+    background-color: transparent;
+    color: #e6e6e6;
   }
 
-  .centerDisplayFlexRowRight{
-    /*padding-top: 6px;*/
-    padding-top: 2px;
-    position: absolute;
-    right: 0;
-    align-self: center;
-    /*border: 1px solid #dcd521;*/
+  .form-title {
+    font-size: 45px;
+    font-weight: bold;
   }
+
+  .form-title-second {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .center{
+    text-align: center;
+    align-items: center;
+    padding : 85px 90px;
+  }
+
+  .form-component {
+    width: 320px;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  /*.centerDisplayFlexRow{*/
+    /*position: relative;*/
+    /*display: flex;*/
+    /*flex-direction: row;*/
+    /*align-items: initial;*/
+    /*min-height: 65px;*/
+
+  /*}*/
+
+  /*.centerDisplayFlexRowRight{*/
+    /*!*padding-top: 6px;*!*/
+    /*padding-top: 2px;*/
+    /*position: absolute;*/
+    /*right: 0;*/
+    /*align-self: center;*/
+    /*!*border: 1px solid #dcd521;*!*/
+  /*}*/
 
   .placeMessageSousBoutton{
     display: flex;
@@ -203,19 +256,19 @@ body {
     text-shadow: 4px 4px 10px #cdcdcd;
   }
 
-  .flexiflex-logo-HomePage {
-    font-family: "vegan", fantasy;
-    font-size: 40px;
-    text-shadow: 4px 4px 10px #cdcdcd;
-    text-decoration: none;
-    color: #2c3e50;
-  }
-.flexiflex-logo-HomePage:hover {
-  font-family: "vegan", fantasy;
-  font-size: 40px;
-  text-shadow: 4px 4px 10px #cdcdcd;
-  text-decoration: none;
-}
+  /*.flexiflex-logo-HomePage {*/
+    /*font-family: "vegan", fantasy;*/
+    /*font-size: 40px;*/
+    /*text-shadow: 4px 4px 10px #cdcdcd;*/
+    /*text-decoration: none;*/
+    /*color: #2c3e50;*/
+  /*}*/
+/*.flexiflex-logo-HomePage:hover {*/
+  /*font-family: "vegan", fantasy;*/
+  /*font-size: 40px;*/
+  /*text-shadow: 4px 4px 10px #cdcdcd;*/
+  /*text-decoration: none;*/
+/*}*/
 
   .form-input {
     width: 220px;
@@ -226,28 +279,38 @@ body {
     border-radius: 5px;
     text-align: center;
   }
-
+/* --------------------------------------------------------------------------------------------- */
+/* ------------------------------------------ Ring Loader -------------------------------------- */
+.loadingRingLoader{
+  padding-top: 20px;
+}
+.loadingRingLoaderHeightCenter{
+  padding-top: 20vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* --------------------------------------------------------------------------------------------- */
+/* ------------------------------------------ Input Invalid  ----------------------------------- */
   .invalidClass{
     content:"3 caractères minimum";
     border: 1px solid crimson;
     outline: none;
   }
-
+/* --------------------------------------------------------------------------------------------- */
+/* ------------------------------------------ Input Birthday ----------------------------------- */
   .form-input-date{
     background-color: white;
     color: grey;
     padding-right: 0px;
     padding-left: 46px;
   }
-
   .birthdateClass:hover::after{
      content: "";
    }
-
   .birthdateClass:focus::after{
     content: "";
   }
-
   .birthdateClass:after{
     content: "Date de naissance";
     position:absolute;
@@ -255,7 +318,8 @@ body {
     background-color: white;
     z-index: 0;
   }
-
+/* --------------------------------------------------------------------------------------------- */
+/* ------------------------------------------ Buttons ------------------------------------------ */
   .form-button {
     align-self: center;
     padding: 3px;
@@ -270,49 +334,44 @@ body {
     justify-content: center;
     align-items: center;
   }
-
-.form-button-delete {
-  align-self: center;
-  padding: 3px;
-  border: none;
-  width: 220px;
-  height: 25px;
-  margin: 15px 0px 0px;
-  border-radius: 5px;
-  background-color: white;
-  font-weight: bold;
-  cursor: pointer;
-  justify-content: center;
-  align-items: center;
-}
-
-  .form-button-delete:hover{
-    box-shadow: 0px 2px 2px grey;
-    background-color: crimson;
-    color: white;
-  }
-
-  .form-button:hover{
-    box-shadow: 0px 2px 2px grey;
-    background-color: darkgreen;
-    color: white;
-  }
-
-
-
   .form-button:focus {
     box-shadow: 0px 2px 2px grey;
     background-color: darkgreen;
     color: white;
   }
-
+/* ------------------------------------------ Button --- Delete --- */
+  .form-button-delete {
+    align-self: center;
+    padding: 3px;
+    border: none;
+    width: 220px;
+    height: 25px;
+    margin: 15px 0px 0px;
+    border-radius: 5px;
+    background-color: white;
+    font-weight: bold;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+  }
+  .form-button-delete:hover{
+    box-shadow: 0px 2px 2px grey;
+    background-color: crimson;
+    color: white;
+  }
+  .form-button:hover{
+    box-shadow: 0px 2px 2px grey;
+    background-color: darkgreen;
+    color: white;
+  }
+/* ------------------------------------------ Button --- Disable --- */
   .form-button-disabled{
     background-color: #b0b0b0;
     color: #8a8a8a;
     cursor: not-allowed;
     pointer-events: none;
   }
-
+/* ------------------------------------------ Button --- User Account   --- */
   .useraccount-button{
     border: none;
     width: auto;
@@ -322,6 +381,7 @@ body {
     color: #cdcdcd;
     cursor: pointer;
   }
+<<<<<<< HEAD
 
   .reverse-primary {
     background-color: transparent;

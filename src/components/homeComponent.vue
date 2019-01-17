@@ -14,21 +14,27 @@
     <product-list></product-list>
     <product-detail></product-detail>
     <video-player-modal></video-player-modal>
+    <headerLayout></headerLayout>
+    <div class="movies-background-container">
+      <!--<div class="loadingRingLoaderHeightCenter">-->
+        <!--<br><ring-loader :color="colorRingLoader" :size="sizeRingLoader"></ring-loader>-->
+      <!--</div>-->
+    </div>
   </div>
 </template>
 
 <script>
+
 import Vue from 'vue'
 import Vuex from 'vuex'
 import RingLoader from 'vue-spinner/src/RingLoader.vue'
 import ProductList from './productListComponent.vue'
 import ProductDetail from './productDetailComponent.vue'
 import VideoPlayerModal from './videoPlayerModal.vue'
-
-
-Vue.use(Vuex);
+import headerLayout from './layouts/headerComponent.vue'
 import { mapActions, mapGetters } from 'vuex'
 
+Vue.use(Vuex);
 export default {
   name: 'home-page',
   data() {
@@ -36,7 +42,7 @@ export default {
       email: "",
       products: null,
       colorRingLoader: '#2c3e50',
-      sizeRingLoader: '200px'
+      sizeRingLoader: '200px',
     }
   },
   computed: {
@@ -50,7 +56,8 @@ export default {
     RingLoader,
     ProductList,
     ProductDetail,
-    VideoPlayerModal
+    VideoPlayerModal,
+    headerLayout
   },
   created () {
     if (this.user === null) {
@@ -75,3 +82,17 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .movies-background-container{
+    min-height: 0%;
+    height: 100%;
+    max-height: 100%;
+    width: 96.5vw;
+    border-radius: 5px;
+    background-color: #cccccc;
+    opacity: 0.9;
+    z-index: -1;
+    margin-bottom: 0.3vh;
+  }
+</style>
