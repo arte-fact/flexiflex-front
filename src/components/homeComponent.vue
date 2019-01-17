@@ -1,7 +1,5 @@
 <template>
-
   <div class="centerDisplayFlexColumn">
-
     <div class="centerDisplayFlexRow">
       <router-link :to="{name: 'home-page'}">
         <div class="flexiflex-logo-HomePage">Flexiflex</div>
@@ -12,12 +10,10 @@
         </router-link>
         <div class="useraccount-button" v-on:click="doLogout">Logout</div>
       </div>
-
     </div>
-
-    <div>
-      <product-list></product-list>
-    </div>
+    <product-list></product-list>
+    <product-detail></product-detail>
+    <video-player-modal></video-player-modal>
   </div>
 </template>
 
@@ -26,6 +22,9 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import RingLoader from 'vue-spinner/src/RingLoader.vue'
 import ProductList from './productListComponent.vue'
+import ProductDetail from './productDetailComponent.vue'
+import VideoPlayerModal from './videoPlayerModal.vue'
+
 
 Vue.use(Vuex);
 import { mapActions, mapGetters } from 'vuex'
@@ -49,7 +48,9 @@ export default {
   },
   components: {
     RingLoader,
-    ProductList
+    ProductList,
+    ProductDetail,
+    VideoPlayerModal
   },
   created () {
     if (this.user === null) {
