@@ -149,7 +149,6 @@ const actions = {
     )
   },
   register ({commit}, {email, password, birthdate}) {
-    console.log(birthdate)
     commit(REGISTER_REQUEST)
     Vue.http.post(
       'api/custom/register',

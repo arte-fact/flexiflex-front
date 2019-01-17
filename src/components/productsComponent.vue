@@ -9,6 +9,7 @@
           </div>
         </div>
       </div>
+      <router-view></router-view>
     </div>
     <ring-loader class="background" v-if="products === null" :color="colorRingLoader" :size="sizeRingLoader"></ring-loader>
   </div>
@@ -18,14 +19,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import RingLoader from 'vue-spinner/src/RingLoader.vue'
-import ProductDetail from './productListComponent.vue'
-import VideoPlayerModal from './productListComponent.vue'
+import ProductDetail from './productsComponent.vue'
+import VideoPlayerModal from './productsComponent.vue'
 
 Vue.use(Vuex);
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
-  name: 'product-list',
+  name: 'products',
   data() {
     return {
       colorRingLoader: '#2c3e50',
@@ -63,22 +64,18 @@ export default {
 <style scoped>
 
   .product-list-container {
-    position: fixed;
-    display: flex;
-    flex-direction: row;
-    flex-flow: wrap-reverse;
-    width: 100%;
-    height: 100%;
-    top: 65px;
+    position: relative;
+    margin: 10px;
+    width: 90vw;
+    height: 80vh;
     overflow-x: scroll;
   }
 
   .product-list {
-    position: absolute;
+    position: relative;
     display: flex;
     flex-direction: row;
     flex-flow: wrap;
-    width: 100%;
   }
 
   .product-item {

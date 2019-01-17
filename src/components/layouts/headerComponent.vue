@@ -1,10 +1,10 @@
 <template>
   <div class="header-container">
-    <router-link to="/home/product-list">
+    <router-link to="/products">
       <div class="logo">Flexiflex</div>
     </router-link>
     <div class="nav-menu">
-      <router-link v-if= "user != null" class="button" to="/home/user-account">Compte {{user.firstName}} {{user.lastName}}</router-link>
+      <router-link v-if= "user != null" class="button" to="/user-account">Compte {{user.firstName}} {{user.lastName}}</router-link>
       <button class="button" v-on:click="doLogout">Logout</button>
     </div>
   </div>

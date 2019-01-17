@@ -1,7 +1,7 @@
 <template>
     <div class="container">
-      <div class="copyright positionCenter"><i class="far fa-copyright"></i></div>
-      <div class="flexiflex positionCenter">Flexiflex</div>
+      <div class="copyright"><i class="far fa-copyright"></i></div>
+      <div class="flexiflex">Flexiflex</div>
       <div class="year positionCenter"> {{this.whatYearAreWe}} </div>
     </div>
 </template>
@@ -22,35 +22,28 @@
 </script>
 
 <style scoped>
-   .container{
-     position: fixed;
-     bottom: 0;
-    /*width: 96.5vw;*/
-    /*min-width: 96.5vw;*/
-    /*height:26px;*/
-    /*min-height: 26px;*/
-    /*margin-top: 0.3vh;*/
-    /*margin-bottom: 0.3vh;*/
-    /*font-size: 15px;*/
-    /*color: #2c3e50;*/
-    /*text-shadow: 1px 1px 1px #cdcdcd;*/
-     border: 1px solid lime;
+  .container{
+    position: fixed;
+    display: flex;
+    bottom: 0;
+    height: 30px;
+    font-size: 15px;
+    color: #2c3e50;
+    text-shadow: 1px 1px 1px #cdcdcd;
   }
-  .positionCenter{
-    position: absolute;
-    top: 50%;
-    transform: translate(0%,-50%);
-  }
+
   .copyright{
-    left: 0;
+    position: relative;
     filter: drop-shadow(1px 1px 1px #cdcdcd);
+    margin-left: 6px;
   }
   .flexiflex{
-    left: 20px;
+    position: relative;
     font-family: "vegan", fantasy;
+    margin-left: 4px;
   }
   .year{
-    left: 80px;
     font-family: fantasy;
+    margin-left: 4px;
   }
 </style>

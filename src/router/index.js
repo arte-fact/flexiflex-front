@@ -6,13 +6,31 @@ import homeLayout from '../components/layouts/homeLayout'
 import finalRegisterComponent from '../components/finalRegisterComponent'
 import userAccountComponent from '../components/userAccountComponent'
 import connectionLayout from '../components/layouts/connectionLayout'
-import homeComponent from "../components/homeComponent";
+import productsComponent from "../components/productsComponent";
+import productDetailComponent from "../components/productDetailComponent";
 
 Vue.use(Router)
 
 export default new Router({
   mode: 'history',
   routes: [
+    {
+      path: '/',
+      name: 'home-layout',
+      component: homeLayout,
+      children: [
+        {
+          path: '/products',
+          name: 'products',
+          component: productsComponent
+        },
+        {
+          path: 'user-account',
+          name: 'user-account',
+          component: userAccountComponent
+        },
+      ]
+    },
     {
       path: '/auth',
       name: 'connection-layout',
@@ -36,25 +54,9 @@ export default new Router({
       ]
     },
     {
-      path: '/home',
-      name: 'home-layout',
-      component: homeLayout,
-      children: [
-        {
-          path: '/product-list',
-          name: 'product-list',
-          component: homeComponent
-        },
-        {
-          path: '/user-account',
-          name: 'user-account',
-          component: userAccountComponent
-        },
-      ]
-    },
-    {
       path: '/*',
-      component: homeComponent
+      component: homeLayout,
+      name: 'default'
     }
   ]
 })

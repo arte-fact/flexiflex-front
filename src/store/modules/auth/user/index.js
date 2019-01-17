@@ -75,16 +75,12 @@ const actions = {
       }).then(
       response => {
         if (response.status === 200) {
-          console.log(response)
           commit(USER_REQUEST, response)
         } else {
-          console.log(response)
           commit(USER_REQUEST_FAIL)
         }
       },
       response => {
-        console.log("user response not ok")
-        console.log(response)
         commit(USER_REQUEST_FAIL)
       }
     )

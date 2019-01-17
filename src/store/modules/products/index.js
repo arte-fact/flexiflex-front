@@ -63,7 +63,6 @@ const actions = {
     commit(RESET_PRODUCT)
   },
   requestProducts ({commit}) {
-    console.log('product request')
     setTimeout(function () {
         let items = []
         for (let i = 0; i < 50; i++) {

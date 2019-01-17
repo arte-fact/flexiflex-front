@@ -41,10 +41,8 @@
       this.imageNumber = Math.ceil( Math.random() * 7 )
       if (window.innerWidth <= 812) {
         this.styleObject.backgroundImage = 'url(' + require('@/assets/homepage_MaxWidth_600/background-splash-medium-' + this.imageNumber + '.jpg')
-        console.log(this.styleObject)
       } else {
         this.styleObject.backgroundImage = 'url(' + require('@/assets/homepage/background-splash-' + this.imageNumber + '.jpg')
-        console.log(this.styleObject)
       }
       if (this.token === null) {
         this.$router.push({
@@ -60,7 +58,7 @@
           })
         } else {
           this.$router.push({
-            name: 'product-list'
+            name: 'products'
           })
         }
       },
@@ -115,6 +113,10 @@ form {
   padding: 0;
 }
 
+a {
+  color: #2c3e50;
+}
+
 @keyframes fade {
   from {
     opacity: 1;
@@ -155,11 +157,6 @@ form {
   .reverse-primary {
     background-color: transparent;
     color: #e6e6e6;
-  }
-
-  .form-title {
-    font-size: 45px;
-    font-weight: bold;
   }
 
   .center{
@@ -207,8 +204,7 @@ form {
     width: 220px;
     height: 25px;
     border: none;
-    padding: 5px;
-    margin: 2px;
+    margin: 3px 0;
     border-radius: 5px;
     text-align: center;
   }
@@ -321,6 +317,9 @@ form {
   }
 
   .form-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 45px;
     font-weight: bold;
   }
