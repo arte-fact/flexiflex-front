@@ -1,10 +1,6 @@
 <template>
-  <div class="centerDisplayFlexColumn">
     <div class="centerDisplayFlex">
-      <div class="flexiflex-logo">Flexiflex</div>
-      <div class="form-component">
-        <div class="login-background-container"></div>
-        <form @submit.prevent="submit" action="https://" method="post">
+        <form class="form-component" @submit.prevent="submit" action="https://" method="post">
           <h2 class="form-title">Connexion</h2>
           <input class="form-input" v-bind:class="{invalidClass: emailRegexValid === false && email != ''}" id="name" v-model="email" type="text" name="email" placeholder="Email">
           <input class="form-input" v-bind:class="{invalidClass: password.length < 3 && password != ''}" id="password" v-model="password" type="password" name="password" placeholder="Mot de passe">
@@ -12,7 +8,7 @@
         </form>
         <div class="placeMessageSousBoutton" v-if="!isAuthenticating">
           <div class="sizeHomepageLinks">Vous êtes nouveau ?
-            <router-link class="menu-item" to='/register'>
+            <router-link class="menu-item" to='/auth/register'>
               Inscrivez-vous
             </router-link>
           </div>
@@ -24,9 +20,7 @@
         <div class="placeMessageSousBoutton loadingRingLoader" v-if="isAuthenticating" v-on:click="submit">
           <br><ring-loader :color="colorRingLoader" :size="sizeRingLoader"></ring-loader>
         </div>
-      </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -98,15 +92,3 @@
     }
   }
 </script>
-
-<style scoped>
-  .login-background-container {
-    position: absolute;
-    height: 240px;
-    width: 300px;
-    border-radius: 5px;
-    background-color: #cccccc;
-    opacity: 0.9;
-    z-index: -1;
-  }
-</style>

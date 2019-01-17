@@ -33,7 +33,7 @@ const mutations = {
     state.productRequestFail = false
   },
   [RESET_PRODUCT] (state) {
-    state.product = []
+    state.product = null
   },
   [PRODUCT_REQUEST_FAIL] (state) {
     state.productRequestFail = true
@@ -58,6 +58,9 @@ const actions = {
   },
   unSelectProduct({commit}) {
     commit(UNSELECT_A_PRODUCT)
+  },
+  resetProducts({commit}) {
+    commit(RESET_PRODUCT)
   },
   requestProducts ({commit}) {
     console.log('product request')
@@ -126,11 +129,8 @@ const actions = {
         commit(RESET_PRODUCT)
         commit(PRODUCT_REQUEST, items)
       },
-      1000)
-    },
-  resetProduct ({commit}) {
-    commit(RESET_PRODUCT)
-  }
+      500)
+    }
 }
 
 export default {

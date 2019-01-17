@@ -32,14 +32,13 @@
   import { mapActions, mapGetters } from 'vuex'
 
   export default {
-    name: 'finalRegister-page',
+    name: 'final-register-page',
     data () {
       return {
         prenom: '',
         nom: '',
         email:'',
         birthdate:'',
-        msg: 'Welcome to final register page',
         colorRingLoader: '#2c3e50',
         sizeRingLoader: '120px',
       }

@@ -1,12 +1,10 @@
 <template>
-  <div class="container">
-    <router-link :to="{name: 'home-page'}">
+  <div class="header-container">
+    <router-link to="/home/product-list">
       <div class="logo">Flexiflex</div>
     </router-link>
-    <div class="buttonContainer">
-      <router-link :to="{name: 'user-account'}">
-        <button v-if= "user != null" class="button">Compte {{user.firstName}} {{user.lastName}}</button>
-      </router-link>
+    <div class="nav-menu">
+      <router-link v-if= "user != null" class="button" to="/home/user-account">Compte {{user.firstName}} {{user.lastName}}</router-link>
       <button class="button" v-on:click="doLogout">Logout</button>
     </div>
   </div>
@@ -20,7 +18,7 @@
   import { mapActions, mapGetters } from 'vuex'
 
   export default {
-    name: 'headerLayout',
+    name: 'header-layout',
     computed: {
       ...mapGetters('auth', [
         'user',
@@ -46,17 +44,19 @@
 </script>
 
 <style scoped>
-  .container{
-    position: relative;
-    height:65px;
-    min-height: 65px;
-    width:100%;
-    min-width:100%;
-    margin-bottom: 0.5vh;
+  .header-container{
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
   }
+
   .logo {
-    position: absolute;
-    left: 0px;
+    position: relative;
+    left: 0;
     font-family: "vegan", fantasy;
     font-size: 40px;
     text-shadow: 4px 4px 10px #cdcdcd;
@@ -65,16 +65,14 @@
     cursor: pointer;
   }
   .logo:hover {
-    font-family: "vegan", fantasy;
-    font-size: 40px;
-    text-shadow: 4px 4px 10px #cdcdcd;
     text-decoration: none;
   }
+
   .buttonContainer{
-    position: absolute;
+    position: relative;
     right:0px;
     top: 50%;
-    transform: translate(0%,-50%);
+    /*transform: translate(0%,-50%);*/
   }
   .button{
     font-size: 12px;

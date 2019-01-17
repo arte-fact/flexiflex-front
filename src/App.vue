@@ -1,14 +1,13 @@
 <template>
-  <div id="app">
+  <div id="app" class="app">
     <div v-bind:style="styleObject"></div>
-    <router-view/>
-    <footerLayout></footerLayout>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
   import { mapActions, mapGetters } from 'vuex'
-  import footerLayout from './components/layouts/footerComponent.vue'
+  import GlobalLayout from './components/layouts/connectionLayout.vue'
 
   export default {
     name: 'App',
@@ -22,6 +21,7 @@
         imageNumber:1,
 
         styleObject: {
+          position: 'fixed',
           content: '',
           backgroundImage : null,
           backgroundRepeat: 'no-repeat',
@@ -30,18 +30,15 @@
           backgroundColor: 'black',
           opacity: 0.8,
           zIndex: -2,
-          position: 'fixed',
-          width: '100%',
-          height: '100%',
-          transform: 'scaleX(1.1)',
+          width: '100vw',
+          height: '100vh',
         }
       }
     },
     created() {
-      this.imageNumber = Math.ceil( Math.random() * 7 )
-
       this.setTokenFromCookie()
 
+      this.imageNumber = Math.ceil( Math.random() * 7 )
       if (window.innerWidth <= 812) {
         this.styleObject.backgroundImage = 'url(' + require('@/assets/homepage_MaxWidth_600/background-splash-medium-' + this.imageNumber + '.jpg')
         console.log(this.styleObject)
@@ -49,20 +46,24 @@
         this.styleObject.backgroundImage = 'url(' + require('@/assets/homepage/background-splash-' + this.imageNumber + '.jpg')
         console.log(this.styleObject)
       }
-      // if (this.token === null) {
-      //   this.$router.push({
-      //     name: 'login-page'
-      //   })
-      // }
+      if (this.token === null) {
+        this.$router.push({
+          name: 'login-page'
+        })
+      }
     },
     watch: {
-      // token (newValue) {
-      //   if (newValue === null) {
-      //     this.$router.push({
-      //       name: 'login-page'
-      //     })
-      //   }
-      // },
+      token (newValue) {
+        if (newValue === null) {
+          this.$router.push({
+            name: 'login-page'
+          })
+        } else {
+          this.$router.push({
+            name: 'product-list'
+          })
+        }
+      },
 
       userRequestFail(state) {
         if (state === true) {
@@ -84,24 +85,34 @@
       ])
     },
     components: {
-      footerLayout
+      GlobalLayout
     },
   }
 </script>
 
 <style>
 html {
-  position: absolute;
-  display: flex;
-  height: 100%;
-  width: 100%;
+  position: relative;
   color: #1d1d1d;
   background: black;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
 }
 
 body {
+  position: relative;
+  padding: 0;
+  margin: 0;
   height: 100%;
-  width: 100%;
+}
+
+form {
+  margin: 0;
+  padding: 0;
 }
 
 @keyframes fade {
@@ -115,19 +126,12 @@ body {
 }
 
 #app {
-  display: flex;
-  flex-direction: column;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  align-items: center;
-  width: 100%;
-  height: 100%;
   margin: 0;
-  bottom: 0;
-  user-select: none;
+  height: 100%;
 }
 
   @font-face {
@@ -139,15 +143,6 @@ body {
 
 /* --------------------------------------------------------------------------------------------- */
 /* ------------------------------------------ Alignement du site ------------------------------- */
-.centerDisplayFlexColumn{
-  display: flex;
-  flex-direction: column;
-  width: 96.5vw;
-  height : 100vh;
-
-  /*border: 1px solid #29ce12;*/
-}
-
   .centerDisplayFlex{
     display: flex;
     flex-direction: column;
@@ -156,17 +151,6 @@ body {
 
     /*border: 1px solid #00ffff;*/
   }
-
-<<<<<<< HEAD
-  .centerDisplayFlexColumn{
-     display: flex;
-     flex-direction: column;
-     width: 96.5vw;
-   }
-=======
->>>>>>> 0a103998db931656979c6771ded1be3f3895e649
-
-
 
   .reverse-primary {
     background-color: transparent;
@@ -178,41 +162,12 @@ body {
     font-weight: bold;
   }
 
-  .form-title-second {
-    font-size: 20px;
-    font-weight: bold;
-  }
-
   .center{
     text-align: center;
     align-items: center;
     padding : 85px 90px;
   }
 
-  .form-component {
-    width: 320px;
-    margin: 5px;
-    padding: 10px;
-    border-radius: 5px;
-  }
-
-  /*.centerDisplayFlexRow{*/
-    /*position: relative;*/
-    /*display: flex;*/
-    /*flex-direction: row;*/
-    /*align-items: initial;*/
-    /*min-height: 65px;*/
-
-  /*}*/
-
-  /*.centerDisplayFlexRowRight{*/
-    /*!*padding-top: 6px;*!*/
-    /*padding-top: 2px;*/
-    /*position: absolute;*/
-    /*right: 0;*/
-    /*align-self: center;*/
-    /*!*border: 1px solid #dcd521;*!*/
-  /*}*/
 
   .placeMessageSousBoutton{
     display: flex;
@@ -220,7 +175,6 @@ body {
     justify-content: center;
     align-items: center;
     height: 65px;
-    width: 100%;
     margin-top: 5px;
     font-size: 12px;
     color: crimson;
@@ -248,27 +202,6 @@ body {
     font-size: 12px;
     color: darkgreen;
   }
-
-  .flexiflex-logo {
-    font-family: "vegan", fantasy;
-    font-size: 100px;
-    padding: 20px;
-    text-shadow: 4px 4px 10px #cdcdcd;
-  }
-
-  /*.flexiflex-logo-HomePage {*/
-    /*font-family: "vegan", fantasy;*/
-    /*font-size: 40px;*/
-    /*text-shadow: 4px 4px 10px #cdcdcd;*/
-    /*text-decoration: none;*/
-    /*color: #2c3e50;*/
-  /*}*/
-/*.flexiflex-logo-HomePage:hover {*/
-  /*font-family: "vegan", fantasy;*/
-  /*font-size: 40px;*/
-  /*text-shadow: 4px 4px 10px #cdcdcd;*/
-  /*text-decoration: none;*/
-/*}*/
 
   .form-input {
     width: 220px;
@@ -381,7 +314,6 @@ body {
     color: #cdcdcd;
     cursor: pointer;
   }
-<<<<<<< HEAD
 
   .reverse-primary {
     background-color: transparent;
@@ -417,16 +349,6 @@ body {
      z-index: -1;
    }
 
-  .finalRegister-component-background {
-    position: absolute;
-    height: 280px;
-    width: 300px;
-    border-radius: 5px;
-    background-color: #cccccc;
-    opacity: 0.9;
-    z-index: -1;
-  }
-
   .useraccount-component-background {
     position: absolute;
     height: 220px;
@@ -456,10 +378,10 @@ body {
   }
 
   .form-component {
-    width: 320px;
-    margin: 5px;
-    padding: 10px;
-    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   .useraccount-form-component {

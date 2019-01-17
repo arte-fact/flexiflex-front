@@ -8,7 +8,7 @@
 
 <script>
     export default {
-        name: "footerLayout",
+        name: "footer-layout",
       data() {
         return {
           whatYearAreWe: null,
@@ -23,16 +23,18 @@
 
 <style scoped>
    .container{
-    position: relative;
-    width: 96.5vw;
-    min-width: 96.5vw;
-    height:26px;
-    min-height: 26px;
-    margin-top: 0.3vh;
-    margin-bottom: 0.3vh;
-    font-size: 15px;
-    color: #2c3e50;
-    text-shadow: 1px 1px 1px #cdcdcd;
+     position: fixed;
+     bottom: 0;
+    /*width: 96.5vw;*/
+    /*min-width: 96.5vw;*/
+    /*height:26px;*/
+    /*min-height: 26px;*/
+    /*margin-top: 0.3vh;*/
+    /*margin-bottom: 0.3vh;*/
+    /*font-size: 15px;*/
+    /*color: #2c3e50;*/
+    /*text-shadow: 1px 1px 1px #cdcdcd;*/
+     border: 1px solid lime;
   }
   .positionCenter{
     position: absolute;

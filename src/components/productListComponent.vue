@@ -1,7 +1,6 @@
 <template>
   <div class="product-list-container">
-    <div class="background" v-if="products !== null">
-      <div class="title">Catalogue</div>
+    <div v-if="products !== null">
       <div class="product-list">
         <div v-bind:key="product.id" v-for="product in products">
           <div class="product-item" v-on:click="select(product)">
@@ -51,7 +50,8 @@ export default {
   methods: {
     ...mapActions('products', [
       'requestProducts',
-      'selectProduct'
+      'selectProduct',
+      'resetProducts'
     ]),
     select(product) {
       this.selectProduct(product)
@@ -62,11 +62,23 @@ export default {
 
 <style scoped>
 
-  .product-list {
+  .product-list-container {
+    position: fixed;
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    flex-flow: wrap-reverse;
+    width: 100%;
+    height: 100%;
+    top: 65px;
     overflow-x: scroll;
+  }
+
+  .product-list {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
+    width: 100%;
   }
 
   .product-item {
@@ -75,22 +87,14 @@ export default {
     position: relative;
     width: 150px;
     cursor: pointer;
-    margin-right: 10px;
     z-index: 1;
+    margin: 5px;
   }
 
   .product-image {
     height: 200px;
     width: 150px;
     background-color: grey;
-  }
-
-
-  .background {
-    border-radius: 5px;
-    background-color: #cccccc;
-    opacity: 0.9;
-    padding: 20px;
   }
 
 </style>
