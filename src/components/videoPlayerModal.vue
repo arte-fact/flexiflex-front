@@ -1,11 +1,11 @@
 <template xmlns:v-video-player="http://www.w3.org/1999/xhtml">
   <div v-if="isPlaying && getSelected !== null">
-    <video id="video-player" class="video-player" controls>
+    <video v-on:click="toggleIsPlaying" id="video-player" class="video-player" width="100%" height="auto" controls>
       <source
         :src="videoUrl"
         type="video/mp4">
     </video>
-    <div class="close-button" v-on:click="toggleIsPlaying">Close</div>
+    <div class="close-button" v-on:click="toggleIsPlaying">fermer</div>
     <div class="video-player-background">
     </div>
   </div>
@@ -78,29 +78,21 @@
     font-weight: bold;
     padding: 3px;
     margin: 10px;
-    width: 30px;
-    height: 30px;
-    border-radius: 100%;
     cursor: pointer;
     justify-content: center;
     align-items: center;
     transition: ease 0.3s;
-    top: 0;
-    right: 0;
+    top: 50px;
+    right: 10px;
     z-index: 4;
-    background: black;
     opacity: 1;
-  }
-
-
-  .close-button:before, .close-button:after {
-    position: absolute;
-    content: "fermer";
-    height: 20%;
     color: #cccc;
-    z-index: 4;
-    top: 5px;
-    right: 0;
+    border: 1px solid #cccc;
+    border-radius: 5px;
+  }
+  .close-button:hover {
+    color: white;
+    border: 1px solid white;
   }
 
 </style>
