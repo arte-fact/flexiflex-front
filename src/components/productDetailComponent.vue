@@ -4,21 +4,21 @@
       <!--<div class="close-button" v-on:click="close"></div>-->
       <img :src="'http://image.tmdb.org/t/p/w500' + selectedProduct.cover" :alt="selectedProduct.title" class="selected-product-image">
       <div class="column">
-        <div class="form-title">{{ selectedProduct.title }}</div>
+        <div class="detail-title">{{ selectedProduct.title }}</div>
         <!--<div class="form-button" v-on:click="isPlaying = true">Lecture</div>-->
-        <div>Date de sortie: {{ selectedProduct.releaseDate }}</div>
-        <span>Date d'ajout: {{ selectedProduct.addDate }}</span>
-        <ul>Réalisateurs:
-          <li v-bind:key="e.id" v-for="e in selectedProduct.directors">
-            {{ e.firstName }} {{ e.lastName }}
-          </li>
-        </ul>
-        <ul>Acteurs:
-          <li v-bind:key="a.id" v-for="a in selectedProduct.actors">
-            {{ a.firstName }} {{ a.lastName }}
-          </li>
-        </ul>
-        <div class="">{{ selectedProduct.synopsis }}</div>
+        <!--<div>Date de sortie: {{ selectedProduct.releaseDate }}</div>-->
+        <!--<span>Date d'ajout: {{ selectedProduct.addDate }}</span>-->
+        <!--<ul>Réalisateurs:-->
+          <!--<li v-bind:key="e.id" v-for="e in selectedProduct.directors">-->
+            <!--{{ e.firstName }} {{ e.lastName }}-->
+          <!--</li>-->
+        <!--</ul>-->
+        <!--<ul>Acteurs:-->
+          <!--<li v-bind:key="a.id" v-for="a in selectedProduct.actors">-->
+            <!--{{ a.firstName }} {{ a.lastName }}-->
+          <!--</li>-->
+        <!--</ul>-->
+        <p class="detail-synopsis">{{ selectedProduct.synopsis }}</p>
       </div>
     </div>
   </div>
@@ -92,6 +92,7 @@
     height: 34vh;
     width: auto;
     background-color: grey;
+    padding: 5px;
   }
 
   .product-detail-container {
@@ -110,5 +111,14 @@
   .detail-container {
     display: flex;
     flex-direction: row;
+  }
+
+  .detail-title {
+    font-weight: bold;
+    font-size: 35px;
+  }
+
+  .detail-synopsis {
+    text-align: justify;
   }
 </style>

@@ -50,7 +50,9 @@
               cover: result.poster_path,
               title: result.title,
               id: this.id,
-              synopsis: result.overview
+              synopsis: result.overview,
+              releaseDate: result.release_date,
+              addDate: 'unknown'
             })
 
             if (this.id === 0) {
