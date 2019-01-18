@@ -6,7 +6,7 @@
       <div class="column">
         <div class="detail-title">{{ selectedProduct.title }}</div>
         <!--<div class="form-button" v-on:click="isPlaying = true">Lecture</div>-->
-        <!--<div>Date de sortie: {{ selectedProduct.releaseDate }}</div>-->
+        <div>Date de sortie: {{ selectedProduct.releaseDate }}</div>
         <!--<span>Date d'ajout: {{ selectedProduct.addDate }}</span>-->
         <!--<ul>Réalisateurs:-->
           <!--<li v-bind:key="e.id" v-for="e in selectedProduct.directors">-->
@@ -102,15 +102,15 @@
     align-items: flex-start;
     flex-wrap: wrap;
     padding: 20px;
-    width: 100%;
     height: 36vh;
+    width: 100vw;
     margin-bottom: 10px;
-
   }
 
   .detail-container {
     display: flex;
     flex-direction: row;
+    width: 100vw;
   }
 
   .detail-title {

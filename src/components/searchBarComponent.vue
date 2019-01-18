@@ -27,8 +27,7 @@
     watch: {
       input(oldValue, newValue) {
         if (!this.isRequesting && newValue === null || newValue === '') {
-          this.requestProducts()
-        } else if (!this.isRequesting && newValue.length > 1) {
+        } else if (!this.isRequesting && newValue.length > 2) {
           this.search(newValue)
         }
       }
@@ -67,11 +66,11 @@
           this.id += 1
         }, this)
       },
-      search(query) {
+      search() {
         this.isRequesting = true;
 
         this.isRequesting = true;
-        Vue.http.post('http://api.themoviedb.org/3/search/movie?api_key=b9e5550676ff70a2c33461f55fac000c&query=' + query + '&language=fr',
+        Vue.http.post('http://api.themoviedb.org/3/search/movie?api_key=b9e5550676ff70a2c33461f55fac000c&query=' + this.input + '&language=fr',
           {
             headers: {
               'Access-Control-Allow-Origin': '*'
@@ -85,7 +84,7 @@
             this.isRequesting = false;
           }
         )
-        Vue.http.post('http://api.themoviedb.org/3/search/tv?api_key=b9e5550676ff70a2c33461f55fac000c&query=' + query + '&language=fr',
+        Vue.http.post('http://api.themoviedb.org/3/search/tv?api_key=b9e5550676ff70a2c33461f55fac000c&query=' + this.input + '&language=fr',
           {
             headers: {
               'Access-Control-Allow-Origin': '*'
