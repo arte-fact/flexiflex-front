@@ -1,6 +1,6 @@
 <template>
     <div class="search-input-container">
-      <input v-on:click="input = null" id="search-input" class="form-input search-input" name="research" v-model="input"><span>(admin)</span>
+      <input v-on:click="input = ''" id="search-input" class="form-input search-input" name="research" v-model="input"><span>(admin)</span>
     </div>
 </template>
 
@@ -26,8 +26,7 @@
     },
     watch: {
       input(oldValue, newValue) {
-        if (!this.isRequesting && newValue === null || newValue === '') {
-        } else if (!this.isRequesting && newValue.length > 2) {
+        if (!this.isRequesting && newValue.length > 2 && newValue !== null) {
           this.search(newValue)
         }
       }
