@@ -1,18 +1,19 @@
 <template>
   <div>
     <div class="product-list-container">
-      <input name="seach" class="form-input search-bar"/>
       <div v-if="products !== null">
         <div class="product-list">
           <div v-bind:key="product.id" v-for="product in products">
             <div class="product-item" v-on:click="select(product)">
-              <img :alt="product.title" class="product-image" :src="product.cover">
+              <img :alt="product.title" class="product-image" :src="'http://image.tmdb.org/t/p/w154' + product.cover">
               <div class="product-title">{{product.title}}</div>
             </div>
           </div>
         </div>
       </div>
-      <ring-loader class="background" v-if="products === null" :color="colorRingLoader" :size="sizeRingLoader"></ring-loader>
+      <div class="loader-container" v-if="products === null">
+        <ring-loader color="#2c3e50" size="200px"></ring-loader>
+      </div>
     </div>
   </div>
 </template>
@@ -32,8 +33,6 @@ export default {
   name: 'products',
   data() {
     return {
-      colorRingLoader: '#2c3e50',
-      sizeRingLoader: '200px',
       searchBarMessage: 'Rechercher ici des contenus'
     }
   },
@@ -71,20 +70,21 @@ export default {
 
   .product-list-container {
     position: relative;
-    margin: 10px;
+    display: flex;
+    justify-content: stretch;
     width: 100%;
-    height: 95%;
+    height: 50vh;
     overflow-x: scroll;
     top: 0;
+    padding: 30px;
   }
 
   .product-list {
     position: relative;
     display: flex;
-    justify-content: space-around;
     flex-direction: row;
     flex-flow: wrap;
-    flex-shrink: 1;
+    height: 50%;
   }
 
   .product-item {
@@ -103,11 +103,11 @@ export default {
     background-color: grey;
   }
 
-  .search-bar {
-    position: fixed;
-    top: 50px;
-    height: 40px;
-    width: 50%;
+  .loader-container {
+    position: relative;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
   }
 
 </style>

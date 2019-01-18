@@ -79,7 +79,8 @@
     },
     computed: {
       ...mapGetters('auth', [
-        'token'
+        'token',
+        'user'
       ])
     },
     components: {

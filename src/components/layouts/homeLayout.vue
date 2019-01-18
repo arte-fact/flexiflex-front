@@ -2,8 +2,9 @@
   <div class="home-container">
     <header-layout></header-layout>
     <div class="body-content">
-      <products></products>
+      <search-bar v-if="isAdmin"></search-bar>
       <product-detail-component></product-detail-component>
+      <products></products>
       <!--<video-player-modal></video-player-modal>-->
     </div>
     <footer-layout></footer-layout>
@@ -21,12 +22,14 @@
   import footerLayout from '../layouts/footerComponent.vue'
   import { mapActions, mapGetters } from 'vuex'
   import FooterLayout from "./footerComponent.vue";
+  import SearchBar from "../searchBarComponent.vue";
 
   Vue.use(Vuex);
   export default {
     name: 'home-layout',
     data() {
       return {
+        isAdmin: false,
         email: "",
         products: null,
         colorRingLoader: '#2c3e50',
@@ -41,6 +44,7 @@
       ])
     },
     components: {
+      SearchBar,
       FooterLayout,
       RingLoader,
       Products,
@@ -70,7 +74,23 @@
       doLogout() {
         this.resetToken()
         this.resetUser()
+      },
+      inArray(needle, haystack) {
+        let length = haystack.length;
+        for(let i = 0; i < length; i++) {
+          if(haystack[i] === needle) return true;
+        }
+        return false;
       }
+    },
+    watch: {
+      user(newValue) {
+        if (this.inArray("ROLE_ADMIN", newValue.authorities)) {
+          this.isAdmin = true
+        } else {
+          this.isAdmin = false
+        }
+      },
     }
   }
 </script>
@@ -83,8 +103,7 @@
   .body-content {
     position: absolute;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
     background-color: #cccc;
     transition: all ease 1s;
     top: 0;

@@ -1,13 +1,13 @@
 <template>
   <div v-if="getSelected !== null" class="product-detail-container">
-    <div class="row">
-      <div class="close-button" v-on:click="close"></div>
+    <div class="detail-container">
+      <!--<div class="close-button" v-on:click="close"></div>-->
+      <img :src="'http://image.tmdb.org/t/p/w500' + selectedProduct.cover" :alt="selectedProduct.title" class="selected-product-image">
       <div class="column">
-        <img :src="selectedProduct.cover" :alt="selectedProduct.title" class="selected-product-image">
         <div class="form-title">{{ selectedProduct.title }}</div>
-        <div class="form-button" v-on:click="isPlaying = true">Lecture</div>
+        <!--<div class="form-button" v-on:click="isPlaying = true">Lecture</div>-->
         <div>Date de sortie: {{ selectedProduct.releaseDate }}</div>
-        <div>Date d'ajout: {{ selectedProduct.addDate }}</div>
+        <span>Date d'ajout: {{ selectedProduct.addDate }}</span>
         <ul>Réalisateurs:
           <li v-bind:key="e.id" v-for="e in selectedProduct.directors">
             {{ e.firstName }} {{ e.lastName }}
@@ -18,8 +18,8 @@
             {{ a.firstName }} {{ a.lastName }}
           </li>
         </ul>
+        <div class="">{{ selectedProduct.synopsis }}</div>
       </div>
-      <p class="selected-product-detail selected-product-synopsis">{{ selectedProduct.synopsis }}</p>
     </div>
   </div>
 </template>
@@ -89,18 +89,26 @@
 
   .selected-product-image {
     display: flex;
-    height: 400px;
-    width: 300px;
+    height: 34vh;
+    width: auto;
     background-color: grey;
   }
 
   .product-detail-container {
     position: relative;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
-    margin: 0 20px;
-    flex-shrink: 0;
-    width: 350px;
+    flex-wrap: wrap;
+    padding: 20px;
+    width: 100%;
+    height: 36vh;
+    margin-bottom: 10px;
+
+  }
+
+  .detail-container {
+    display: flex;
+    flex-direction: row;
   }
 </style>

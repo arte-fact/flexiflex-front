@@ -4,6 +4,7 @@ const PRODUCT_REQUEST_FAIL = 'PRODUCT_REQUEST_FAIL'
 const SELECT_A_PRODUCT = 'SELECT_A_PRODUCT'
 const UNSELECT_A_PRODUCT = 'UNSELECT_A_PRODUCT'
 const TOGGLE_IS_PLAYING = 'TOGGLE_IS_PLAYING'
+const PRODUCT_PUSH = 'PRODUCT_PUSH'
 
 const state = {
   productRequestFail: false,
@@ -32,6 +33,9 @@ const mutations = {
     state.product = items
     state.productRequestFail = false
   },
+  [PRODUCT_PUSH] (state, item) {
+    state.product.push(item)
+  },
   [RESET_PRODUCT] (state) {
     state.product = null
   },
@@ -50,6 +54,12 @@ const mutations = {
 }
 
 const actions = {
+  addProduct({commit}, item) {
+    commit(PRODUCT_PUSH, item)
+  },
+  flushProduct({commit}) {
+    commit(PRODUCT_REQUEST, [])
+  },
   toggleIsPlaying({commit}) {
     commit(TOGGLE_IS_PLAYING)
   },
@@ -63,74 +73,9 @@ const actions = {
     commit(RESET_PRODUCT)
   },
   requestProducts ({commit}) {
-    setTimeout(function () {
-        let items = []
-        for (let i = 0; i < 50; i++) {
-          let item = {"actors": [
-              {
-                "id": 0,
-                "identity": {
-                  "firstName": "string",
-                  "id": 0,
-                  "lastName": "string"
-                }
-              },
-              {
-                "id": 1,
-                "identity": {
-                  "firstName": "string",
-                  "id": 0,
-                  "lastName": "string"
-                }
-              },
-              {
-                "id": 2,
-                "identity": {
-                  "firstName": "string",
-                  "id": 0,
-                  "lastName": "string"
-                }
-              }
-            ],
-            "addDate": "2019-01-15",
-            "ageRequired": 0,
-            "directors": [
-              {
-                "id": 0,
-                "identity": {
-                  "firstName": "string",
-                  "id": 0,
-                  "lastName": "string"
-                }
-              },
-              {
-                "id": 1,
-                "identity": {
-                  "firstName": "string",
-                  "id": 0,
-                  "lastName": "string"
-                }
-              }
-            ],
-            "genre": {
-              "firstName": "string",
-              "id": 0
-            },
-            "id": i,
-            "releaseDate": "2019-01-15",
-            "synopsis": "string",
-            "title": "Aquaman " + i,
-            "cover": "https://image.tmdb.org/t/p/w185_and_h278_bestv2/mODmCg1OpvGbDKHq15Mlf9sfaAY.jpg",
-            "url": "string"
-          }
+    commit(RESET_PRODUCT, [])
+  }
 
-          items.push(item)
-        }
-        commit(RESET_PRODUCT)
-        commit(PRODUCT_REQUEST, items)
-      },
-      500)
-    }
 }
 
 export default {
