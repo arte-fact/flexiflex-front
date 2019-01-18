@@ -11,7 +11,7 @@
       <button class="form-button" v-bind:class="{'form-button-disabled': user.firstName === '' || user.lastName === ''}" v-on:click="submit">Modifier Compte</button>
       <button class="form-button-delete" v-on:click="deleteUserNow">Supprimer Compte</button>
     </div>
-    <router-link class="return-link form-button" to="/">retour</router-link>
+    <router-link class="return-link" to="/">retour</router-link>
 </div>
 </template>
 

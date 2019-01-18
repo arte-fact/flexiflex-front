@@ -3,7 +3,7 @@
     <div class="row">
       <div class="close-button" v-on:click="close"></div>
       <div class="column">
-        <img :alt="selectedProduct.title" class="selected-product-image" src="">
+        <img :src="selectedProduct.cover" :alt="selectedProduct.title" class="selected-product-image">
         <div class="form-title">{{ selectedProduct.title }}</div>
         <div class="form-button" v-on:click="isPlaying = true">Lecture</div>
         <div>Date de sortie: {{ selectedProduct.releaseDate }}</div>
@@ -31,7 +31,7 @@
     name: 'product-detail-component',
     data () {
       return {
-        selectedProduct: null
+        selected: null
       }
     },
     computed: {

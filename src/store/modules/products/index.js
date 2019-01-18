@@ -119,7 +119,8 @@ const actions = {
             "id": i,
             "releaseDate": "2019-01-15",
             "synopsis": "string",
-            "title": "Titre du film n°" + i,
+            "title": "Aquaman " + i,
+            "cover": "https://image.tmdb.org/t/p/w185_and_h278_bestv2/mODmCg1OpvGbDKHq15Mlf9sfaAY.jpg",
             "url": "string"
           }
 

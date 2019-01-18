@@ -6,7 +6,7 @@
         <div class="product-list">
           <div v-bind:key="product.id" v-for="product in products">
             <div class="product-item" v-on:click="select(product)">
-              <img :alt="product.title" class="product-image" src="">
+              <img :alt="product.title" class="product-image" :src="product.cover">
               <div class="product-title">{{product.title}}</div>
             </div>
           </div>
