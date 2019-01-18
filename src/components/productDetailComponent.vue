@@ -1,10 +1,10 @@
 <template>
-  <div v-if="getSelected !== null" class="container background">
-    <div class="close-button" v-on:click="close"></div>
-    <div class="form-title">{{ selectedProduct.title }}</div>
+  <div v-if="getSelected !== null" class="product-detail-container">
     <div class="row">
+      <div class="close-button" v-on:click="close"></div>
       <div class="column">
         <img :alt="selectedProduct.title" class="selected-product-image" src="">
+        <div class="form-title">{{ selectedProduct.title }}</div>
         <div class="form-button" v-on:click="isPlaying = true">Lecture</div>
         <div>Date de sortie: {{ selectedProduct.releaseDate }}</div>
         <div>Date d'ajout: {{ selectedProduct.addDate }}</div>
@@ -55,11 +55,9 @@
   }
 </script>
 
-<style>
+<style scoped>
   .close-button {
     position: absolute;
-    right: 10px;
-    top: 10px;
     font-weight: bold;
     padding: 3px;
     margin: 3px;
@@ -70,6 +68,8 @@
     justify-content: center;
     align-items: center;
     transition: ease 0.3s;
+    right: 0px;
+    top: -30px;
   }
 
   .close-button:before, .close-button:after {
@@ -94,12 +94,13 @@
     background-color: grey;
   }
 
-  .container {
-    position: absolute;
+  .product-detail-container {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 320px;
-    right: 10px;
+    margin: 0 20px;
+    flex-shrink: 0;
+    width: 350px;
   }
 </style>

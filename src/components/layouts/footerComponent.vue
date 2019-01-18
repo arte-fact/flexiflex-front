@@ -1,7 +1,7 @@
 <template>
     <div class="container">
-      <div class="copyright"><i class="far fa-copyright"></i></div>
-      <div class="flexiflex">Flexiflex</div>
+      <span class="copyright"><i class="far fa-copyright"></i></span>
+      <span class="flexiflex">Flexiflex</span>
       <div class="year positionCenter"> {{this.whatYearAreWe}} </div>
     </div>
 </template>
@@ -25,8 +25,10 @@
   .container{
     position: fixed;
     display: flex;
+    align-items: center;
+    justify-content: center;
     bottom: 0;
-    height: 30px;
+    height: 50px;
     font-size: 15px;
     color: #2c3e50;
     text-shadow: 1px 1px 1px #cdcdcd;
@@ -45,5 +47,6 @@
   .year{
     font-family: fantasy;
     margin-left: 4px;
+    font-size: 12px;
   }
 </style>

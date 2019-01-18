@@ -113,10 +113,6 @@ form {
   padding: 0;
 }
 
-a {
-  color: #2c3e50;
-}
-
 @keyframes fade {
   from {
     opacity: 1;

@@ -1,17 +1,19 @@
 <template>
-  <div class="product-list-container">
-    <div v-if="products !== null">
-      <div class="product-list">
-        <div v-bind:key="product.id" v-for="product in products">
-          <div class="product-item" v-on:click="select(product)">
-            <img :alt="product.title" class="product-image" src="">
-            <div class="product-title">{{product.title}}</div>
+  <div>
+    <div class="product-list-container">
+      <input name="seach" class="form-input search-bar"/>
+      <div v-if="products !== null">
+        <div class="product-list">
+          <div v-bind:key="product.id" v-for="product in products">
+            <div class="product-item" v-on:click="select(product)">
+              <img :alt="product.title" class="product-image" src="">
+              <div class="product-title">{{product.title}}</div>
+            </div>
           </div>
         </div>
       </div>
-      <router-view></router-view>
+      <ring-loader class="background" v-if="products === null" :color="colorRingLoader" :size="sizeRingLoader"></ring-loader>
     </div>
-    <ring-loader class="background" v-if="products === null" :color="colorRingLoader" :size="sizeRingLoader"></ring-loader>
   </div>
 </template>
 
@@ -24,13 +26,15 @@ import VideoPlayerModal from './productsComponent.vue'
 
 Vue.use(Vuex);
 import { mapActions, mapGetters } from 'vuex'
+import ProductDetailComponent from "./productDetailComponent";
 
 export default {
   name: 'products',
   data() {
     return {
       colorRingLoader: '#2c3e50',
-      sizeRingLoader: '200px'
+      sizeRingLoader: '200px',
+      searchBarMessage: 'Rechercher ici des contenus'
     }
   },
   computed: {
@@ -39,6 +43,7 @@ export default {
     ])
   },
   components: {
+    ProductDetailComponent,
     VideoPlayerModal,
     RingLoader,
     ProductDetail
@@ -52,7 +57,8 @@ export default {
     ...mapActions('products', [
       'requestProducts',
       'selectProduct',
-      'resetProducts'
+      'resetProducts',
+      'getSelected'
     ]),
     select(product) {
       this.selectProduct(product)
@@ -66,16 +72,19 @@ export default {
   .product-list-container {
     position: relative;
     margin: 10px;
-    width: 90vw;
-    height: 80vh;
+    width: 100%;
+    height: 95%;
     overflow-x: scroll;
+    top: 0;
   }
 
   .product-list {
     position: relative;
     display: flex;
+    justify-content: space-around;
     flex-direction: row;
     flex-flow: wrap;
+    flex-shrink: 1;
   }
 
   .product-item {
@@ -85,13 +94,20 @@ export default {
     width: 150px;
     cursor: pointer;
     z-index: 1;
-    margin: 5px;
+    margin: 0 5px 5px 0;
   }
 
   .product-image {
     height: 200px;
     width: 150px;
     background-color: grey;
+  }
+
+  .search-bar {
+    position: fixed;
+    top: 50px;
+    height: 40px;
+    width: 50%;
   }
 
 </style>

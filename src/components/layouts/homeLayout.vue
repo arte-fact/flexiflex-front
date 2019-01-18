@@ -2,7 +2,9 @@
   <div class="home-container">
     <header-layout></header-layout>
     <div class="body-content">
-      <router-view/>
+      <products></products>
+      <product-detail-component></product-detail-component>
+      <!--<video-player-modal></video-player-modal>-->
     </div>
     <footer-layout></footer-layout>
   </div>
@@ -12,8 +14,8 @@
   import Vue from 'vue'
   import Vuex from 'vuex'
   import RingLoader from 'vue-spinner/src/RingLoader.vue'
-  import ProductList from '../productsComponent.vue'
-  import ProductDetail from '../productDetailComponent.vue'
+  import Products from '../productsComponent.vue'
+  import ProductDetailComponent from '../productDetailComponent.vue'
   import VideoPlayerModal from '../videoPlayerModal.vue'
   import headerLayout from '../layouts/headerComponent.vue'
   import footerLayout from '../layouts/footerComponent.vue'
@@ -41,8 +43,8 @@
     components: {
       FooterLayout,
       RingLoader,
-      ProductList,
-      ProductDetail,
+      Products,
+      ProductDetailComponent,
       VideoPlayerModal,
       headerLayout,
       footerLayout
@@ -80,13 +82,14 @@
   }
   .body-content {
     position: absolute;
-    top: 65px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
     justify-content: center;
     background-color: #cccc;
-    padding: 20px;
+    transition: all ease 1s;
+    top: 0;
+    bottom: 0;
+    padding: 90px 20px 20px 20px;
   }
 
 </style>

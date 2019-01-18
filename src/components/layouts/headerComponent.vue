@@ -4,7 +4,7 @@
       <div class="logo">Flexiflex</div>
     </router-link>
     <div class="nav-menu">
-      <router-link v-if= "user != null" class="button" to="/user-account">Compte {{user.firstName}} {{user.lastName}}</router-link>
+      <router-link v-if= "user != null" class="button" to="auth/user-account">Compte {{user.firstName}} {{user.lastName}}</router-link>
       <button class="button" v-on:click="doLogout">Logout</button>
     </div>
   </div>
@@ -77,11 +77,11 @@
   .button{
     font-size: 12px;
     border: none;
-    border-radius: 5px;
     width: auto;
-    height: auto;
+    height: 30px;
     color: #cdcdcd;
     background-color: #2c3e50;
     cursor: pointer;
+    margin: 10px 0 10px 0;
   }
 </style>

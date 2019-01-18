@@ -24,11 +24,6 @@ export default new Router({
           name: 'products',
           component: productsComponent
         },
-        {
-          path: 'user-account',
-          name: 'user-account',
-          component: userAccountComponent
-        },
       ]
     },
     {
@@ -47,9 +42,14 @@ export default new Router({
           component: registerComponent
         },
         {
-          path: '/final-register',
+          path: 'final-register',
           name: 'final-register-page',
           component: finalRegisterComponent
+        },
+        {
+          path: 'user-account',
+          name: 'user-account',
+          component: userAccountComponent
         },
       ]
     },
