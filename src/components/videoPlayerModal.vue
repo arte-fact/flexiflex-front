@@ -1,12 +1,13 @@
 <template xmlns:v-video-player="http://www.w3.org/1999/xhtml">
   <div v-if="isPlaying && getSelected !== null">
-    <div class="container"></div>
-    <video id="video-player" class="video-player" width="100%" height="auto" controls>
+    <video id="video-player" class="video-player" controls>
       <source
         :src="videoUrl"
         type="video/mp4">
     </video>
-    <div class="close-button video-close-button" v-on:click="isPlaying = false">Close</div>
+    <div class="close-button" v-on:click="toggleIsPlaying">Close</div>
+    <div class="video-player-background">
+    </div>
   </div>
 </template>
 
@@ -21,7 +22,7 @@
     name: 'video-player-modal',
     data () {
       return {
-        videoUrl: 'http://62.210.148.177:9001/flexiflex/kingsman.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=flexiflexadmin%2F20190111%2F%2Fs3%2Faws4_request&X-Amz-Date=20190111T115624Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=03150dcf0ab56edb5ab32341ac478addfc6cb7a4461922e0b1152fcfabf980c1'
+        videoUrl: 'http://62.210.148.177:9001/transmission/downloads/L.age.de.glace.4.La.d%C3%A9rive.des.continents.2012.BDrip.x264.aac-titine.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=flexiflexadmin%2F20190118%2F%2Fs3%2Faws4_request&X-Amz-Date=20190118T145116Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=96190ee6a96fdb70324134ab71505f7c7e3916f9ea2713a7e76f9fcd4b3e4298'
       }
     },
     computed: {
@@ -30,34 +31,76 @@
         'getSelected'
       ])
     },
+    methods: {
+      ...mapActions('products', [
+        'toggleIsPlaying'
+      ])
+    }
   }
 </script>
 
 <style scoped>
-  .container {
+  .video-player-background {
     position: fixed;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
     height: 100vh;
+    width: 100vw;
     background: black;
-    opacity: 0.5;
+    opacity: 0.7;
+    z-index: 3;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     margin: 0;
-    padding: 0;
   }
 
   .video-player {
     position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
-    height: 100%;
+    height: auto;
     opacity: 1;
-    top: 0;
+    top: 15%;
     left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 4;
+    background: black;
+  }
+
+  .close-button {
+    position: fixed;
+    font-weight: bold;
+    padding: 3px;
+    margin: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    transition: ease 0.3s;
+    top: 0;
+    right: 0;
+    z-index: 4;
+    background: black;
+    opacity: 1;
+  }
+
+
+  .close-button:before, .close-button:after {
+    position: absolute;
+    content: "fermer";
+    height: 20%;
+    color: #cccc;
+    z-index: 4;
+    top: 5px;
+    right: 0;
   }
 
 </style>

@@ -5,7 +5,7 @@
       <search-bar v-if="isAdmin"></search-bar>
       <product-detail-component></product-detail-component>
       <products></products>
-      <!--<video-player-modal></video-player-modal>-->
+      <video-player-modal></video-player-modal>
     </div>
     <footer-layout></footer-layout>
   </div>

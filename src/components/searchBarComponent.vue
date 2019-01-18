@@ -43,7 +43,6 @@
         this.id = 0;
         response.body.results.forEach(function (result) {
           if (result.poster_path !== 'undefined' && result.poster_path != null) {
-            console.log(result)
             this.addProduct({
               cover: result.poster_path,
               title: result.title,
@@ -58,7 +57,9 @@
                 cover: result.poster_path,
                 title: result.title,
                 id: this.id,
-                synopsis: result.overview
+                synopsis: result.overview,
+                releaseDate: result.release_date,
+                addDate: 'unknown'
               })
             }
           }
@@ -116,7 +117,7 @@
     position: fixed;
     display: flex;
     width: 50%;
-    top: 10px;
+    top: 50px;
     z-index: 3;
     left: 25%;
     height: 40px;

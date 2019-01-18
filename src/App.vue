@@ -93,7 +93,7 @@
 html {
   position: relative;
   color: #1d1d1d;
-  background: black;
+  background: #cccc;
   height: 100%;
   width: 100%;
   left: 0;

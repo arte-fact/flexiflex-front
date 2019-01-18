@@ -2,21 +2,24 @@
   <div v-if="getSelected !== null" class="product-detail-container">
     <div class="detail-container">
       <!--<div class="close-button" v-on:click="close"></div>-->
-      <img :src="'http://image.tmdb.org/t/p/w500' + selectedProduct.cover" :alt="selectedProduct.title" class="selected-product-image">
-      <div class="column">
+      <div class="play-button" v-on:click="toggleIsPlaying">
+        <img :src="'http://image.tmdb.org/t/p/w500' + selectedProduct.cover" :alt="selectedProduct.title" class="selected-product-image">
+      </div>
+
+      <div class="detail-text">
         <div class="detail-title">{{ selectedProduct.title }}</div>
-        <!--<div class="form-button" v-on:click="isPlaying = true">Lecture</div>-->
+
         <div>Date de sortie: {{ selectedProduct.releaseDate }}</div>
         <!--<span>Date d'ajout: {{ selectedProduct.addDate }}</span>-->
         <!--<ul>Réalisateurs:-->
-          <!--<li v-bind:key="e.id" v-for="e in selectedProduct.directors">-->
-            <!--{{ e.firstName }} {{ e.lastName }}-->
-          <!--</li>-->
+        <!--<li v-bind:key="e.id" v-for="e in selectedProduct.directors">-->
+        <!--{{ e.firstName }} {{ e.lastName }}-->
+        <!--</li>-->
         <!--</ul>-->
         <!--<ul>Acteurs:-->
-          <!--<li v-bind:key="a.id" v-for="a in selectedProduct.actors">-->
-            <!--{{ a.firstName }} {{ a.lastName }}-->
-          <!--</li>-->
+        <!--<li v-bind:key="a.id" v-for="a in selectedProduct.actors">-->
+        <!--{{ a.firstName }} {{ a.lastName }}-->
+        <!--</li>-->
         <!--</ul>-->
         <p class="detail-synopsis">{{ selectedProduct.synopsis }}</p>
       </div>
@@ -46,7 +49,7 @@
     },
     methods: {
       ...mapActions('products', [
-        'unSelectProduct'
+        'toggleIsPlaying'
       ]),
       close() {
         this.unSelectProduct()
@@ -56,41 +59,12 @@
 </script>
 
 <style scoped>
-  .close-button {
-    position: absolute;
-    font-weight: bold;
-    padding: 3px;
-    margin: 3px;
-    width: 30px;
-    height: 30px;
-    border-radius: 100%;
-    cursor: pointer;
-    justify-content: center;
-    align-items: center;
-    transition: ease 0.3s;
-    right: 0px;
-    top: -30px;
-  }
-
-  .close-button:before, .close-button:after {
-    position: absolute;
-    content: "";
-    width: 80%;
-    height: 20%;
-    background-color: #2c3e50;
-    border-radius: 20%;
-    transform-origin: center;
-    transform: translateX(-10px) translateY(10px) rotateZ(45deg);
-  }
-
-  .close-button:after {
-    transform: translateX(-10px) translateY(10px) rotateZ(-45deg);
-  }
-
   .selected-product-image {
+    position: relative;
     display: flex;
-    height: 34vh;
-    width: auto;
+    height: 30vh;
+    width: 20vh;
+    min-width: 20vh;
     background-color: grey;
     padding: 5px;
   }
@@ -102,9 +76,10 @@
     align-items: flex-start;
     flex-wrap: wrap;
     padding: 20px;
-    height: 36vh;
+    height: 38vh;
     width: 100vw;
     margin-bottom: 10px;
+    overflow: hidden;
   }
 
   .detail-container {
@@ -115,10 +90,43 @@
 
   .detail-title {
     font-weight: bold;
-    font-size: 35px;
+    font-size: 4vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
   }
 
   .detail-synopsis {
+    position: relative;
     text-align: justify;
   }
+
+  .play-button {
+    display: block;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .play-button:hover:after {
+    content: "";
+    position: absolute;
+    background: black;
+    color: #cccc;
+    opacity: 0.6;
+    left: 20px;
+    right: 0;
+    width: 20vh;
+    height: 30vh;
+    padding: 5px;
+    top: 20px;
+    background-image: url('../assets/play_button.png');
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .detail-text {
+    overflow-x: scroll;
+    padding: 0 10px;
+  }
+
 </style>
