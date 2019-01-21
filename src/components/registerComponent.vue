@@ -22,6 +22,7 @@
         Un email vous a été envoyé à l'adresse :
         <br> {{email}}
       </div>
+
     </div>
     <div class="placeMessageSousBoutton loadingRingLoader" v-if="isRegistering" v-on:click="submit">
       <br><ring-loader :color="colorRingLoader" :size="sizeRingLoader"></ring-loader>
