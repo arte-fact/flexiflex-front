@@ -1,6 +1,7 @@
 <template>
   <div class="home-container">
-    <header-layout></header-layout>
+      <header-layout></header-layout>
+
     <div class="body-content">
       <search-bar></search-bar>
       <product-detail-component></product-detail-component>
@@ -98,24 +99,38 @@
 
 <style scoped>
   .home-container {
+    position: relative;
     display: flex;
     justify-content: center;
     height: 100%;
     width: 100%;
+
+
+    /*border: 5px solid #ffef00;*/
   }
+
   .body-content {
     background-color: #cccc;
     position: absolute;
     flex-direction: column;
     display: flex;
     justify-content: stretch;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding: 60px 10px 40px 10px;
-    height: 100%;
+    /*top: 0;*/
+    /*left: 0;*/
+    /*right: 0;*/
+    /*bottom: 0;*/
+    padding: 70px 10px 25px 10px;
+    /*padding: 11% 1% 1% 10%;*/
+    /*top: 6%;*/
+    /*height: 100%;*/
     overflow: hidden;
+
+
+    min-width: 100%;
+    width: 100%;
+
+    /*border: 5px solid #1eff0a;*/
+
   }
 </style>
 

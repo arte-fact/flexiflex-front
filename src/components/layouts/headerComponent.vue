@@ -3,8 +3,10 @@
     <router-link to="/products">
       <div class="logo">Flexiflex</div>
     </router-link>
-    <router-link v-if= "user != null" class="button" to="auth/user-account">Compte {{user.firstName}} {{user.lastName}}</router-link>
-    <button class="button" v-on:click="doLogout">Logout</button>
+    <div class="buttonContainer">
+      <router-link v-if= "user != null" class="button" to="auth/user-account">Compte {{user.firstName}} {{user.lastName}}</router-link>
+      <button class="button" v-on:click="doLogout">Logout</button>
+    </div>
   </div>
 </template>
 
@@ -49,8 +51,12 @@
     top: 0;
     z-index: 2;
     align-items: center;
-    min-width: 99%;
-    width: 99%;
+    height: 70px;
+    padding: 0 10px 0 10px;
+    width: 100%;
+
+
+    /*border: 5px solid #ff03d3;*/
   }
   .logo {
     position: relative;
@@ -67,9 +73,9 @@
   }
   .buttonContainer{
     position: relative;
-    right:0px;
+    right:0;
     top: 50%;
-    /*transform: translate(0%,-50%);*/
+    transform: translate(0%,-50%);
   }
   .button{
     font-size: 12px;

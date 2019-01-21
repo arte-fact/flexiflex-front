@@ -269,6 +269,11 @@ form {
     justify-content: center;
     align-items: center;
   }
+  .form-button-delete:focus{
+    box-shadow: 0px 2px 2px grey;
+    background-color: crimson;
+    color: white;
+  }
   .form-button-delete:hover{
     box-shadow: 0px 2px 2px grey;
     background-color: crimson;

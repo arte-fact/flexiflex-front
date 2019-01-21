@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="border">
     <div
       v-bind:class="{ fullHeight: getSelected === null}"
     >
@@ -13,8 +13,8 @@
           </div>
         </div>
       </div>
-      <div class="loader-container" v-if="products === null">
-        <ring-loader color="#2c3e50" size="200px"></ring-loader>
+      <div class="loader-container" v-else>
+        <!--<ring-loader color="#2c3e50" size="200px"></ring-loader>-->
       </div>
     </div>
   </div>
@@ -70,12 +70,17 @@ export default {
 
 <style scoped>
 
+  .border{
+    position: relative;
+    /*border: 5px solid #ff861c;*/
+    /*padding-top: 150px;*/
+  }
+
   .product_list_container {
     position: relative;
     bottom: 0;
     overflow-x: scroll;
   }
-
   .fullHeight {
     position: relative;
     bottom: 0;
@@ -88,14 +93,12 @@ export default {
     overflow-x: scroll;
     height: 43vh;
   }
-
   .product-list {
     position: relative;
     display: flex;
     flex-direction: row;
     flex-flow: wrap;
   }
-
   .product-item {
     display: flex;
     flex-direction: column;
@@ -105,19 +108,16 @@ export default {
     z-index: 1;
     margin: 0 5px 5px 0;
   }
-
   .product-image {
     position: relative;
     height: 100%;
     width: 100%;
     background-color: grey;
   }
-
   .loader-container {
     position: relative;
     width: 100vw;
     display: flex;
     justify-content: center;
   }
-
 </style>

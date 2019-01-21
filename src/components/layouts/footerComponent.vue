@@ -27,19 +27,20 @@
     display: flex;
     bottom: 0;
     height: 25px;
+    padding: 0 0 20px 10px;
+    min-width: 100%;
+    width: 100%;
     color: #2c3e50;
     text-shadow: 1px 1px 1px #cdcdcd;
     font-size: 14px;
-    min-width: 99%;
-    width: 99%;
+
+
+    /*border: 5px solid #ff03d3;*/
   }
 
   .copyright{
     position: relative;
     filter: drop-shadow(1px 1px 1px #cdcdcd);
-
-
-    /*margin-left: 6px;*/
   }
   .flexiflex{
     position: relative;
