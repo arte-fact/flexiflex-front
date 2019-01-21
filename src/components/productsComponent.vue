@@ -62,7 +62,7 @@ export default {
       'resetProducts',
     ]),
     select(product) {
-      console.log(JSON.parse(this.getSelected.urls))
+      this.selectProduct(product)
     }
   }
 }
