@@ -88,19 +88,6 @@ const actions = {
       }).then(
       response => {
         commit(PRODUCT_REQUEST, response.body)
-        response.body.forEach(function (result) {
-          if (result.poster_path !== 'undefined' && result.poster_path != null) {
-            this.addProduct({
-              cover: JSON.parse(result.urls).cover,
-              title: result.title,
-              id: this.id,
-              synopsis: result.overview,
-              releaseDate: result.release_date,
-              addDate: 'unknown'
-            })
-          }
-          this.id += 1
-        }, this)
       },
       response => {
         this.isRequesting = false;
@@ -109,21 +96,12 @@ const actions = {
 
     commit(RESET_PRODUCT, [])
   },
-  createProduct({commit}, product) {
-
+  createProduct({commit}, item) {
+    console.log(item)
     Vue.http.options.credentials = false
     Vue.http.post(
       'api/products',
-      {
-        synopsis: product.product.synopsis,
-        title: product.product.title,
-        urls: JSON.stringify({
-            "hd": product.hdUrl,
-            "sd": product.sdUrl,
-            "sourceFile": product.sourceUrl,
-            "cover": product.cover
-        })
-      },
+      item,
       {
       headers: {
         'Access-Control-Allow-Origin': '*',
@@ -133,10 +111,12 @@ const actions = {
     }).then(
       response => {
         if (response.status === 201) {
-          console.log(JSON.parse(response.body.urls))
-          console.log(response.synopsis)
-          console.log(response.urls)
-          console.log(response.urls)
+          console.log(response.body.title)
+          console.log(response.body.synopsis)
+          console.log(response.body.hdUrl)
+          console.log(response.body.sdUrl)
+          console.log(response.body.coverUrl)
+          console.log(response.body.sourceFileUrl)
         } else {
 
         }
