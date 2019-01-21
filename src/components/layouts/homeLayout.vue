@@ -100,6 +100,8 @@
   .home-container {
     display: flex;
     justify-content: center;
+    height: 100%;
+    width: 100%;
   }
   .body-content {
     background-color: #cccc;
@@ -115,6 +117,5 @@
     height: 100%;
     overflow: hidden;
   }
-
 </style>
 

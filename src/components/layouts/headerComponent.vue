@@ -3,10 +3,8 @@
     <router-link to="/products">
       <div class="logo">Flexiflex</div>
     </router-link>
-    <div class="nav-menu">
-      <router-link v-if= "user != null" class="button" to="auth/user-account">Compte {{user.firstName}} {{user.lastName}}</router-link>
-      <button class="button" v-on:click="doLogout">Logout</button>
-    </div>
+    <router-link v-if= "user != null" class="button" to="auth/user-account">Compte {{user.firstName}} {{user.lastName}}</router-link>
+    <button class="button" v-on:click="doLogout">Logout</button>
   </div>
 </template>
 
@@ -49,11 +47,11 @@
     display: flex;
     justify-content: space-between;
     top: 0;
-    left: 0;
-    right: 0;
     z-index: 2;
+    align-items: center;
+    min-width: 99%;
+    width: 99%;
   }
-
   .logo {
     position: relative;
     left: 0;
@@ -67,7 +65,6 @@
   .logo:hover {
     text-decoration: none;
   }
-
   .buttonContainer{
     position: relative;
     right:0px;

@@ -5,20 +5,19 @@
       <div class="global-layout-container body-background">
         <router-view/>
       </div>
+      <footer-layout></footer-layout>
     </div>
   </div>
 </template>
 
 <script>
   import FooterLayout from './footerComponent.vue'
-  import HeaderLayout from './headerComponent.vue'
 
   export default {
     name: "connection-layout",
-    components: [
-      FooterLayout,
-      HeaderLayout
-    ]
+    components: {
+      FooterLayout
+    }
   }
 </script>
 
@@ -28,20 +27,18 @@
     display: flex;
     justify-content: center;
     padding: 20px;
+    border-radius: 5px;
   }
-
   .body-background {
     position: absolute;
     background-color: #cccccc;
   }
-
   .body-content {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-
   .flexiflex-logo {
     position: relative;
     display: flex;

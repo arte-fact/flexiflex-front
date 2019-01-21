@@ -101,7 +101,6 @@ html {
   top: 0;
   bottom: 0;
 }
-
 body {
   position: relative;
   padding: 0;
@@ -113,12 +112,10 @@ form {
   margin: 0;
   padding: 0;
 }
-
 @keyframes fade {
   from {
     opacity: 1;
   }
-
   to {
     opacity: 0;
   }
@@ -141,28 +138,7 @@ form {
   }
 
 /* --------------------------------------------------------------------------------------------- */
-/* ------------------------------------------ Alignement du site ------------------------------- */
-  .centerDisplayFlex{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    /*border: 1px solid #00ffff;*/
-  }
-
-  .reverse-primary {
-    background-color: transparent;
-    color: #e6e6e6;
-  }
-
-  .center{
-    text-align: center;
-    align-items: center;
-    padding : 85px 90px;
-  }
-
-
+/* ------------------------------------------ Message under button ----------------------------- */
   .placeMessageSousBoutton{
     display: flex;
     flex-direction: column;
@@ -173,38 +149,23 @@ form {
     font-size: 12px;
     color: crimson;
   }
-
-  .errorSaisieRegister{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 75px;
-    width: 100%;
-    margin-top: 5px;
-    font-size: 12px;
-    color: crimson;
-  }
-
   .sizeHomepageLinks{
     font-size: 13px;
     color: #2c3e50;
     padding-bottom: 5px;
   }
-
-  .ok{
+  .confirmationInscription{
     font-size: 12px;
     color: darkgreen;
   }
-
-  .form-input {
-    width: 220px;
-    height: 25px;
-    border: none;
-    margin: 3px 0;
-    border-radius: 5px;
-    text-align: center;
-  }
+/* --------------------------------------------------------------------------------------------- */
+/* ------------------------------------------ Background --------------------------------------- */
+.form-component {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 /* --------------------------------------------------------------------------------------------- */
 /* ------------------------------------------ Ring Loader -------------------------------------- */
 .loadingRingLoader{
@@ -215,6 +176,29 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+/* --------------------------------------------------------------------------------------------- */
+/* ------------------------------------------ Forms Titles ------------------------------------- */
+.form-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 45px;
+  font-weight: bold;
+}
+.form-title-second {
+  font-size: 20px;
+  font-weight: bold;
+}
+/* --------------------------------------------------------------------------------------------- */
+/* ------------------------------------------ Forms Input -------------------------------------- */
+.form-input {
+  width: 220px;
+  height: 25px;
+  border: none;
+  margin: 3px 0;
+  border-radius: 5px;
+  text-align: center;
 }
 /* --------------------------------------------------------------------------------------------- */
 /* ------------------------------------------ Input Invalid  ----------------------------------- */
@@ -265,6 +249,11 @@ form {
     background-color: darkgreen;
     color: white;
   }
+  .form-button:hover{
+    box-shadow: 0px 2px 2px grey;
+    background-color: darkgreen;
+    color: white;
+  }
 /* ------------------------------------------ Button --- Delete --- */
   .form-button-delete {
     align-self: center;
@@ -285,11 +274,6 @@ form {
     background-color: crimson;
     color: white;
   }
-  .form-button:hover{
-    box-shadow: 0px 2px 2px grey;
-    background-color: darkgreen;
-    color: white;
-  }
 /* ------------------------------------------ Button --- Disable --- */
   .form-button-disabled{
     background-color: #b0b0b0;
@@ -297,93 +281,5 @@ form {
     cursor: not-allowed;
     pointer-events: none;
   }
-/* ------------------------------------------ Button --- User Account   --- */
-  .useraccount-button{
-    border: none;
-    width: auto;
-    height: 20px;
-    border-radius: 5px;
-    background-color: #2c3e50;
-    color: #cdcdcd;
-    cursor: pointer;
-  }
-
-  .reverse-primary {
-    background-color: transparent;
-    color: #e6e6e6;
-  }
-
-  .form-title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 45px;
-    font-weight: bold;
-  }
-
-  .form-title-second {
-    font-size: 20px;
-    font-weight: bold;
-  }
-  .login-component-background {
-    position: absolute;
-    height: 240px;
-    width: 300px;
-    border-radius: 5px;
-    background-color: #cccccc;
-    opacity: 0.9;
-    z-index: -1;
-  }
-
-  .register-component-background {
-     position: absolute;
-     height: 280px;
-     width: 300px;
-     border-radius: 5px;
-     background-color: #cccccc;
-     opacity: 0.9;
-     z-index: -1;
-   }
-
-  .useraccount-component-background {
-    position: absolute;
-    height: 220px;
-    width: 480px;
-    border-radius: 5px;
-    background-color: #cccccc;
-    opacity: 0.9;
-    z-index: -1;
-
-  }
-
-  .center{
-    text-align: center;
-    align-items: center;
-    padding : 85px 90px;
-  }
-
-  .loadingRingLoader{
-    padding-top: 20px;
-  }
-
-  .loadingRingLoaderHeightCenter{
-    padding-top: 20vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .form-component {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .useraccount-form-component {
-    width: 480px;
-    margin: 5px;
-    padding-top: 10px;
-    border-radius: 5px;
-  }
+/* --------------------------------------------------------------------------------------------- */
 </style>

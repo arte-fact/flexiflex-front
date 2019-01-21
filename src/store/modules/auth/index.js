@@ -25,7 +25,8 @@ const state = {
   isRegistered: false,
   hasRegistrationError: false,
   hasCookie: null,
-  token: window.$cookies.get('token'),
+  token: 'toto',
+  // token: window.$cookies.get('token'),
   uuid: window.$cookies.get('uuid')
 }
 

@@ -9,7 +9,7 @@
     </form>
     <div class="placeMessageSousBoutton" v-if="!isRegistering">
       <div class="sizeHomepageLinks">Vous avez un compte...
-        <router-link class="menu-item" to='/auth/login'>
+        <router-link to='/auth/login'>
           Connectez-vous
         </router-link>
       </div>
@@ -18,7 +18,7 @@
       <div v-if="agevalidate === false && birthdate != ''">Vous devez avoir 16 ans</div>
       <div v-if="hasRegistrationError">Erreur inscription</div>
       <!--Message d'envoi d'email quand l'inscription réussi-->
-      <div class="ok" v-if="isRegistered">
+      <div class="confirmationInscription" v-if="isRegistered">
         Un email vous a été envoyé à l'adresse :
         <br> {{email}}
       </div>
@@ -127,13 +127,4 @@ import RingLoader from 'vue-spinner/src/RingLoader.vue'
 </script>
 
 <style scoped>
-  .register-background-container {
-    position: absolute;
-    height: 280px;
-    width: 300px;
-    border-radius: 5px;
-    background-color: #cccccc;
-    opacity: 0.9;
-    z-index: -1;
-  }
 </style>
