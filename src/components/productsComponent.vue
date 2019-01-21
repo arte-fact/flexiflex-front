@@ -7,7 +7,7 @@
         <div class="product-list">
           <div v-bind:key="product.id" v-for="product in products">
             <div class="product-item" v-on:click="select(product)">
-              <img :alt="product.title" class="product-image" :src="'http://image.tmdb.org/t/p/w154' + JSON.parse(product.urls).cover">
+              <img :alt="product.title" class="product-image" :src="'http://image.tmdb.org/t/p/w154' + product.coverUrl">
               <div class="product-title">{{product.title}}</div>
             </div>
           </div>
@@ -52,7 +52,7 @@ export default {
   },
   created () {
     if (this.products === null) {
-      this.requestProducts()
+      // this.requestProducts()
     }
   },
   methods: {

@@ -3,7 +3,7 @@
     <div class="detail-container">
       <!--<div class="close-button" v-on:click="close"></div>-->
       <div class="play-button" v-on:click="openFullscreen">
-        <img :src="'http://image.tmdb.org/t/p/w500' + JSON.parse(this.getSelected.urls).cover" :alt="getSelected.title" class="selected-product-image">
+        <img :src="'http://image.tmdb.org/t/p/w500' + getSelected.coverUrl" :alt="getSelected.title" class="selected-product-image">
       </div>
 
       <div class="detail-text">
@@ -12,9 +12,7 @@
         <input v-model="sdUrl" name="hdUrl" value="SD mp4 url"><br>
         <input v-model="sourceUrl" name="hdUrl" value="avi or mkv url">
         <br>
-        <button v-on:click="createProduct(
-        {product: getSelected, hdUrl: hdUrl, sdUrl: sdUrl, sourceUrl: sourceUrl, cover: getSelected.cover}
-        )">ajouter à la base de donnée</button>
+        <button v-on:click="saveProduct">ajouter à la base de donnée</button>
         <a v-if="hdUrl !== null" :href="hdUrl">HD mp4</a>
         <a v-if="sdUrl !== null" :href="sdUrl">SD mp4</a>
         <a v-if="sourceUrl !== null" :href="sourceUrl">Original file</a>
@@ -63,6 +61,16 @@
       },
       openFullscreen() {
         this.toggleIsPlaying()
+      },
+      saveProduct() {
+        this.createProduct({
+          hdUrl: this.hdUrl,
+          sdUrl: this.sdUrl,
+          sourceFileUrl: this.sourceUrl,
+          coverUrl: this.getSelected.coverUrl,
+          title: this.getSelected.title,
+          synopsis: this.getSelected.synopsis,
+        })
       }
     }
   }

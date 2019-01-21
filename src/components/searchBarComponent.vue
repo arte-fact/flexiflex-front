@@ -60,9 +60,7 @@
         response.body.results.forEach(function (result) {
           if (result.poster_path !== 'undefined' && result.poster_path != null) {
             this.addProduct({
-              urls: JSON.stringify({
-                cover: result.poster_path
-              }),
+              coverUrl: result.poster_path,
               title: result.title,
               id: this.id,
               synopsis: result.overview,

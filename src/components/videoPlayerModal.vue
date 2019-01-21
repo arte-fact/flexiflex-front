@@ -2,7 +2,7 @@
   <div v-if="isPlaying && getSelected !== null">
     <video id="myvideo" v-on:click="toggleIsPlaying" class="video-player" width="100%" height="auto" controls>
       <source
-        :src="videoUrl"
+        :src="getSelected.hdUrl"
         type="video/mp4">
     </video>
     <div class="close-button" v-on:click="toggleIsPlaying">fermer</div>
@@ -21,11 +21,6 @@
 
   export default {
     name: 'video-player-modal',
-    data () {
-      return {
-        videoUrl: 'http://62.210.148.177:9001/transmission/downloads/L.age.de.glace.4.La.d%C3%A9rive.des.continents.2012.BDrip.x264.aac-titine.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=flexiflexadmin%2F20190118%2F%2Fs3%2Faws4_request&X-Amz-Date=20190118T145116Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=96190ee6a96fdb70324134ab71505f7c7e3916f9ea2713a7e76f9fcd4b3e4298'
-      }
-    },
     computed: {
       ...mapGetters('products', [
         'isPlaying',
