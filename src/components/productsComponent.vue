@@ -1,11 +1,13 @@
 <template>
   <div>
-    <div class="product-list-container">
+    <div
+      v-bind:class="{ fullHeight: getSelected === null}"
+    >
       <div v-if="products !== null">
         <div class="product-list">
           <div v-bind:key="product.id" v-for="product in products">
             <div class="product-item" v-on:click="select(product)">
-              <img :alt="product.title" class="product-image" :src="'http://image.tmdb.org/t/p/w154' + product.cover">
+              <img :alt="product.title" class="product-image" :src="'http://image.tmdb.org/t/p/w154' + JSON.parse(product.urls).cover">
               <div class="product-title">{{product.title}}</div>
             </div>
           </div>
@@ -38,7 +40,8 @@ export default {
   },
   computed: {
     ...mapGetters('products', [
-      'products'
+      'products',
+      'getSelected'
     ])
   },
   components: {
@@ -57,10 +60,9 @@ export default {
       'requestProducts',
       'selectProduct',
       'resetProducts',
-      'getSelected'
     ]),
     select(product) {
-      this.selectProduct(product)
+      console.log(JSON.parse(this.getSelected.urls))
     }
   }
 }
@@ -68,15 +70,23 @@ export default {
 
 <style scoped>
 
-  .product-list-container {
+  .product_list_container {
     position: relative;
-    display: flex;
-    justify-content: stretch;
-    width: 100%;
-    height: 50vh;
+    bottom: 0;
     overflow-x: scroll;
-    top: 0;
-    padding: 30px;
+  }
+
+  .fullHeight {
+    position: relative;
+    bottom: 0;
+    overflow-x: scroll;
+    height: 86vh;
+  }
+  .mid_height {
+    position: relative;
+    bottom: 0;
+    overflow-x: scroll;
+    height: 43vh;
   }
 
   .product-list {
@@ -84,22 +94,22 @@ export default {
     display: flex;
     flex-direction: row;
     flex-flow: wrap;
-    height: 50%;
   }
 
   .product-item {
     display: flex;
     flex-direction: column;
     position: relative;
-    width: 150px;
+    width: 100px;
     cursor: pointer;
     z-index: 1;
     margin: 0 5px 5px 0;
   }
 
   .product-image {
-    height: 200px;
-    width: 150px;
+    position: relative;
+    height: 100%;
+    width: 100%;
     background-color: grey;
   }
 

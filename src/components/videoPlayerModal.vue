@@ -1,6 +1,6 @@
 <template xmlns:v-video-player="http://www.w3.org/1999/xhtml">
   <div v-if="isPlaying && getSelected !== null">
-    <video v-on:click="toggleIsPlaying" id="video-player" class="video-player" width="100%" height="auto" controls>
+    <video id="myvideo" v-on:click="toggleIsPlaying" class="video-player" width="100%" height="auto" controls>
       <source
         :src="videoUrl"
         type="video/mp4">
@@ -9,6 +9,7 @@
     <div class="video-player-background">
     </div>
   </div>
+
 </template>
 
 <script>

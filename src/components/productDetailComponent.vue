@@ -2,14 +2,23 @@
   <div v-if="getSelected !== null" class="product-detail-container">
     <div class="detail-container">
       <!--<div class="close-button" v-on:click="close"></div>-->
-      <div class="play-button" v-on:click="toggleIsPlaying">
-        <img :src="'http://image.tmdb.org/t/p/w500' + selectedProduct.cover" :alt="selectedProduct.title" class="selected-product-image">
+      <div class="play-button" v-on:click="openFullscreen">
+        <img :src="'http://image.tmdb.org/t/p/w500' + JSON.parse(this.getSelected.urls).cover" :alt="getSelected.title" class="selected-product-image">
       </div>
 
       <div class="detail-text">
-        <div class="detail-title">{{ selectedProduct.title }}</div>
-
-        <div>Date de sortie: {{ selectedProduct.releaseDate }}</div>
+        <div class="detail-title">{{ getSelected.title }}</div><br>
+        <input v-model="hdUrl" name="hdUrl" value="HD mp4 url"><br>
+        <input v-model="sdUrl" name="hdUrl" value="SD mp4 url"><br>
+        <input v-model="sourceUrl" name="hdUrl" value="avi or mkv url">
+        <br>
+        <button v-on:click="createProduct(
+        {product: getSelected, hdUrl: hdUrl, sdUrl: sdUrl, sourceUrl: sourceUrl, cover: getSelected.cover}
+        )">ajouter à la base de donnée</button>
+        <a v-if="hdUrl !== null" :href="hdUrl">HD mp4</a>
+        <a v-if="sdUrl !== null" :href="sdUrl">SD mp4</a>
+        <a v-if="sourceUrl !== null" :href="sourceUrl">Original file</a>
+        <!--<div>Date de sortie: {{ selectedProduct.releaseDate }}</div>-->
         <!--<span>Date d'ajout: {{ selectedProduct.addDate }}</span>-->
         <!--<ul>Réalisateurs:-->
         <!--<li v-bind:key="e.id" v-for="e in selectedProduct.directors">-->
@@ -21,7 +30,7 @@
         <!--{{ a.firstName }} {{ a.lastName }}-->
         <!--</li>-->
         <!--</ul>-->
-        <p class="detail-synopsis">{{ selectedProduct.synopsis }}</p>
+        <div class="detail-synopsis">{{ getSelected.synopsis }}</div>
       </div>
     </div>
   </div>
@@ -34,7 +43,9 @@
     name: 'product-detail-component',
     data () {
       return {
-        selected: null
+        hdUrl: null,
+        sdUrl: null,
+        sourceUrl: null
       }
     },
     computed: {
@@ -42,17 +53,16 @@
         'getSelected'
       ])
     },
-    watch: {
-      getSelected(newValue) {
-         this.selectedProduct = newValue;
-      }
-    },
     methods: {
       ...mapActions('products', [
-        'toggleIsPlaying'
+        'toggleIsPlaying',
+        'createProduct'
       ]),
       close() {
         this.unSelectProduct()
+      },
+      openFullscreen() {
+        this.toggleIsPlaying()
       }
     }
   }
@@ -62,49 +72,55 @@
   .selected-product-image {
     position: relative;
     display: flex;
-    height: 30vh;
-    width: 20vh;
-    min-width: 20vh;
+    width: auto;
     background-color: grey;
-    padding: 5px;
+    max-height: 40vh;
   }
 
-  .product-detail-container {
+  .detail-container {
     position: relative;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    flex-wrap: wrap;
-    padding: 20px;
-    height: 38vh;
-    width: 100vw;
-    margin-bottom: 10px;
-    overflow: hidden;
+    width: 100%;
+    height: 50%;
+    margin-bottom: 5px;
   }
 
-  .detail-container {
+  .detail-text {
+    position: relative;
     display: flex;
     flex-direction: row;
-    width: 100vw;
+    width: 100%;
+    flex-wrap: wrap;
+    overflow-x: scroll;
+    max-height: 35vh;
+    padding: 5px;
   }
 
   .detail-title {
     font-weight: bold;
-    font-size: 4vh;
+    font-size: 3vh;
     margin: 0;
     padding: 0;
     overflow: hidden;
+    width: 100%;
   }
 
   .detail-synopsis {
     position: relative;
     text-align: justify;
+    overflow-x: scroll;
   }
 
   .play-button {
-    display: block;
+    position: relative;
+    left: 0;
+    top: 0;
+    bottom: 0;
     justify-content: center;
     cursor: pointer;
+    padding: 0;
   }
 
   .play-button:hover:after {
@@ -113,12 +129,9 @@
     background: black;
     color: #cccc;
     opacity: 0.6;
-    left: 20px;
-    right: 0;
-    width: 20vh;
-    height: 30vh;
-    padding: 5px;
-    top: 20px;
+    top: 0;
+    width: 100%;
+    height: 100%;
     background-image: url('../assets/play_button.png');
     background-position: center;
     background-repeat: no-repeat;

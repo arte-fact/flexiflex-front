@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueCookies from 'vue-cookies'
-import userAccountComponent from "../../../../components/userAccountComponent";
 
 Vue.use(VueCookies)
 

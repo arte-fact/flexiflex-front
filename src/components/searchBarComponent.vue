@@ -1,6 +1,7 @@
 <template>
     <div class="search-input-container">
-      <input v-on:click="input = ''" id="search-input" class="form-input search-input" name="research" v-model="input"><span>(admin)</span>
+      <input id="search-input" class="form-input search-input" name="research" v-model="input">
+      <input type="checkbox" id="checkbox" v-model="isFlexiSearch">
     </div>
 </template>
 
@@ -8,7 +9,7 @@
   import Vue from 'vue'
   import Vuex from 'vuex'
   import VueResource from 'vue-resource'
-  import { mapActions } from 'vuex'
+  import { mapActions, mapGetters } from 'vuex'
 
   Vue.use(VueResource)
   Vue.use(Vuex);
@@ -17,26 +18,41 @@
     name: "search-bar",
     data () {
       return {
-        input: 'star wars',
+        isFlexiSearch: false,
+        input: '',
         isRequesting: false
       }
     },
     created () {
-      this.search(this.input)
+      this.requestProducts()
+      // this.imdbSearch()
     },
     watch: {
       input(oldValue, newValue) {
-        if (!this.isRequesting && newValue.length > 2 && newValue !== null) {
-          this.search(newValue)
+        this.unSelectProduct()
+        if (!this.isRequesting && newValue.length > 0 && newValue !== '') {
+          if (this.isFlexiSearch) {
+            this.requestProducts()
+          } else {
+            this.imdbSearch(newValue)
+          }
+        } else {
+          this.requestProducts()
         }
-      }
+      },
+    },
+    computed: {
+      ...mapGetters('products', [
+        'products'
+      ])
     },
     methods:{
       ...mapActions('products', [
         'addProduct',
         'flushProduct',
         'requestProducts',
-        'selectProduct'
+        'selectProduct',
+        'unSelectProduct'
       ]),
       displayResults(response) {
         this.flushProduct()
@@ -44,31 +60,37 @@
         response.body.results.forEach(function (result) {
           if (result.poster_path !== 'undefined' && result.poster_path != null) {
             this.addProduct({
-              cover: result.poster_path,
+              urls: JSON.stringify({
+                cover: result.poster_path
+              }),
               title: result.title,
               id: this.id,
               synopsis: result.overview,
               releaseDate: result.release_date,
               addDate: 'unknown'
             })
-
-            if (this.id === 0) {
-              this.selectProduct({
-                cover: result.poster_path,
-                title: result.title,
-                id: this.id,
-                synopsis: result.overview,
-                releaseDate: result.release_date,
-                addDate: 'unknown'
-              })
-            }
           }
           this.id += 1
         }, this)
       },
-      search() {
+      imdbSearch() {
         this.isRequesting = true;
-
+        Vue.http.post('http://api.themoviedb.org/3/search/movie?api_key=b9e5550676ff70a2c33461f55fac000c&query=' + this.input + '&language=fr',
+          {
+            headers: {
+              'Access-Control-Allow-Origin': '*'
+            }
+          }).then(
+          response => {
+            this.displayResults(response)
+            this.isRequesting = false;
+          },
+          response => {
+            this.isRequesting = false;
+          }
+        )
+      },
+      flexiSearch() {
         this.isRequesting = true;
         Vue.http.post('http://api.themoviedb.org/3/search/movie?api_key=b9e5550676ff70a2c33461f55fac000c&query=' + this.input + '&language=fr',
           {
@@ -114,12 +136,11 @@
     padding-left: 20px;
   }
   .search-input-container {
-    position: fixed;
+    position: relative;
     display: flex;
     width: 50%;
-    top: 50px;
     z-index: 3;
     left: 25%;
-    height: 40px;
+    height: 50px;
   }
 </style>

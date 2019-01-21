@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 const PRODUCT_REQUEST = 'PRODUCT_REQUEST'
 const RESET_PRODUCT = 'RESET_PRODUCT'
 const PRODUCT_REQUEST_FAIL = 'PRODUCT_REQUEST_FAIL'
@@ -73,9 +75,77 @@ const actions = {
     commit(RESET_PRODUCT)
   },
   requestProducts ({commit}) {
-    commit(RESET_PRODUCT, [])
-  }
+    commit(UNSELECT_A_PRODUCT)
+    Vue.http.options.credentials = false
+    Vue.http.get(
+      'api/products',
+      {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ' + window.$cookies.get('Authorization')
+        }
+      }).then(
+      response => {
+        commit(PRODUCT_REQUEST, response.body)
+        response.body.forEach(function (result) {
+          if (result.poster_path !== 'undefined' && result.poster_path != null) {
+            this.addProduct({
+              cover: JSON.parse(result.urls).cover,
+              title: result.title,
+              id: this.id,
+              synopsis: result.overview,
+              releaseDate: result.release_date,
+              addDate: 'unknown'
+            })
+          }
+          this.id += 1
+        }, this)
+      },
+      response => {
+        this.isRequesting = false;
+      }
+    )
 
+    commit(RESET_PRODUCT, [])
+  },
+  createProduct({commit}, product) {
+
+    Vue.http.options.credentials = false
+    Vue.http.post(
+      'api/products',
+      {
+        synopsis: product.product.synopsis,
+        title: product.product.title,
+        urls: JSON.stringify({
+            "hd": product.hdUrl,
+            "sd": product.sdUrl,
+            "sourceFile": product.sourceUrl,
+            "cover": product.cover
+        })
+      },
+      {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + window.$cookies.get('Authorization')
+      }
+    }).then(
+      response => {
+        if (response.status === 201) {
+          console.log(JSON.parse(response.body.urls))
+          console.log(response.synopsis)
+          console.log(response.urls)
+          console.log(response.urls)
+        } else {
+
+        }
+      },
+      response => {
+        //
+      }
+    )
+  }
 }
 
 export default {

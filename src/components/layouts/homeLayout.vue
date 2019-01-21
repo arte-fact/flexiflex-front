@@ -2,7 +2,7 @@
   <div class="home-container">
     <header-layout></header-layout>
     <div class="body-content">
-      <search-bar v-if="isAdmin"></search-bar>
+      <search-bar></search-bar>
       <product-detail-component></product-detail-component>
       <products></products>
       <video-player-modal></video-player-modal>
@@ -22,7 +22,7 @@
   import footerLayout from '../layouts/footerComponent.vue'
   import { mapActions, mapGetters } from 'vuex'
   import FooterLayout from "./footerComponent.vue";
-  import SearchBar from "../searchBarComponent.vue";
+  import SearchBar from "../searchBarComponent";
 
   Vue.use(Vuex);
   export default {
@@ -91,6 +91,7 @@
           this.isAdmin = false
         }
       },
+
     }
   }
 </script>
@@ -101,14 +102,18 @@
     justify-content: center;
   }
   .body-content {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
     background-color: #cccc;
-    transition: all ease 1s;
+    position: absolute;
+    flex-direction: column;
+    display: flex;
+    justify-content: stretch;
     top: 0;
+    left: 0;
+    right: 0;
     bottom: 0;
-    padding: 90px 20px 20px 20px;
+    padding: 60px 10px 40px 10px;
+    height: 100%;
+    overflow: hidden;
   }
 
 </style>
