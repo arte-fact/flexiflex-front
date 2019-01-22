@@ -8,26 +8,9 @@
 
       <div class="detail-text">
         <div class="detail-title">{{ getSelected.title }}</div><br>
-        <input v-model="hdUrl" name="hdUrl" value="HD mp4 url"><br>
-        <input v-model="sdUrl" name="hdUrl" value="SD mp4 url"><br>
-        <input v-model="sourceUrl" name="hdUrl" value="avi or mkv url">
-        <br>
-        <button v-on:click="saveProduct">ajouter à la base de donnée</button>
         <a v-if="hdUrl !== null" :href="hdUrl">HD mp4</a>
         <a v-if="sdUrl !== null" :href="sdUrl">SD mp4</a>
         <a v-if="sourceUrl !== null" :href="sourceUrl">Original file</a>
-        <!--<div>Date de sortie: {{ selectedProduct.releaseDate }}</div>-->
-        <!--<span>Date d'ajout: {{ selectedProduct.addDate }}</span>-->
-        <!--<ul>Réalisateurs:-->
-        <!--<li v-bind:key="e.id" v-for="e in selectedProduct.directors">-->
-        <!--{{ e.firstName }} {{ e.lastName }}-->
-        <!--</li>-->
-        <!--</ul>-->
-        <!--<ul>Acteurs:-->
-        <!--<li v-bind:key="a.id" v-for="a in selectedProduct.actors">-->
-        <!--{{ a.firstName }} {{ a.lastName }}-->
-        <!--</li>-->
-        <!--</ul>-->
         <div class="detail-synopsis">{{ getSelected.synopsis }}</div>
       </div>
     </div>
@@ -61,16 +44,6 @@
       },
       openFullscreen() {
         this.toggleIsPlaying()
-      },
-      saveProduct() {
-        this.createProduct({
-          hdUrl: this.hdUrl,
-          sdUrl: this.sdUrl,
-          sourceFileUrl: this.sourceUrl,
-          coverUrl: this.getSelected.coverUrl,
-          title: this.getSelected.title,
-          synopsis: this.getSelected.synopsis,
-        })
       }
     }
   }

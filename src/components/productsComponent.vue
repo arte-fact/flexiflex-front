@@ -10,7 +10,7 @@
             </div>
           </div>
           <br>
-          <div v-if="products !== []" v-on:click="getNextResultPages(2)" class="list-bottom" ref="bottom">Charger la suite</div>
+          <div v-if="products !== null && products !== []" v-on:click="getNextResultPages(2)" class="list-bottom" ref="bottom">Charger la suite</div>
         </div>
       </div>
       <div class="loader-container" v-else>
@@ -42,7 +42,7 @@ export default {
   computed: {
     ...mapGetters('products', [
       'getSelected',
-      'getProduct',
+      'getProducts',
       'getResults'
     ])
   },
@@ -60,7 +60,7 @@ export default {
   watch: {
     getProducts(newValue) {
       if(newValue !== null) {
-        this.products = newValue
+        this.products.push(newValue)
       }
     },
     getResults(newValue) {
@@ -142,8 +142,8 @@ export default {
   }
   .product-image {
     position: relative;
-    height: 150px;
-    width: 100;
+    height: 166px;
+    width: 133px;
     background-color: grey;
   }
   .loader-container {

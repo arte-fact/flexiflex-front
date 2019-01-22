@@ -68,14 +68,16 @@ const mutations = {
       response => {
         console.log(response.body.page)
         response.body.results.forEach(function (item) {
-          setTimeout(function () {
-            // console.log(item)
-            state.results = {
-              title: item.title,
-              coverUrl: item.poster_path,
-              synopsis: item.overview
-            }
-          }, 200)
+          if (item.poster_path !== null) {
+            setTimeout(function () {
+              state.results = {
+                title: item.title,
+                coverUrl: item.poster_path,
+                synopsis: item.overview,
+                isTmdb: true
+              }
+            }, 200)
+          }
         })
       },
       response => {

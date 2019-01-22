@@ -33,14 +33,10 @@ const getters = {
 
 const mutations = {
   [PRODUCT_REQUEST] (state, items) {
-    state.product = items
-    state.productRequestFail = false
+      state.product = items
   },
   [PRODUCT_PUSH] (state, item) {
-    if (state.product === null) {
-      product = []
-    }
-    state.product.push(item)
+    state.product = item;
   },
   [RESET_PRODUCT] (state) {
     state.product = null
@@ -61,8 +57,6 @@ const mutations = {
 
 const actions = {
   addProduct({commit}, item) {
-    console.log(item)
-    console.log('coucou')
     commit(PRODUCT_PUSH, item)
   },
   setProducts({commit}, items) {
@@ -96,14 +90,18 @@ const actions = {
         }
       }).then(
       response => {
-        commit(PRODUCT_REQUEST, response.body)
+        response.body.forEach(function (item) {
+          setTimeout(function () {
+            commit(PRODUCT_PUSH, item)
+          }.bind(commit), 200)
+        })
       },
       response => {
-        this.isRequesting = false;
+        console.log(response)
       }
     )
 
-    commit(RESET_PRODUCT, [])
+    commit(RESET_PRODUCT, null)
   },
   createProduct({commit}, item) {
     console.log(item)
@@ -120,13 +118,15 @@ const actions = {
       }).then(
       response => {
         if (response.status === 201) {
+          response.isTmdb = false
+          alert("Votre contenu à bien été enregistré ;)")
           commit(SELECT_A_PRODUCT, response)
         } else {
-
+          alert("Erreur!")
         }
       },
       response => {
-        //
+        alert("Erreur!")
       }
     )
   }

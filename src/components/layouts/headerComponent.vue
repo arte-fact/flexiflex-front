@@ -1,7 +1,7 @@
 <template>
   <div class="header-container">
     <router-link to="/products">
-      <div class="logo">Flexiflex</div>
+      <div v-on:click="flushProduct()" class="logo">Flexiflex</div>
     </router-link>
     <div class="buttonContainer">
       <router-link v-if= "user != null" class="button" to="auth/user-account">Compte {{user.firstName}} {{user.lastName}}</router-link>
@@ -33,7 +33,7 @@
     methods: {
       ...mapActions('auth', [
         'resetUser',
-        'resetToken',
+        'resetToken'
       ]),
       doLogout() {
         this.resetToken()

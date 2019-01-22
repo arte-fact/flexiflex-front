@@ -1,6 +1,13 @@
 <template>
     <div class="search-input-container">
       <input id="search-input" class="form-input search-input" name="research" v-model="input" placeholder="Rechercher votre film ici...">
+      <div v-if="!isFlexiSearch" class="url_inputs">
+        <input class="form-input search-input" v-model="hdUrl" name="hdUrl" value="HD mp4 url" placeholder="Lien vers le fichier .mp4" required><br>
+        <input class="form-input search-input" v-model="sdUrl" name="hdUrl" value="SD mp4 url" placeholder="" hidden>
+        <input class="form-input search-input" v-model="sourceUrl" name="hdUrl" value="avi or mkv url" placeholder="Lien vers le fichier source" required>
+        <br>
+        <button class="form-button" v-on:click="saveProduct">ajouter à la base de donnée</button>
+      </div>
       <input type="checkbox" id="checkbox" class="checkbox" v-model="isFlexiSearch">
     </div>
 </template>
@@ -18,40 +25,50 @@
     name: "search-bar",
     data () {
       return {
+        hdUrl: null,
+        sdUrl: 'bouchon',
+        sourceUrl: null,
         isTyping: false,
-        isFlexiSearch: false,
+        isFlexiSearch: true,
         input: '',
         page: 1
       }
     },
     created () {
-      // this.requestProducts()
-      // this.imdbSearch()
+      this.requestProducts()
     },
     watch: {
       isTyping(oldValue, newValue) {
         if (newValue === false && oldValue !== newValue) {
-          this.unSelectProduct()
-          this.setSearchParams({
-            media: 'movie',
-            input: this.input,
-          })
-          this.getNextResultPages(2)
+          if (this.isFlexiSearch) {
+            this.unSelectProduct()
+            this.setProducts(null)
+            this.requestProducts()
+          } else {
+            this.unSelectProduct()
+            this.setProducts(null)
+            this.setSearchParams({
+              media: 'movie',
+              input: this.input,
+            })
+            this.getNextResultPages(3)
+          }
         }
       },
       input(newValue) {
-        if (newValue.length > 2) {
+        if (newValue.length > 0) {
           this.isTyping = true
           setTimeout(function () {
             this.isTyping = false
-          }.bind(this), 100)
+          }.bind(this), 500)
         }
       },
     },
     computed: {
       ...mapGetters('products', [
         'products',
-        'getResults'
+        'getResults',
+        'getSelected'
       ])
     },
     methods:{
@@ -63,16 +80,33 @@
         'selectProduct',
         'unSelectProduct',
         'setSearchParams',
-        'getNextResultPages'
-      ])
+        'getNextResultPages',
+        'createProduct'
+      ]),
+      saveProduct() {
+        this.createProduct({
+          hdUrl: this.hdUrl,
+          sdUrl: this.sdUrl,
+          sourceFileUrl: this.sourceUrl,
+          coverUrl: this.getSelected.coverUrl,
+          title: this.getSelected.title,
+          synopsis: this.getSelected.synopsis,
+        })
+      }
     }
   }
 </script>
 
 <style scoped>
+  .url_inputs {
+    width: 100%;
+  }
   .search-input-container {
     position: relative;
     display: flex;
+    flex-direction: column;
+    flex-flow: wrap;
+    justify-content: center;
     width: 50%;
     z-index: 3;
     left: 25%;

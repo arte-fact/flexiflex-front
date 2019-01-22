@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import user from './user'
+import products from '../products'
 import VueCookies from 'vue-cookies'
 
 Vue.use(VueCookies)
@@ -221,6 +222,7 @@ export default {
   mutations,
   actions,
   modules: {
-    user
+    user,
+    products
   }
 }
