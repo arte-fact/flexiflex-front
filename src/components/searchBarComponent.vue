@@ -16,12 +16,12 @@
           placeholder="Lien vers le fichier source"
           required>
         <button
-          class="form-button"
+          class="form-button box-checked-button"
           v-on:click="saveProduct"
           v-bind:class="{send_button_invalid: hdUrl === null || sdUrl === null || sourceUrl === null}"
         >Ajouter</button>
         <button
-          class="form-button-delete"
+          class="form-button-delete box-checked-button"
           v-on:click="deleteProduct()"
         >Supprimer</button>
       </div>
@@ -151,7 +151,6 @@
     /*border: 5px solid #3a5fdc;*/
   }
   .search-input {
-
     position: relative;
     height: 40px;
     width: 100%;
@@ -187,5 +186,8 @@
     background-color: #2c3e50;
     border: 2px solid #2c3e50;
     outline: none;
+  }
+  .box-checked-button{
+    width: 49.5%
   }
 </style>
