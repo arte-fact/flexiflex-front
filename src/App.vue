@@ -237,13 +237,15 @@ form {
     border: none;
     width: 220px;
     height: 25px;
-    margin: 15px 0px 0px;
+    margin: 15px 0 0;
     border-radius: 5px;
     background-color: white;
     font-weight: bold;
     cursor: pointer;
     justify-content: center;
     align-items: center;
+    color: #232323;
+    font-size: 13px;
   }
   .form-button:focus {
     box-shadow: 0px 2px 2px grey;
@@ -269,6 +271,8 @@ form {
     cursor: pointer;
     justify-content: center;
     align-items: center;
+    font-size: 13px;
+    color: #232323;
   }
   .form-button-delete:focus{
     box-shadow: 0px 2px 2px grey;

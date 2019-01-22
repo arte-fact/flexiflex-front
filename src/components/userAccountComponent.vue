@@ -11,7 +11,7 @@
       <button class="form-button" v-bind:class="{'form-button-disabled': user.firstName === '' || user.lastName === ''}" v-on:click="submit">Modifier Compte</button>
       <button class="form-button-delete" v-on:click="deleteUserNow">Supprimer Compte</button>
     </div>
-    <router-link class="return-link" to="/">retour</router-link>
+    <router-link class="form-button return-link" to="/">Retour</router-link>
 </div>
 </template>
 
@@ -87,18 +87,14 @@
   form {
     display: block;
   }
-
   .user-account-container {
     display: flex;
     flex-wrap: wrap;
-    width: 450px;
+    width: 447px;
   }
-
   .return-link {
     display: flex;
     padding-top: 5px;
     width: 100%;
-    align-items: center;
-    justify-content: center;
   }
 </style>
