@@ -26,6 +26,7 @@
 
   export default {
     name: "search-bar",
+    props: ['isAdmin'],
     data () {
       return {
         hdUrl: null,

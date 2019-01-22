@@ -9,4 +9,4 @@ let urls = {
 }
 
 Vue.http.options.root = urls[process.env.NODE_ENV] + '/'
-Vue.http.options.credentials = false
+// Vue.http.options.credentials = false

@@ -44,11 +44,6 @@
       } else {
         this.styleObject.backgroundImage = 'url(' + require('@/assets/homepage/background-splash-' + this.imageNumber + '.jpg')
       }
-      if (this.token === null) {
-        this.$router.push({
-          name: 'login-page'
-        })
-      }
     },
     watch: {
       token (newValue) {

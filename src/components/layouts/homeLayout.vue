@@ -3,7 +3,7 @@
       <header-layout></header-layout>
 
     <div class="body-content">
-      <search-bar></search-bar>
+      <search-bar v-bind:isAdmin="admin"></search-bar>
       <product-detail-component></product-detail-component>
       <products></products>
       <video-player-modal></video-player-modal>
@@ -30,7 +30,7 @@
     name: 'home-layout',
     data() {
       return {
-        isAdmin: false,
+        admin: false,
         email: "",
         products: null,
         colorRingLoader: '#2c3e50',
@@ -57,6 +57,12 @@
     created () {
       if (this.user === null) {
         this.request()
+      }
+
+      if (this.token === null) {
+        this.$router.push({
+          name: 'login-page'
+        })
       }
 
       this.$router.push('products')
