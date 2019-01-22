@@ -99,11 +99,13 @@
 
 <style scoped>
   .home-container {
-    position: relative;
+    position: absolute;
     display: flex;
     justify-content: center;
-    height: 100%;
-    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 
 
     /*border: 5px solid #ffef00;*/
@@ -114,21 +116,10 @@
     position: absolute;
     flex-direction: column;
     display: flex;
-    justify-content: stretch;
-    /*top: 0;*/
-    /*left: 0;*/
-    /*right: 0;*/
-    /*bottom: 0;*/
     padding: 70px 10px 25px 10px;
-    /*padding: 11% 1% 1% 10%;*/
-    /*top: 6%;*/
-    /*height: 100%;*/
-    overflow: hidden;
-
-
-    min-width: 100%;
+    height: 100%;
     width: 100%;
-
+    overflow: hidden;
     /*border: 5px solid #1eff0a;*/
 
   }

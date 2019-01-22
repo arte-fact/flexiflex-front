@@ -10,7 +10,7 @@
         <div class="detail-title">{{ getSelected.title }}</div><br>
         <a v-if="hdUrl !== null" :href="hdUrl">HD mp4</a>
         <a v-if="sdUrl !== null" :href="sdUrl">SD mp4</a>
-        <a v-if="sourceUrl !== null" :href="sourceUrl">Original file</a>
+        <a v-if="getSelected.sourceFileUrl !== null" :href="getSelected.sourceFileUrl">Original file</a>
         <div class="detail-synopsis">{{ getSelected.synopsis }}</div>
       </div>
     </div>
@@ -56,7 +56,8 @@
     display: flex;
     width: auto;
     background-color: grey;
-    max-height: 40vh;
+    max-height: 50vh;
+    min-height: 30vh;
   }
 
   .detail-container {
@@ -76,7 +77,7 @@
     width: 100%;
     flex-wrap: wrap;
     overflow-x: scroll;
-    max-height: 35vh;
+    max-height: 30vh;
     padding: 5px;
   }
 

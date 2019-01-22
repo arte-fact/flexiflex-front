@@ -59,7 +59,7 @@ const actions = {
     commit(RESET_USER)
   },
   updateUser({commit}, {login, firstName, lastName}){
-    Vue.http.put('api/users',
+    Vue.http.post('api/custom/delete',
       {
         login: login,
         firstName: firstName,
@@ -75,11 +75,14 @@ const actions = {
       response => {
         if (response.status === 200) {
           commit(USER_REQUEST, response)
+          alert('Votre comte à été modifié!')
         } else {
+          alert('erreur')
           commit(USER_REQUEST_FAIL)
         }
       },
       response => {
+        alert('erreur')
         commit(USER_REQUEST_FAIL)
       }
     )

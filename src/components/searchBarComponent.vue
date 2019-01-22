@@ -2,11 +2,28 @@
     <div class="search-input-container">
       <input id="search-input" class="form-input search-input" name="research" v-model="input" placeholder="Rechercher votre film ici...">
       <div v-if="!isFlexiSearch" class="url_inputs">
-        <input class="form-input search-input" v-model="hdUrl" name="hdUrl" value="HD mp4 url" placeholder="Lien vers le fichier .mp4" required><br>
+        <input
+          class="form-input search-input"
+          v-model="hdUrl"
+          name="hdUrl"
+          placeholder="Lien vers le fichier .mp4"
+          required>
         <input class="form-input search-input" v-model="sdUrl" name="hdUrl" value="SD mp4 url" placeholder="" hidden>
-        <input class="form-input search-input" v-model="sourceUrl" name="hdUrl" value="avi or mkv url" placeholder="Lien vers le fichier source" required>
-        <br>
-        <button class="form-button" v-on:click="saveProduct">ajouter à la base de donnée</button>
+        <input
+          class="form-input search-input"
+          v-model="sourceUrl"
+          name="hdUrl"
+          placeholder="Lien vers le fichier source"
+          required>
+        <button
+          class="form-button"
+          v-on:click="saveProduct"
+          v-bind:class="{send_button_invalid: hdUrl === null || sdUrl === null || sourceUrl === null}"
+        >Ajouter</button>
+        <button
+          class="form-button-delete"
+          v-on:click="deleteProduct()"
+        >Supprimer</button>
       </div>
       <input type="checkbox" id="checkbox" class="checkbox" v-model="isFlexiSearch">
     </div>
@@ -84,22 +101,42 @@
         'createProduct'
       ]),
       saveProduct() {
-        this.createProduct({
-          hdUrl: this.hdUrl,
-          sdUrl: this.sdUrl,
-          sourceFileUrl: this.sourceUrl,
-          coverUrl: this.getSelected.coverUrl,
-          title: this.getSelected.title,
-          synopsis: this.getSelected.synopsis,
-        })
+        if (this.sourceUrl !== null && this.hdUrl !== null && this.sdUrl !== null) {
+          this.createProduct({
+            hdUrl: this.hdUrl,
+            sdUrl: this.sdUrl,
+            sourceFileUrl: this.sourceUrl,
+            coverUrl: this.getSelected.coverUrl,
+            title: this.getSelected.title,
+            synopsis: this.getSelected.synopsis,
+          })
+        }
+      },
+      deleteProduct() {
+        let strings = [
+          "Savez vous au moins ce que vous faites?",
+          "Pas sur que ce soit possible...",
+          "En êtes vous bien sur?"
+        ]
+
+        alert(strings[Math.floor(Math.random() * 3)])
       }
     }
   }
 </script>
 
 <style scoped>
+  .send_button_invalid {
+    color: gray;
+    background-color: #9d9d9d;
+    pointer-events: none;
+  }
+
   .url_inputs {
-    width: 100%;
+    position: relative;
+    display: block;
+    align-items: center;
+    justify-content: center;
   }
   .search-input-container {
     position: relative;

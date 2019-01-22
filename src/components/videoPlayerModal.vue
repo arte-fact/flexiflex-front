@@ -44,7 +44,7 @@
     height: 100vh;
     width: 100vw;
     background: black;
-    opacity: 0.7;
+    opacity: 0.9;
     z-index: 3;
     top: 0;
     left: 0;

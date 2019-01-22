@@ -66,7 +66,6 @@ const mutations = {
         }
       }).then(
       response => {
-        console.log(response.body.page)
         response.body.results.forEach(function (item) {
           if (item.poster_path !== null) {
             setTimeout(function () {
