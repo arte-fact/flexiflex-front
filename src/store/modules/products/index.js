@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import search from './search'
 
 const PRODUCT_REQUEST = 'PRODUCT_REQUEST'
 const RESET_PRODUCT = 'RESET_PRODUCT'
@@ -16,7 +17,7 @@ const state = {
 }
 
 const getters = {
-  products (state) {
+  getProducts (state) {
     return state.product
   },
   productRequestFail (state) {
@@ -36,6 +37,9 @@ const mutations = {
     state.productRequestFail = false
   },
   [PRODUCT_PUSH] (state, item) {
+    if (state.product === null) {
+      product = []
+    }
     state.product.push(item)
   },
   [RESET_PRODUCT] (state) {
@@ -57,7 +61,12 @@ const mutations = {
 
 const actions = {
   addProduct({commit}, item) {
+    console.log(item)
+    console.log('coucou')
     commit(PRODUCT_PUSH, item)
+  },
+  setProducts({commit}, items) {
+    commit(PRODUCT_REQUEST, items)
   },
   flushProduct({commit}) {
     commit(PRODUCT_REQUEST, [])
@@ -74,7 +83,7 @@ const actions = {
   resetProducts({commit}) {
     commit(RESET_PRODUCT)
   },
-  requestProducts ({commit}) {
+  requestProducts({commit}) {
     commit(UNSELECT_A_PRODUCT)
     Vue.http.options.credentials = false
     Vue.http.get(
@@ -103,20 +112,15 @@ const actions = {
       'api/products',
       item,
       {
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Accept': 'application/json',
-        'Authorization': 'Bearer ' + window.$cookies.get('Authorization')
-      }
-    }).then(
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ' + window.$cookies.get('Authorization')
+        }
+      }).then(
       response => {
         if (response.status === 201) {
-          console.log(response.body.title)
-          console.log(response.body.synopsis)
-          console.log(response.body.hdUrl)
-          console.log(response.body.sdUrl)
-          console.log(response.body.coverUrl)
-          console.log(response.body.sourceFileUrl)
+          commit(SELECT_A_PRODUCT, response)
         } else {
 
         }
@@ -128,10 +132,14 @@ const actions = {
   }
 }
 
+
 export default {
   namespaced: true,
   state,
   getters,
   mutations,
-  actions
+  actions,
+  modules: {
+    search
+  }
 }

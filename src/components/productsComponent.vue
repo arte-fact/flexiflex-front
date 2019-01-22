@@ -1,16 +1,16 @@
 <template>
   <div class="border">
-    <div
-      v-bind:class="{ fullHeight: getSelected === null}"
-    >
+    <div v-bind:class="{ fullHeight: getSelected === null}">
       <div v-if="products !== null">
         <div class="product-list">
           <div v-bind:key="product.id" v-for="product in products">
-            <div class="product-item" v-on:click="select(product)">
+            <div  class="product-item" v-on:click="select(product)">
               <img :alt="product.title" class="product-image" :src="'http://image.tmdb.org/t/p/w154' + product.coverUrl">
               <div class="product-title">{{product.title}}</div>
             </div>
           </div>
+          <br>
+          <div v-if="products !== []" v-on:click="getNextResultPages(2)" class="list-bottom" ref="bottom">Charger la suite</div>
         </div>
       </div>
       <div class="loader-container" v-else>
@@ -35,13 +35,15 @@ export default {
   name: 'products',
   data() {
     return {
+      products: [],
       searchBarMessage: 'Rechercher ici des contenus'
     }
   },
   computed: {
     ...mapGetters('products', [
-      'products',
-      'getSelected'
+      'getSelected',
+      'getProduct',
+      'getResults'
     ])
   },
   components: {
@@ -52,23 +54,52 @@ export default {
   },
   created () {
     if (this.products === null) {
-      // this.requestProducts()
+      this.requestProducts()
+    }
+  },
+  watch: {
+    getProducts(newValue) {
+      if(newValue !== null) {
+        this.products = newValue
+      }
+    },
+    getResults(newValue) {
+      if (newValue == null) {
+        this.products = []
+      } else {
+        this.products.push(newValue)
+      }
     }
   },
   methods: {
     ...mapActions('products', [
       'requestProducts',
+      'addProduct',
+      'setProducts',
       'selectProduct',
       'resetProducts',
+      'getNextResultPages'
     ]),
     select(product) {
       this.selectProduct(product)
-    }
+    },
   }
 }
 </script>
 
 <style scoped>
+
+  @keyframes fade {
+    0% {
+      opacity: 0;
+      background: black;
+    }
+    100% {
+      opacity: 1;
+      background: transparent;
+    }
+  }
+
 
   .border{
     position: relative;
@@ -107,11 +138,12 @@ export default {
     cursor: pointer;
     z-index: 1;
     margin: 0 5px 5px 0;
+    transition: 15s linear fade;
   }
   .product-image {
     position: relative;
-    height: 100%;
-    width: 100%;
+    height: 150px;
+    width: 100;
     background-color: grey;
   }
   .loader-container {
@@ -119,5 +151,16 @@ export default {
     width: 100vw;
     display: flex;
     justify-content: center;
+  }
+
+  .list-bottom {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+    cursor: pointer;
+    color: #2c3e50;
   }
 </style>

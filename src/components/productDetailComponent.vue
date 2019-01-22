@@ -77,6 +77,7 @@
 </script>
 
 <style scoped>
+
   .selected-product-image {
     position: relative;
     display: flex;

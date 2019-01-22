@@ -18,107 +18,53 @@
     name: "search-bar",
     data () {
       return {
-        isFlexiSearch: true,
+        isTyping: false,
+        isFlexiSearch: false,
         input: '',
-        isRequesting: false
+        page: 1
       }
     },
     created () {
-      this.requestProducts()
+      // this.requestProducts()
       // this.imdbSearch()
     },
     watch: {
-      input(oldValue, newValue) {
-        this.unSelectProduct()
-        if (!this.isRequesting && newValue.length > 0 && newValue !== '') {
-          if (this.isFlexiSearch) {
-            this.requestProducts()
-          } else {
-            this.imdbSearch(newValue)
-          }
-        } else {
-          this.requestProducts()
+      isTyping(oldValue, newValue) {
+        if (newValue === false && oldValue !== newValue) {
+          this.unSelectProduct()
+          this.setSearchParams({
+            media: 'movie',
+            input: this.input,
+          })
+          this.getNextResultPages(2)
+        }
+      },
+      input(newValue) {
+        if (newValue.length > 2) {
+          this.isTyping = true
+          setTimeout(function () {
+            this.isTyping = false
+          }.bind(this), 100)
         }
       },
     },
     computed: {
       ...mapGetters('products', [
-        'products'
+        'products',
+        'getResults'
       ])
     },
     methods:{
       ...mapActions('products', [
         'addProduct',
+        'setProducts',
         'flushProduct',
         'requestProducts',
         'selectProduct',
-        'unSelectProduct'
-      ]),
-      displayResults(response) {
-        this.flushProduct()
-        this.id = 0;
-        response.body.results.forEach(function (result) {
-          if (result.poster_path !== 'undefined' && result.poster_path != null) {
-            this.addProduct({
-              coverUrl: result.poster_path,
-              title: result.title,
-              id: this.id,
-              synopsis: result.overview,
-              releaseDate: result.release_date,
-              addDate: 'unknown'
-            })
-          }
-          this.id += 1
-        }, this)
-      },
-      imdbSearch() {
-        this.isRequesting = true;
-        Vue.http.post('http://api.themoviedb.org/3/search/movie?api_key=b9e5550676ff70a2c33461f55fac000c&query=' + this.input + '&language=fr',
-          {
-            headers: {
-              'Access-Control-Allow-Origin': '*'
-            }
-          }).then(
-          response => {
-            this.displayResults(response)
-            this.isRequesting = false;
-          },
-          response => {
-            this.isRequesting = false;
-          }
-        )
-      },
-      flexiSearch() {
-        this.isRequesting = true;
-        Vue.http.post('http://api.themoviedb.org/3/search/movie?api_key=b9e5550676ff70a2c33461f55fac000c&query=' + this.input + '&language=fr',
-          {
-            headers: {
-              'Access-Control-Allow-Origin': '*'
-            }
-          }).then(
-          response => {
-            this.displayResults(response)
-            this.isRequesting = false;
-          },
-          response => {
-            this.isRequesting = false;
-          }
-        )
-        Vue.http.post('http://api.themoviedb.org/3/search/tv?api_key=b9e5550676ff70a2c33461f55fac000c&query=' + this.input + '&language=fr',
-          {
-            headers: {
-              'Access-Control-Allow-Origin': '*'
-            }
-          }).then(
-          response => {
-            this.displayResults(response)
-            this.isRequesting = false;
-          },
-          response => {
-            this.isRequesting = false;
-          }
-        )
-      }
+        'unSelectProduct',
+        'setSearchParams',
+        'getNextResultPages'
+      ])
     }
   }
 </script>
