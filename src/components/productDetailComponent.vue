@@ -58,9 +58,11 @@
     background-color: grey;
     max-height: 50vh;
     min-height: 30vh;
+
   }
 
   .detail-container {
+
     position: relative;
     display: flex;
     flex-direction: row;
@@ -68,6 +70,8 @@
     width: 100%;
     height: 50%;
     margin-bottom: 5px;
+    /*overflow-x: hidden;*/
+    /*overflow-y: hidden;*/
   }
 
   .detail-text {
@@ -76,9 +80,11 @@
     flex-direction: row;
     width: 100%;
     flex-wrap: wrap;
-    overflow-x: scroll;
     max-height: 30vh;
-    padding: 5px;
+    padding: 0 10px;
+
+    overflow-x: scroll;
+
   }
 
   .detail-title {
@@ -86,14 +92,18 @@
     font-size: 3vh;
     margin: 0;
     padding: 0;
-    overflow: hidden;
     width: 100%;
+
+
+    overflow-x: hidden;
+    overflow-y: hidden;
   }
 
   .detail-synopsis {
     position: relative;
     text-align: justify;
-    overflow-x: scroll;
+
+
   }
 
   .play-button {
@@ -120,9 +130,5 @@
     background-repeat: no-repeat;
   }
 
-  .detail-text {
-    overflow-x: scroll;
-    padding: 0 10px;
-  }
 
 </style>

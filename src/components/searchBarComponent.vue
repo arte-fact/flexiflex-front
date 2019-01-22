@@ -2,30 +2,16 @@
     <div class="search-input-container">
       <input id="search-input" class="form-input search-input" name="research" v-model="input" placeholder="Rechercher votre film ici...">
       <div v-if="!isFlexiSearch" class="url_inputs">
-        <input
-          class="form-input search-input"
-          v-model="hdUrl"
-          name="hdUrl"
-          placeholder="Lien vers le fichier .mp4"
-          required>
+        <input class="form-input search-input" v-model="hdUrl" name="hdUrl" placeholder="Lien vers le fichier .mp4" required>
         <input class="form-input search-input" v-model="sdUrl" name="hdUrl" value="SD mp4 url" placeholder="" hidden>
-        <input
-          class="form-input search-input"
-          v-model="sourceUrl"
-          name="hdUrl"
-          placeholder="Lien vers le fichier source"
-          required>
-        <button
-          class="form-button box-checked-button"
-          v-on:click="saveProduct"
-          v-bind:class="{send_button_invalid: hdUrl === null || sdUrl === null || sourceUrl === null}"
-        >Ajouter</button>
-        <button
-          class="form-button-delete box-checked-button"
-          v-on:click="deleteProduct()"
-        >Supprimer</button>
+        <input class="form-input search-input" v-model="sourceUrl" name="hdUrl" placeholder="Lien vers le fichier source" required>
+        <div class="buttonPlace">
+          <button class="form-button box-checked-button" v-on:click="saveProduct" v-bind:class="{send_button_invalid: hdUrl === null || sdUrl === null || sourceUrl === null}">Ajouter</button>
+          <button class="form-button-delete box-checked-button" v-on:click="deleteProduct()">Supprimer</button>
+        </div>
       </div>
       <input type="checkbox" id="checkbox" class="checkbox" v-model="isFlexiSearch">
+      <div  v-on:click=search()><i class="fab fa-searchengin loupe"></i></div>
     </div>
 </template>
 
@@ -57,21 +43,10 @@
     watch: {
       isTyping(oldValue, newValue) {
         if (newValue === false && oldValue !== newValue) {
-          if (this.isFlexiSearch) {
-            this.unSelectProduct()
-            this.setProducts(null)
-            this.requestProducts()
-          } else {
-            this.unSelectProduct()
-            this.setProducts(null)
-            this.setSearchParams({
-              media: 'movie',
-              input: this.input,
-            })
-            this.getNextResultPages(3)
-          }
+          this.search()
         }
       },
+
       input(newValue) {
         if (newValue.length > 0) {
           this.isTyping = true
@@ -120,6 +95,21 @@
         ]
 
         alert(strings[Math.floor(Math.random() * 3)])
+      },
+      search(){
+        if (this.isFlexiSearch) {
+          this.unSelectProduct()
+          this.setProducts(null)
+          this.requestProducts()
+        } else {
+          this.unSelectProduct()
+          this.setProducts(null)
+          this.setSearchParams({
+            media: 'movie',
+            input: this.input,
+          })
+          this.getNextResultPages(3)
+        }
       }
     }
   }
@@ -140,12 +130,13 @@
   }
   .search-input-container {
     position: relative;
+    align-self: center;
     flex-direction: column;
     flex-flow: wrap;
     justify-content: center;
+    min-width: 950px;
     width: 50%;
     z-index: 3;
-    left: 25%;
     margin-bottom: 10px;
 
     /*border: 5px solid #3a5fdc;*/
@@ -161,19 +152,31 @@
     border-radius: 20px;
     padding-left: 20px;
     outline: none;
-
-    /*border: 1px solid crimson;*/
   }
   .search-input::placeholder{
     align-items: center;
     font-size: 12px;
+  }
+
+  .loupe{
+    position: absolute;
+    right: -25px;
+    top:2.5px;
+    margin: 5px 40px 5px 0;
+    display:inline-block;
+    width: 30px;
+    height: 30px;
+    outline: none;
+    cursor: pointer;
+    color : #959595;
+
   }
   .checkbox{
     -webkit-appearance: none;
     position: absolute;
     right: -25px;
     top:2.5px;
-    margin: 5px 30px 5px 0;
+    margin: 5px 75px 5px 0;
     display:inline-block;
     width: 30px;
     height: 30px;
@@ -187,7 +190,20 @@
     border: 2px solid #2c3e50;
     outline: none;
   }
+  .buttonPlace{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
   .box-checked-button{
-    width: 49.5%
+    width: 49.5%;
+  }
+
+  @media screen and (max-width: 970px)  {
+    .search-input-container {
+      width: 100%;
+      min-width: 100%;
+    }
   }
 </style>

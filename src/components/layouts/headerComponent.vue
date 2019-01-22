@@ -5,7 +5,7 @@
     </router-link>
     <div class="buttonContainer">
       <router-link v-if= "user != null" class="button" to="auth/user-account">Compte {{user.firstName}} {{user.lastName}}</router-link>
-      <button class="button" v-on:click="doLogout">Logout</button>
+      <button class="button" v-on:click="doLogout">Déconnexion</button>
     </div>
   </div>
 </template>

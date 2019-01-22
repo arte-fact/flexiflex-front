@@ -101,7 +101,7 @@
   .home-container {
     position: absolute;
     display: flex;
-    justify-content: center;
+    /*justify-content: center;*/
     top: 0;
     left: 0;
     right: 0;

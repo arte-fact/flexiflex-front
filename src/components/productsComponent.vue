@@ -1,6 +1,5 @@
 <template>
   <div class="border">
-    <div >
       <div v-if="products !== null">
         <div class="product-list mid_height" v-bind:class="{ fullHeight: isFullHeight}">
           <div v-bind:key="product.id" v-for="product in products">
@@ -9,14 +8,15 @@
               <div class="product-title">{{product.title}}</div>
             </div>
           </div>
-          <br>
-          <div v-if="products !== null && products !== []" v-on:click="getNextResultPages(2)" class="list-bottom" ref="bottom">Charger la suite</div>
+          <!--<br>-->
+          <div class="list-bottom-container">
+            <button v-if="products !== null && products !== []" v-on:click="getNextResultPages(2)" class="list-bottom" ref="bottom">Afficher la suite...</button>
+          </div>
         </div>
       </div>
-      <div class="loader-container" v-else>
-        <!--<ring-loader color="#2c3e50" size="200px"></ring-loader>-->
-      </div>
-    </div>
+      <!--<div class="loader-container" v-else>-->
+        <!--&lt;!&ndash;<ring-loader color="#2c3e50" size="200px"></ring-loader>&ndash;&gt;-->
+      <!--</div>-->
   </div>
 </template>
 
@@ -100,7 +100,6 @@ export default {
 </script>
 
 <style scoped>
-
   .product-title {
     max-height: 50px;
     overflow: hidden;
@@ -113,34 +112,47 @@ export default {
 
   .border{
     position: relative;
+    /*flex-direction: column;*/
+    /*flex-flow: wrap;*/
+    /*justify-content: space-between;*/
+    margin-bottom: 10px;
+    /*overflow-y: scroll;*/
+    overflow-y: hidden;
     /*border: 5px solid #ff861c;*/
-    /*padding-top: 150px;*/
   }
 
   .product_list_container {
     position: relative;
     bottom: 0;
     overflow-x: scroll;
+    /*border: 2px solid #ff4418;*/
   }
+
   .mid_height {
     position: relative;
     bottom: 0;
     overflow-x: scroll;
     height: 48vh;
+    /*border: 2px solid #ecff1a;*/
   }
+
   .fullHeight {
     position: relative;
     bottom: 0;
     overflow-x: scroll;
     height: 78vh;
+    /*border: 2px solid #4325ff;*/
   }
+
   .product-list {
     position: relative;
     display: flex;
     flex-direction: row;
     flex-flow: wrap;
-    /*border: 1px solid lime;*/
+    /*border: 5px solid #31fff8;*/
+    /*overflow-X: hidden;*/
   }
+
   .product-item {
     display: flex;
     flex-direction: column;
@@ -149,32 +161,56 @@ export default {
     cursor: pointer;
     z-index: 1;
     margin: 0 5px 5px 0;
+    /*border: 2px solid #4b0709;*/
   }
+
   .product-image {
     position: relative;
     height: 166px;
     width: 133px;
     background-color: grey;
+    /*border: 2px solid #297c1a;*/
   }
+
   .loader-container {
     position: relative;
     width: 100vw;
     display: flex;
     justify-content: center;
+    /*border: 2px solid #ff03d3;*/
+  }
+
+  .list-bottom-container{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%
   }
 
   .list-bottom {
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 50px;
+    height: 40px;
+    min-width: 950px;
+    width: 50%;
+    border : none;
+    border-radius: 20px;
+    background-color: #ffff;
+    color : #959595;
+    font-size: 16px;
+    font-weight: bold;
+    outline: none;
     cursor: pointer;
-    color: #2c3e50;
   }
 
-  .list-bottom:hover {
+  .list-bottom:hover{
     background-color: #e1e1e1;
+    color : #777777;
+  }
+
+  @media screen and (max-width: 970px)  {
+    .list-bottom {
+      width: 100%;
+      min-width: 100%;
+    }
   }
 </style>
