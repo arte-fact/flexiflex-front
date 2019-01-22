@@ -1,20 +1,11 @@
 <template>
   <div>
-    <div class="flexiflex-logo">Flexiflex</div>
+    <div v-if="!hasError && !isActivated">Activation de votre compte...</div>
+    <div v-if="hasError">Erreur d'activation: {{errorMessage}}</div>
+    <div v-if="isActivated">Votre compte est maintenant actif...<router-link to="/auth/login">Login!</router-link></div>
     <div class="form-component">
-      <div class="center" v-if="user === null">
+      <div class="center" v-if="!hasError && !isActivated">
         <ring-loader :color="colorRingLoader" :size="sizeRingLoader"></ring-loader>
-      </div>
-      <div v-else>
-        <form @submit.prevent="submit" action="https://" method="post">
-          <h2 class="form-title">Profil</h2>
-          <input class="form-input" v-bind:class="{invalidClass: prenom === ''}" id="prenom" v-model="prenom" type="text" name="prenom" placeholder="Prénom" maxlength="50">
-          <input class="form-input" v-bind:class="{invalidClass: nom === ''}" id="nom" v-model="nom" type="text" name="nom" placeholder="Nom" maxlength="50">
-          <button class="form-button" v-bind:class="{'form-button-disabled': prenom === '' || nom === ''}" type="submit" value="Submit">Valider</button>
-          <h2 class="form-title-second">- - - - - </h2>
-          <input class="form-input" id="email" type="text" v-model="user.email" placeholder="Email" disabled>
-          <input class="form-input" id="birthdate" type="text" v-model="user.birthdate" placeholder="Date de naissance" disabled>
-        </form>
       </div>
     </div>
   </div>
@@ -38,10 +29,16 @@
         birthdate:'',
         colorRingLoader: '#2c3e50',
         sizeRingLoader: '120px',
+        isActivated: false,
+        hasError: false,
+        errorMessage: ''
       }
     },
     components: {
       RingLoader
+    },
+    created (){
+      this.activate()
     },
     computed:{
       ...mapGetters('auth',[
@@ -52,13 +49,38 @@
       ...mapActions('auth', [
         'updateUser'
       ]),
-    submit () {
-      this.updateUser({
-        login: this.email,
-        firstName: this.firstName,
-        lastName: this.lastName,
-      })
-    },
+      submit () {
+        this.updateUser({
+          login: this.email,
+          firstName: this.firstName,
+          lastName: this.lastName,
+        })
+      },
+      activate () {
+        console.log(this.$route.params.activationKey)
+        Vue.http.get(
+          'api/custom/activate?key=' + this.$route.params.activationKey,
+          {
+            headers: {
+              'Access-Control-Allow-Origin': '*',
+              'Accept': 'application/json'
+            }
+          }
+        ).then(
+          response => {
+            if (response.status === 200) {
+              this.isActivated = true
+            } else {
+              this.hasError = true
+              this.errorMessage = response.body.title
+            }
+          },
+          response => {
+            this.hasError = true
+            this.errorMessage = response.body.title
+          }
+        )
+      }
     }
   }
 </script>

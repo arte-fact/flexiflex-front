@@ -7,7 +7,6 @@ import finalRegisterComponent from '../components/finalRegisterComponent'
 import userAccountComponent from '../components/userAccountComponent'
 import connectionLayout from '../components/layouts/connectionLayout'
 import productsComponent from "../components/productsComponent";
-import productDetailComponent from "../components/productDetailComponent";
 
 Vue.use(Router)
 
@@ -42,7 +41,7 @@ export default new Router({
           component: registerComponent
         },
         {
-          path: 'final-register',
+          path: 'final-register/:activationKey',
           name: 'final-register-page',
           component: finalRegisterComponent
         },
@@ -51,6 +50,11 @@ export default new Router({
           name: 'user-account',
           component: userAccountComponent
         },
+        {
+          path: '/auth/*',
+          component: loginComponent,
+          name: 'login'
+        }
       ]
     },
     {
