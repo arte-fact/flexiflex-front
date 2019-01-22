@@ -140,7 +140,6 @@
   }
   .search-input-container {
     position: relative;
-    display: flex;
     flex-direction: column;
     flex-flow: wrap;
     justify-content: center;
@@ -152,6 +151,7 @@
     /*border: 5px solid #3a5fdc;*/
   }
   .search-input {
+
     position: relative;
     height: 40px;
     width: 100%;
@@ -171,11 +171,9 @@
   }
   .checkbox{
     -webkit-appearance: none;
-
     position: absolute;
     right: -25px;
     top:2.5px;
-
     margin: 5px 30px 5px 0;
     display:inline-block;
     width: 30px;
