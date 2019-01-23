@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import search from './search'
+import media from './media'
 
 const PRODUCT_REQUEST = 'PRODUCT_REQUEST'
 const RESET_PRODUCT = 'RESET_PRODUCT'
@@ -140,6 +141,7 @@ export default {
   mutations,
   actions,
   modules: {
-    search
+    search,
+    media
   }
 }

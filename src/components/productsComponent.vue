@@ -43,6 +43,7 @@ export default {
     ...mapGetters('products', [
       'getSelected',
       'getProducts',
+      'getMedias',
       'getResults'
     ])
   },
@@ -53,8 +54,9 @@ export default {
     ProductDetail
   },
   created () {
-    if (this.products === null) {
-      this.requestProducts()
+    this.requestMedias()
+    this.requestFolders()
+    if (this.getMedias === null) {
     }
   },
   watch: {
@@ -66,6 +68,14 @@ export default {
       }
     },
     getResults(newValue) {
+      if (newValue == null) {
+        this.products = []
+      } else {
+        this.products.push(newValue)
+        console.log(this.products)
+      }
+    },
+    getMedias(newValue) {
       if (newValue == null) {
         this.products = []
       } else {
@@ -90,7 +100,9 @@ export default {
       'setProducts',
       'selectProduct',
       'resetProducts',
-      'getNextResultPages'
+      'getNextResultPages',
+      'requestMedias',
+      'requestFolders'
     ]),
     select(product) {
       this.selectProduct(product)

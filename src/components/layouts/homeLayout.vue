@@ -73,10 +73,13 @@
         'resetUser',
         'resetToken',
         'setAuthHeaderFromCookie',
-        'logout'
+        'logout',
+        'requestProduct',
+        'minioLogin'
       ]),
       request () {
         this.requestUser()
+        this.minioLogin()
       },
       doLogout() {
         this.resetToken()
