@@ -1,11 +1,10 @@
 <template>
   <div v-if="getSelected !== null" class="product-detail-container">
     <div class="detail-container">
-      <!--<div class="close-button" v-on:click="close"></div>-->
+      <div class="close-button" v-on:click="close"></div>
       <div class="play-button" v-on:click="openFullscreen">
         <img :src="'http://image.tmdb.org/t/p/w500' + getSelected.coverUrl" :alt="getSelected.title" class="selected-product-image">
       </div>
-
       <div class="detail-text">
         <div class="detail-title">{{ getSelected.title }}</div><br>
         <a v-if="hdUrl !== null" :href="hdUrl">HD mp4</a>
@@ -50,7 +49,6 @@
 </script>
 
 <style scoped>
-
   .selected-product-image {
     position: relative;
     display: flex;
@@ -58,11 +56,8 @@
     background-color: grey;
     max-height: 50vh;
     min-height: 30vh;
-
   }
-
   .detail-container {
-
     position: relative;
     display: flex;
     flex-direction: row;
@@ -70,42 +65,31 @@
     width: 100%;
     height: 50%;
     margin-bottom: 5px;
-    /*overflow-x: hidden;*/
-    /*overflow-y: hidden;*/
   }
-
   .detail-text {
     position: relative;
     display: flex;
     flex-direction: row;
     width: 100%;
     flex-wrap: wrap;
-    max-height: 30vh;
+    max-height: 33vh;
     padding: 0 10px;
-
-    overflow-x: scroll;
-
+    overflow-Y: auto;
+    overflow-x: hidden;
   }
-
   .detail-title {
     font-weight: bold;
     font-size: 3vh;
     margin: 0;
     padding: 0;
     width: 100%;
-
-
     overflow-x: hidden;
     overflow-y: hidden;
   }
-
   .detail-synopsis {
     position: relative;
     text-align: justify;
-
-
   }
-
   .play-button {
     position: relative;
     left: 0;
@@ -115,7 +99,6 @@
     cursor: pointer;
     padding: 0;
   }
-
   .play-button:hover:after {
     content: "";
     position: absolute;
@@ -129,6 +112,4 @@
     background-position: center;
     background-repeat: no-repeat;
   }
-
-
 </style>
