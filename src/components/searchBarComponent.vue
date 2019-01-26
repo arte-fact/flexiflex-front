@@ -79,12 +79,14 @@
       saveProduct() {
         if (this.sourceUrl !== null && this.hdUrl !== null && this.sdUrl !== null) {
           this.createProduct({
-            hdUrl: this.hdUrl,
-            sdUrl: this.sdUrl,
-            sourceFileUrl: this.sourceUrl,
-            coverUrl: this.getSelected.coverUrl,
-            title: this.getSelected.title,
-            synopsis: this.getSelected.synopsis,
+          urls: JSON.stringify({
+              hdUrl: this.hdUrl,
+              sdUrl: this.sdUrl,
+              sourceFileUrl: this.sourceUrl,
+              coverUrl: this.getSelected.urls.coverUrl,
+            }),
+          title: this.getSelected.title,
+          synopsis: this.getSelected.synopsis,
           })
         }
       },

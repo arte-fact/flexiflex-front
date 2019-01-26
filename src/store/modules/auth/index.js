@@ -1,10 +1,9 @@
 import Vue from 'vue'
 import user from './user'
-import products from '../products'
 import VueCookies from 'vue-cookies'
-
 Vue.use(VueCookies)
 
+const MINIO_URL = 'http://62.210.148.177:9001/minio/webrpc'
 const LOGIN_REQUEST = 'LOGIN_REQUEST'
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
@@ -15,6 +14,7 @@ const LOGOUT_REQUEST = 'LOGOUT_REQUEST'
 const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
 const LOGOUT_FAIL = 'LOGOUT_FAIL'
 const SET_USER_TOKEN = 'SET_USER_TOKEN'
+const SET_MINIO_TOKEN = 'SET_MINIO_TOKEN'
 const RESET_USER_TOKEN = 'RESET_USER_TOKEN'
 const RESET_ERRORS = 'RESET_ERRORS'
 
@@ -26,6 +26,7 @@ const state = {
   isRegistered: false,
   hasRegistrationError: false,
   hasCookie: null,
+  minioToken: window.$cookies.get('minio'),
   token: window.$cookies.get('token'),
   // token: 'toto',
 }
@@ -106,6 +107,10 @@ const mutations = {
     state.token = response.token
     state.hasCookie = true
   },
+  [SET_MINIO_TOKEN] (state, response) {
+    window.$cookies.set('Minio_Authorization', response)
+    state.minioToken = response
+  },
   [RESET_USER_TOKEN] (state) {
     window.$cookies.remove('Authorization')
     state.token = null
@@ -123,10 +128,10 @@ const actions = {
     commit(LOGIN_REQUEST)
     Vue.http.post(
       'api/authenticate', {
-      password: password,
-      rememberMe: true,
-      username: username,
-      email: username
+        password: password,
+        rememberMe: true,
+        username: username,
+        email: username
       },
       {
         headers: {
@@ -149,7 +154,35 @@ const actions = {
       }
     )
   },
-  register ({commit}, {login, email, password}) {
+  minioLogin ({commit}) {
+    Vue.http.post(
+      MINIO_URL,
+      {
+        "id": "1",
+        "jsonrpc": "2.0",
+        "method": "Web.Login",
+        "params": {
+          "password": "m2ijavamsa",
+          "username": "flexiflexadmin"
+        }
+      },
+      {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        }
+      }).then(
+      response => {
+        commit(SET_MINIO_TOKEN, response.body.result.token)
+        console.log(window.$cookies.get('Minio_Authorization'))
+      },
+      response => {
+        console.log(response)
+      }
+    )
+  },
+  register ({commit}, {email, password, birthdate}) {
     commit(REGISTER_REQUEST)
     Vue.http.post(
       'api/register',
@@ -221,7 +254,6 @@ export default {
   mutations,
   actions,
   modules: {
-    user,
-    products
+    user
   }
 }

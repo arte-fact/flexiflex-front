@@ -71,7 +71,12 @@ const mutations = {
             setTimeout(function () {
               state.results = {
                 title: item.title,
-                coverUrl: item.poster_path,
+                urls: {
+                  hdUrl: null,
+                  sdUrl: null,
+                  sourceFileUrl: null,
+                  coverUrl: item.poster_path,
+                },
                 synopsis: item.overview,
                 isTmdb: true
               }

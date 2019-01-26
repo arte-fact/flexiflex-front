@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import search from './search'
+import media from './media'
 
 const PRODUCT_REQUEST = 'PRODUCT_REQUEST'
 const RESET_PRODUCT = 'RESET_PRODUCT'
@@ -36,6 +37,7 @@ const mutations = {
       state.product = items
   },
   [PRODUCT_PUSH] (state, item) {
+    item.urls = JSON.parse(item.urls)
     state.product = item;
   },
   [RESET_PRODUCT] (state) {
@@ -140,6 +142,7 @@ export default {
   mutations,
   actions,
   modules: {
-    search
+    search,
+    media
   }
 }

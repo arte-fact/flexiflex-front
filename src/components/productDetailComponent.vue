@@ -3,13 +3,11 @@
     <div class="detail-container">
       <div class="close-button" v-on:click="close"></div>
       <div class="play-button" v-on:click="openFullscreen">
-        <img :src="'http://image.tmdb.org/t/p/w500' + getSelected.coverUrl" :alt="getSelected.title" class="selected-product-image">
+        <img :src="'http://image.tmdb.org/t/p/w500' + getSelected.urls.coverUrl" :alt="getSelected.title" class="selected-product-image">
       </div>
       <div class="detail-text">
         <div class="detail-title">{{ getSelected.title }}</div><br>
-        <a v-if="hdUrl !== null" :href="hdUrl">HD mp4</a>
-        <a v-if="sdUrl !== null" :href="sdUrl">SD mp4</a>
-        <a v-if="getSelected.sourceFileUrl !== null" :href="getSelected.sourceFileUrl">Original file</a>
+        <a v-if="getSelected.urls.sourceFileUrl !== null" :href="getSelected.urls.sourceFileUrl">Original file</a>
         <div class="detail-synopsis">{{ getSelected.synopsis }}</div>
       </div>
     </div>
@@ -23,9 +21,7 @@
     name: 'product-detail-component',
     data () {
       return {
-        hdUrl: null,
-        sdUrl: null,
-        sourceUrl: null
+        urls: null
       }
     },
     computed: {
