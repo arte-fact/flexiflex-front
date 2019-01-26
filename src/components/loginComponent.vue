@@ -2,9 +2,9 @@
   <div>
     <form class="form-component" @submit.prevent="submit" action="https://" method="post">
       <h2 class="form-title">Connexion</h2>
-      <input class="form-input" v-bind:class="{invalidClass: emailRegexValid === false && email != ''}" id="name" v-model="email" type="text" name="email" placeholder="Email">
+      <input class="form-input" v-bind:class="{invalidClass: username === null}" id="name" v-model="username" type="text" name="username" placeholder="Nom d'utilisateur">
       <input class="form-input" v-bind:class="{invalidClass: password.length < 3 && password != ''}" id="password" v-model="password" type="password" name="password" placeholder="Mot de passe">
-      <button class="form-button" v-bind:class="{'form-button-disabled': email === '' || password === '' || emailRegexValid === false || password.length < 3}"  v-if="!isAuthenticating">Connexion</button>
+      <button class="form-button" v-bind:class="{'form-button-disabled': login === null || password === '' || password.length < 3}"  v-if="!isAuthenticating">Connexion</button>
     </form>
     <div class="placeMessageSousBoutton" v-if="!isAuthenticating">
       <div class="sizeHomepageLinks">Vous êtes nouveau ?
@@ -31,7 +31,7 @@
     data () {
       return {
         msg: 'Login',
-        email: '',
+        username: null,
         password: '',
         error: this.hasError,
         emailRegexValid: true,
@@ -85,7 +85,7 @@
 
       submit () {
         this.login({
-          username: this.email,
+          username: this.username,
           password: this.password
         })
       },

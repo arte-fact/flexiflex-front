@@ -2,10 +2,10 @@
   <div>
     <form class="form-component" @submit.prevent="submit" action="https://" method="post">
       <h2 class="form-title">Inscription</h2>
+      <input class="form-input" v-bind:class="{invalidClass: login === ''}" id="login" v-model="login" type="text" name="login" placeholder="Login">
       <input class="form-input" v-bind:class="{invalidClass: emailRegexValid === false && email != ''}" id="email" v-model="email" type="text" name="email" placeholder="Email">
       <input class="form-input" v-bind:class="{invalidClass: password.length < 3 && password != ''}" id="password" v-model="password" type="password" name="password" placeholder="Mot de passe">
-      <input class="form-input form-input-date" v-bind:class="{birthdateClass: birthdate === null || birthdate === '', invalidClass: agevalidate === false && birthdate != ''}" id="birthdate" v-model="birthdate" type="date" name="birthdate">
-      <button class="form-button form-button-register" v-bind:class="{'form-button-disabled': email === '' || password === '' || birthdate === null || emailRegexValid === false || password.length < 3 || agevalidate === false}" v-if="!isRegistering">Inscription</button>
+      <button class="form-button form-button-register" v-bind:class="{'form-button-disabled': email === '' || password === '' || emailRegexValid === false || password.length < 3 || agevalidate === false}" v-if="!isRegistering">Inscription</button>
     </form>
     <div class="placeMessageSousBoutton" v-if="!isRegistering">
       <div class="sizeHomepageLinks">Vous avez un compte...
@@ -44,6 +44,7 @@ import RingLoader from 'vue-spinner/src/RingLoader.vue'
     data() {
       return {
         email: "",
+        login: "",
         password: "",
         birthdate: null,
         emailRegexValid: true,
@@ -118,9 +119,9 @@ import RingLoader from 'vue-spinner/src/RingLoader.vue'
       ]),
       submit () {
         this.register({
+          login: this.login,
           email: this.email,
           password: this.password,
-          birthdate: this.birthdate,
         })
       }
     }

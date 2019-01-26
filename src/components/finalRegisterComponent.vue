@@ -59,7 +59,7 @@
       activate () {
         console.log(this.$route.params.activationKey)
         Vue.http.get(
-          'api/custom/activate?key=' + this.$route.params.activationKey,
+          'api/activate?key=' + this.$route.params.activationKey,
           {
             headers: {
               'Access-Control-Allow-Origin': '*',
