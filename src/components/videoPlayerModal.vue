@@ -2,7 +2,7 @@
   <div v-if="isPlaying && getSelected !== null">
     <video id="myvideo" v-on:click="toggleIsPlaying" class="video-player" width="100%" height="auto" controls>
       <source
-        :src="getSelected.hdUrl"
+        :src="getSelected.urls.hdUrl"
         type="video/mp4">
     </video>
     <div class="close-button" v-on:click="toggleIsPlaying">fermer</div>

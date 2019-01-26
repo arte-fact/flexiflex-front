@@ -1,6 +1,7 @@
 {
   "appId": "com.artefact.flexiflex",
   "appName": "flexiflex",
-  "bundledWebRuntime": false,
-  "webDir": "dist"
+  "bundledWebRuntime": true,
+  "webDir": "dist",
+  "linuxAndroidStudioPath": "/home/arte-fact/android-studio/bin/studio.sh"
 }
