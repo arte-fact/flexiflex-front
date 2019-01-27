@@ -3,7 +3,7 @@
       <header-layout></header-layout>
 
     <div class="body-content">
-      <search-bar v-bind:isAdmin="admin"></search-bar>
+      <!--<search-bar v-bind:isAdmin="admin"></search-bar>-->
       <product-detail-component></product-detail-component>
       <products></products>
       <video-player-modal></video-player-modal>
