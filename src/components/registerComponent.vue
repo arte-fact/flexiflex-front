@@ -2,7 +2,7 @@
   <div>
     <form class="form-component" @submit.prevent="submit" action="https://" method="post">
       <h2 class="form-title">Inscription</h2>
-      <input class="form-input" v-bind:class="{invalidClass: login === ''}" id="login" v-model="login" type="text" name="login" placeholder="Login">
+      <input class="form-input" v-bind:class="{invalidClass: username === ''}" id="username" v-model="username" type="text" name="username" placeholder="Login">
       <input class="form-input" v-bind:class="{invalidClass: emailRegexValid === false && email != ''}" id="email" v-model="email" type="text" name="email" placeholder="Email">
       <input class="form-input" v-bind:class="{invalidClass: password.length < 3 && password != ''}" id="password" v-model="password" type="password" name="password" placeholder="Mot de passe">
       <button class="form-button form-button-register" v-bind:class="{'form-button-disabled': email === '' || password === '' || emailRegexValid === false || password.length < 3 || agevalidate === false}" v-if="!isRegistering">Inscription</button>
@@ -44,7 +44,7 @@ import RingLoader from 'vue-spinner/src/RingLoader.vue'
     data() {
       return {
         email: "",
-        login: "",
+        username: "",
         password: "",
         birthdate: null,
         emailRegexValid: true,
@@ -119,7 +119,7 @@ import RingLoader from 'vue-spinner/src/RingLoader.vue'
       ]),
       submit () {
         this.register({
-          login: this.login,
+          username: this.username,
           email: this.email,
           password: this.password,
         })

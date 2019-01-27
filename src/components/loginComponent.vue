@@ -12,8 +12,8 @@
           Inscrivez-vous
         </router-link>
       </div>
-      <div v-if="emailRegexValid === false && email != ''">Format d'email incorrect</div>
-      <div v-if="password.length < 3 && password != ''">Mot de passe : 3 caractères minimum </div>
+      <div v-if="emailRegexValid === false && email !== ''">Format d'email incorrect</div>
+      <div v-if="password.length < 3 && password !== ''">Mot de passe : 3 caractères minimum </div>
       <div v-if="hasAuthenticationError">Email ou mot de passe invalides</div>
     </div>
     <!--Image de chargement quand clique sur le bouton-->
