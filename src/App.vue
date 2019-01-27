@@ -38,7 +38,7 @@
     created() {
       this.setTokenFromCookie()
 
-      this.imageNumber = Math.ceil( Math.random() * 5 )
+      this.imageNumber = Math.ceil( Math.random() * 4 )
       if (window.innerWidth <= 812) {
         this.styleObject.backgroundImage = 'url(' + require('@/assets/homepage_MaxWidth_600/background-splash-medium-' + this.imageNumber + '.jpg')
       } else {
