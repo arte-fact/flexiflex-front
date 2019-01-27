@@ -2,6 +2,7 @@
   <div id="app" class="app">
     <div v-bind:style="styleObject"></div>
     <router-view></router-view>
+    <link rel="manifest" href="../assets/manifest.json">
   </div>
 </template>
 
