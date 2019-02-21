@@ -4,7 +4,7 @@ import VueResource from 'vue-resource'
 Vue.use(VueResource)
 
 let urls = {
-  production: 'http://62.210.148.177:9090',
+  production: 'https://api.flexiflex.tk',
   development: 'http://localhost:8080'
 }
 
